@@ -8,8 +8,14 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
- ola eu sou costa e este e o meu site 
- <div>istoeaminhasegundalinha</div>
+      ola eu sou costa e este e o meu site
+      <div style={{ background: "blue", color: "pink" }}>para ti minha princesa </div>
+      <button>o button do costa</button>
+      <div><input></input></div>
+      <div>
+        <textarea></textarea>
+      </div>
+      <hr></hr>
     </>
   )
 }
