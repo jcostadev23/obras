@@ -1,9 +1,14 @@
+import SiteMenu from '@/components/menu';
 import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, SearchField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, SwitchField, TextField, PasswordField, Grid } from '@aws-amplify/ui-react';
+import { useState } from 'react';
 
 import { DiJsBadge } from 'react-icons/di';
 export default function Home() {
+  const [mostrar, setMostrar] = useState(false)
   return (
     <>
+      <SiteMenu />
+
       <PasswordField
         autoComplete="new-password"
         descriptiveText="Please enter password"
@@ -12,25 +17,8 @@ export default function Home() {
         size="small"
       />
 
-      <Autocomplete
-        label="Autocomplete"
-        options={[{ "id": "apple", "label": "apple" }, { "id": "banana", "label": "banana" }, { "id": "cherry", "label": "cherry" }, { "id": "grape", "label": "grape" }, { "id": "kiwis", "label": "kiwis" }, { "id": "lemon", "label": "lemon" }, { "id": "mango", "label": "mango" }, { "id": "orange", "label": "orange" }, { "id": "strawberry", "label": "strawberry" }]}
-        placeholder="Search here..."
-      />
 
-      <Expander>
-        <ExpanderItem title="What is an ExpanderItem?" value="expander-item">
-          An ExpanderItem contains all the parts of a collapsible section.
-        </ExpanderItem>
-        <ExpanderItem title="This is the item's title" value="unique-value">
-          The `children` of the ExpanderItem are displayed here.
-        </ExpanderItem>
-      </Expander>
-      <div><SwitchField
-        isDisabled={false}
-        label="SwitchField"
-        labelPosition="start"
-      /></div>
+
 
       ola eu sou costa e este e o meu site
       <div style={{ background: "blue", color: "pink" }}>para ti minha princesa </div>
@@ -89,6 +77,7 @@ export default function Home() {
       </div>
       <Loader
       />
+      {mostrar && <div>mostrar apos enviar msg</div>}
       <Grid
         columnGap="0.5rem"
         rowGap="0.5rem"
@@ -102,10 +91,10 @@ export default function Home() {
           <Menu
             menuAlign="start"
           >
-            <MenuItem onClick={() => alert('Enviar msg')}>
+            <MenuItem onClick={() => setMostrar(true)}>
               Enviar msg
             </MenuItem>
-            <MenuItem onClick={() => alert('Crear obra')}>
+            <MenuItem onClick={() => setMostrar(false)}>
               Crear obra
             </MenuItem>
 
@@ -116,7 +105,20 @@ export default function Home() {
           columnStart="1"
           columnEnd="2"
         >
-          Nav
+          <Autocomplete
+            label="Autocomplete"
+            options={[{ "id": "apple", "label": "apple" }, { "id": "banana", "label": "banana" }, { "id": "cherry", "label": "cherry" }, { "id": "grape", "label": "grape" }, { "id": "kiwis", "label": "kiwis" }, { "id": "lemon", "label": "lemon" }, { "id": "mango", "label": "mango" }, { "id": "orange", "label": "orange" }, { "id": "strawberry", "label": "strawberry" }]}
+            placeholder="Search here..."
+          />
+
+          {mostrar && <Expander>
+            <ExpanderItem title="What is an ExpanderItem?" value="expander-item">
+              An ExpanderItem contains all the parts of a collapsible section.
+            </ExpanderItem>
+            <ExpanderItem title="This is the item's title" value="unique-value">
+              The `children` of the ExpanderItem are displayed here.
+            </ExpanderItem>
+          </Expander>}
         </Card>
         <Card
           columnStart="2"
