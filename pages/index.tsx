@@ -16,10 +16,7 @@ export default function Home() {
         name="password"
         size="small"
       />
-
-
-
-
+      amplify pull
       ola eu sou costa e este e o meu site
       <div style={{ background: "blue", color: "pink" }}>para ti minha princesa </div>
       <Button variation="primary">costa</Button>
@@ -46,7 +43,6 @@ export default function Home() {
             label="Numero Telf:"
             descriptiveText="Please enter your phone number"
             placeholder="234-567-8910"
-
 
           />
           Tab content #2
