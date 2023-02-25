@@ -16,7 +16,7 @@ export default function Home() {
         name="password"
         size="small"
       />
-      amplify pull
+
       ola eu sou costa e este e o meu site
       <div style={{ background: "blue", color: "pink" }}>para ti minha princesa </div>
       <Button variation="primary">costa</Button>
@@ -66,6 +66,7 @@ export default function Home() {
         name="jardim"
         value="yes"
       />
+      {mostrar && <div>mostrar apos enviar msg</div>}
 
       <div>
         <Alert>This Alert is not dismissible by default</Alert>
@@ -73,7 +74,7 @@ export default function Home() {
       </div>
       <Loader
       />
-      {mostrar && <div>mostrar apos enviar msg</div>}
+
       <Grid
         columnGap="0.5rem"
         rowGap="0.5rem"
