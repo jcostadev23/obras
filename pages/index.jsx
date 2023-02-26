@@ -6,20 +6,9 @@ import { DiJsBadge } from 'react-icons/di';
 export default function Home() {
   const [mostrar, setMostrar] = useState(false)
   return (
+    <div>
+      <SiteMenu />
 
-    <>
-      <Menu
-        menuAlign="start"
-      >
-        <MenuItem onClick={() => setMostrar(true)}>
-          <SiteMenu />
-        </MenuItem>
-
-        <MenuItem onClick={() => setMostrar(false)}>
-          Exit Menu
-        </MenuItem>
-
-      </Menu>
 
       {/* todo: 1 opcoes do menu enviar msg ou preencher seu diario */}
       {/* opcao preencher diario gravar data na pagina de obras */}
@@ -174,7 +163,7 @@ export default function Home() {
         </Card>
       </Grid>
 
-    </>
+    </div>
   )
 }
 
