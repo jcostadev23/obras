@@ -1,5 +1,5 @@
 import SiteMenu from '@/components/menu';
-import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, SearchField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, SwitchField, TextField, PasswordField, Grid } from '@aws-amplify/ui-react';
+import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, SearchField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, SwitchField, TextField, PasswordField, Grid, Flex, Divider } from '@aws-amplify/ui-react';
 import { useState } from 'react';
 
 import { DiJsBadge } from 'react-icons/di';
@@ -9,6 +9,22 @@ export default function Home() {
     <>
       <SiteMenu />
 
+      <Menu
+        menuAlign="start"
+      >
+        <MenuItem onClick={() => setMostrar(true)}>
+          Enviar msg
+        </MenuItem>
+
+        <MenuItem onClick={() => setMostrar(false)}>
+          Crear obra
+        </MenuItem>
+
+      </Menu>
+      {mostrar && <div>mostrar apos enviar msg</div>}
+      <Flex direction="column">
+      
+      </Flex> 
       <PasswordField
         autoComplete="new-password"
         descriptiveText="Please enter password"
@@ -34,7 +50,10 @@ export default function Home() {
       <Tabs
         justifyContent="flex-start">
         <TabItem title="obra manuel">
+          <Alert>This Alert is not dismissible by default</Alert>
+          <Alert isDismissible={true}>Click the X to dismiss this Alert</Alert>
           <Button variation="primary">mais um button</Button>
+
           Tab content #1
         </TabItem>
         <TabItem title="obra maria">
@@ -43,7 +62,6 @@ export default function Home() {
             label="Numero Telf:"
             descriptiveText="Please enter your phone number"
             placeholder="234-567-8910"
-
           />
           Tab content #2
         </TabItem>
@@ -66,11 +84,10 @@ export default function Home() {
         name="jardim"
         value="yes"
       />
-      {mostrar && <div>mostrar apos enviar msg</div>}
+
 
       <div>
-        <Alert>This Alert is not dismissible by default</Alert>
-        <Alert isDismissible={true}>Click the X to dismiss this Alert</Alert>
+
       </div>
       <Loader
       />
@@ -85,17 +102,7 @@ export default function Home() {
           columnStart="1"
           columnEnd="-1"
         >
-          <Menu
-            menuAlign="start"
-          >
-            <MenuItem onClick={() => setMostrar(true)}>
-              Enviar msg
-            </MenuItem>
-            <MenuItem onClick={() => setMostrar(false)}>
-              Crear obra
-            </MenuItem>
 
-          </Menu>
 
         </Card>
         <Card

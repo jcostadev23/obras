@@ -23,6 +23,7 @@ export default function Obras() {
         chamarpessoas()
 
     }, [])
+
     return <div>
         <SiteMenu
         />

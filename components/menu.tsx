@@ -6,5 +6,6 @@ export default function SiteMenu() {
         <Link href="/">Home</Link>
         <div> <Link href="/obras">Obras</Link></div>
         <div> <Link href="/about">About</Link></div>
+        <div> <Link href="/treino">Treino</Link></div>
     </div>
 }
