@@ -6,9 +6,28 @@ import { DiJsBadge } from 'react-icons/di';
 export default function Home() {
   const [mostrar, setMostrar] = useState(false)
   return (
-    <>
-      <SiteMenu />
 
+    <>
+      <Menu
+        menuAlign="start"
+      >
+        <MenuItem onClick={() => setMostrar(true)}>
+          <SiteMenu />
+        </MenuItem>
+
+        <MenuItem onClick={() => setMostrar(false)}>
+          Exit Menu
+        </MenuItem>
+
+      </Menu>
+
+      {/* todo: 1 opcoes do menu enviar msg ou preencher seu diario */}
+      {/* opcao preencher diario gravar data na pagina de obras */}
+      {/* todo: 2 barra de pesquisa de obra */}
+      {/* derigir a parra de pesquisa para pagina de obras  */}
+      {/* todo: 3 pesquisa de equipamentos */}
+      {/* todo: 4 implementar moradas com possivel mapa */}
+      {/* todo: 5 sinal de notificacoes para qualquer tipo de informacao recebida */}
       <Menu
         menuAlign="start"
       >
@@ -17,14 +36,14 @@ export default function Home() {
         </MenuItem>
 
         <MenuItem onClick={() => setMostrar(false)}>
-          Crear obra
+          Exit Menu
         </MenuItem>
 
       </Menu>
       {mostrar && <div>mostrar apos enviar msg</div>}
       <Flex direction="column">
-      
-      </Flex> 
+
+      </Flex>
       <PasswordField
         autoComplete="new-password"
         descriptiveText="Please enter password"
