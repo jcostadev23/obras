@@ -11,9 +11,7 @@ export default function Treino() {
         <Menu
             menuAlign="start">
             <MenuItem onClick={() => setMostrar(true)}>
-            </MenuItem>
-            <MenuItem onClick={() => setMostrar(false)}>
-                Exit Menu
+                fala aki
             </MenuItem>
             <MenuItem onClick={() => setMostrar(false)}>
                 Exit Menu

@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/obras.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/obras.jsx", "components/menu.jsx", "pages/treino.jsx", "pages/about.jsx", "pages/index.jsx"],
   "exclude": ["node_modules"]
 }

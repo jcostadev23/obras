@@ -1,24 +1,44 @@
 import SiteMenu from "@/components/menu";
 import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
-import { Link, SwitchField, Card, Heading, Grid, View, colors, useTheme } from "@aws-amplify/ui-react";
+import { Link, SwitchField, Card, Heading, Grid, SearchField, View, colors, useTheme } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState } from "react";
 import * as React from 'react';
 
+export const SearchFieldControlledExample = () => {
+    const [value, setValue] = React.useState('');
+
+    const onChange = (event) => {
+        setValue(event.target.value);
+    };
+
+    // It is your responsibility to set up onClear
+    const onClear = () => {
+        setValue('');
+    };
+
+    return (
+        <div>{value}</div>
+    );
+};
+
 export default function Obras() {
     const [openswitch, setSwitch] = useState(false)
     const [people, setPeople] = useState([])
+
     const ola = "ola aurelio"
     useEffect(() => {
         async function chamarpessoas() {
             try {
 
-                const peopledainternet = await DataStore.query(People);
+                const peopledainternet = await DataStore.query(People, c => c.name.contains(""));
                 setPeople(peopledainternet)
+
                 console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
             } catch (error) {
-                console.log("Error retrieving posts", error);
+                pessoasearch,
+                    console.log("Error retrieving posts", error);
             }
 
         }
@@ -28,6 +48,10 @@ export default function Obras() {
 
 
     return <div>
+        <SearchField
+            label="Search"
+            placeholder="Search here..."
+        />
 
         <SiteMenu
         />

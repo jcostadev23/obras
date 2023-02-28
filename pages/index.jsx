@@ -8,8 +8,7 @@ export default function Home() {
   return (
     <div>
       <SiteMenu />
-
-
+      
       {/* todo: 1 opcoes do menu enviar msg ou preencher seu diario */}
       {/* opcao preencher diario gravar data na pagina de obras */}
       {/* todo: 2 barra de pesquisa de obra */}
