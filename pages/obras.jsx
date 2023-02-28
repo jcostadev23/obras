@@ -3,29 +3,17 @@ import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
 import { Link, SwitchField, Card, Heading, Grid, SearchField, View, colors, useTheme } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
-import { useEffect, useState } from "react";
+import { useEffect, useState, } from "react";
 import * as React from 'react';
 
-export const SearchFieldControlledExample = () => {
-    const [value, setValue] = React.useState('');
-
-    const onChange = (event) => {
-        setValue(event.target.value);
-    };
-
-    // It is your responsibility to set up onClear
-    const onClear = () => {
-        setValue('');
-    };
-
-    return (
-        <div>{value}</div>
-    );
-};
 
 export default function Obras() {
     const [openswitch, setSwitch] = useState(false)
     const [people, setPeople] = useState([])
+    const [searchpeople, setSearchPeople] = useState("")
+    const onChange = (e) => {
+        setSearchPeople(e.target.value)
+    }
 
     const ola = "ola aurelio"
     useEffect(() => {
@@ -42,19 +30,21 @@ export default function Obras() {
             }
 
         }
+
         chamarpessoas()
 
     }, [])
 
 
     return <div>
-        <SearchField
-            label="Search"
-            placeholder="Search here..."
-        />
 
         <SiteMenu
         />
+        <SearchField
+            type="text"
+            onChange={e => setSearchPeople(e.target.value)} />
+
+        <div>{searchpeople}</div>
         obra do costa ola
         <div>{ola} pita </div>
         <Grid>
