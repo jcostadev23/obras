@@ -1,7 +1,7 @@
 import SiteMenu from "@/components/menu";
 import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
-import { Link, SwitchField, Card, Heading, Grid, SearchField, View, colors, useTheme } from "@aws-amplify/ui-react";
+import { Link, SwitchField, Card, Heading, Grid, SearchField, View, colors, Button, useTheme } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
@@ -62,6 +62,9 @@ export default function Obras() {
                         <Heading level={4}>{user.name}</Heading>
                         <div>{user.phonenumber}</div>
                         <div>{user.role}</div>
+                        <Button onClick={() => (true)}>
+                            <Link href="/editid">Edit</Link> </Button>
+
                     </Card>
                 )
             })}
