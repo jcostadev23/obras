@@ -8,14 +8,7 @@ export default function Home() {
   return (
     <div>
       <SiteMenu />
-      
-      {/* todo: 1 opcoes do menu enviar msg ou preencher seu diario */}
-      {/* opcao preencher diario gravar data na pagina de obras */}
-      {/* todo: 2 barra de pesquisa de obra */}
-      {/* derigir a parra de pesquisa para pagina de obras  */}
-      {/* todo: 3 pesquisa de equipamentos */}
-      {/* todo: 4 implementar moradas com possivel mapa */}
-      {/* todo: 5 sinal de notificacoes para qualquer tipo de informacao recebida */}
+
       <Menu
         menuAlign="start"
       >

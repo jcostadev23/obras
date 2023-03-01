@@ -16,20 +16,22 @@ export default function Obras() {
     }
 
     const ola = "ola aurelio"
-    useEffect(() => {
-        async function chamarpessoas() {
-            try {
 
-                const peopledainternet = await DataStore.query(People, c => c.name.contains(""));
-                setPeople(peopledainternet)
+    async function chamarpessoas() {
+        try {
 
-                console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
-            } catch (error) {
-                pessoasearch,
-                    console.log("Error retrieving posts", error);
-            }
+            const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople));
+            setPeople(peopledainternet)
 
+            console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+        } catch (error) {
+            searchpeople,
+                console.log("Error retrieving posts", error);
         }
+
+    }
+    useEffect(() => {
+
 
         chamarpessoas()
 
@@ -42,7 +44,13 @@ export default function Obras() {
         />
         <SearchField
             type="text"
-            onChange={e => setSearchPeople(e.target.value)} />
+            onChange={(e) => {
+                setSearchPeople(e.target.value)
+                chamarpessoas()
+            }
+            } />
+
+
 
         <div>{searchpeople}</div>
         obra do costa ola
