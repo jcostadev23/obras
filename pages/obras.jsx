@@ -62,8 +62,8 @@ export default function Obras() {
                         <Heading level={4}>{user.name}</Heading>
                         <div>{user.phonenumber}</div>
                         <div>{user.role}</div>
-                        <Button onClick={() => (true)}>
-                            <Link href="/editid">Edit</Link> </Button>
+                        <Link href="/editid">Edit</Link>
+
 
                     </Card>
                 )
