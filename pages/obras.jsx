@@ -62,7 +62,8 @@ export default function Obras() {
                         <Heading level={4}>{user.name}</Heading>
                         <div>{user.phonenumber}</div>
                         <div>{user.role}</div>
-                        <Link href="/editid">Edit</Link>
+                        <div>{user.id}</div>
+                        <Link href={"/people/" + user.id}>Edit</Link>
 
 
                     </Card>
