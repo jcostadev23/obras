@@ -20,7 +20,7 @@ export default function Obras() {
     async function chamarpessoas() {
         try {
 
-            const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople));
+            const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
             setPeople(peopledainternet)
 
             console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
