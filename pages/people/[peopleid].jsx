@@ -6,16 +6,16 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 
 function PeopleDetails() {
-    const router = useRouter()
-    const peopleid = router.query.peopleid
+    const { query, isReady } = useRouter()
+    const peopleid = query.peopleid
     const [people, setPeople] = useState()
 
     async function chamarpessoas() {
-        const id = peopleid
+
 
         try {
             console.log("id:", peopleid)
-            const peopledainternet = await DataStore.query(People, id);
+            const peopledainternet = await DataStore.query(People, peopleid);
             setPeople(peopledainternet)
 
             console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
@@ -27,11 +27,13 @@ function PeopleDetails() {
 
     }
     useEffect(() => {
-
-
+        if (!peopleid) {
+            return
+        }
         chamarpessoas()
 
-    }, [])
+
+    }, [peopleid])
 
     return <><SiteMenu />
         <PeopleUpdateForm />
