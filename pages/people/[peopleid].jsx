@@ -4,46 +4,44 @@ import { useEffect, useState } from "react"
 import PeopleUpdateForm from "@/src/ui-components/PeopleUpdateForm";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
+import { Grid, Heading } from "@aws-amplify/ui-react";
 
 function PeopleDetails() {
     const { query, isReady } = useRouter()
-    const peopleid = query.peopleid
-    const [people, setPeople] = useState()
+    const personid = query.peopleid
+    const [person, setPeople] = useState()
 
     async function chamarpessoas() {
 
 
         try {
-            console.log("id:", peopleid)
-            const peopledainternet = await DataStore.query(People, peopleid);
+
+            const peopledainternet = await DataStore.query(People, personid);
             setPeople(peopledainternet)
 
             console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
         } catch (error) {
             console.log("Error retrieving posts", error);
         }
-        console.log(peopleid)
+
 
 
     }
     useEffect(() => {
-        if (!peopleid) {
+        if (!personid) {
             return
         }
         chamarpessoas()
-
-
-    }, [peopleid])
-
-    return <><SiteMenu />
-        <PeopleUpdateForm />
-        <div> {peopleid} </div>
-
-
-        {JSON.stringify(people)} </>
-
-
-
+    }, [personid])
+    return <>
+        <><SiteMenu />
+            <Grid>
+                <Heading level={4}>{person.name}</Heading>
+                <div>{person.phonenumber}</div>
+                <div>{person.role}</div>
+            </Grid>
+        </><PeopleUpdateForm id={personid} />
+        {JSON.stringify(person)}</>
 }
 
 
