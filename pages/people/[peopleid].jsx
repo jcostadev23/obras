@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import PeopleUpdateForm from "@/src/ui-components/PeopleUpdateForm";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Heading } from "@aws-amplify/ui-react";
+import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
 function PeopleDetails() {
     const { query, isReady } = useRouter()
@@ -33,15 +33,23 @@ function PeopleDetails() {
         }
         chamarpessoas()
     }, [personid])
+
+    if (!person) {
+        return <loader />
+    }
     return <>
-        <><SiteMenu />
-            <Grid>
+        <SiteMenu /><Grid>
+            <Card variation="elevated">
                 <Heading level={4}>{person.name}</Heading>
                 <div>{person.phonenumber}</div>
                 <div>{person.role}</div>
-            </Grid>
-        </><PeopleUpdateForm id={personid} />
-        {JSON.stringify(person)}</>
+            </Card>
+        </Grid>
+        <Grid>
+            <Card variation="elevated">
+                <PeopleUpdateForm id={personid} />
+            </Card>
+        </Grid></>
 }
 
 

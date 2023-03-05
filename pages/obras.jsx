@@ -15,7 +15,7 @@ export default function Obras() {
         setSearchPeople(e.target.value)
     }
 
-    const ola = "ola aurelio"
+
 
     async function chamarpessoas() {
         try {
@@ -53,8 +53,7 @@ export default function Obras() {
 
 
         <div>{searchpeople}</div>
-        obra do costa ola
-        <div>{ola} pita </div>
+
         <Grid>
             {people.map((user) => {
                 return (
@@ -62,7 +61,6 @@ export default function Obras() {
                         <Heading level={4}>{user.name}</Heading>
                         <div>{user.phonenumber}</div>
                         <div>{user.role}</div>
-                        <div>{user.id}</div>
                         <Link href={"/people/" + user.id}>Edit</Link>
 
 
@@ -70,27 +68,31 @@ export default function Obras() {
                 )
             })}
         </Grid>
-
-
+        <Grid>
+            <Card variation="elevated" >
+                <Heading level={4}>{"ADD WORKERS"}</Heading>
+                <PeopleCreateForm
+                    onSubmit={(fields) => {
+                        // Example function to trim all string inputs
+                        console.log(fields)
+                        return fields
+                    }}
+                />  </Card>
+        </Grid>
 
         <SwitchField
             onClick={() => setSwitch(true)}
             label="SwitchField"
             labelPosition="start"
         >
+
         </SwitchField>
 
 
         {openswitch && <div>opcoes de escolha</div>}
 
 
-        <PeopleCreateForm
-            onSubmit={(fields) => {
-                // Example function to trim all string inputs
-                console.log(fields)
-                return fields
-            }}
-        />
-
     </div>
+
+
 }
