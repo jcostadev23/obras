@@ -62,6 +62,7 @@ export default function Obras() {
                         <div>{user.phonenumber}</div>
                         <div>{user.role}</div>
                         <Link href={"/people/" + user.id}>Edit</Link>
+                        <div><Link href={"/delete/" + user.id}>Delete</Link></div>
 
 
                     </Card>
@@ -84,7 +85,7 @@ export default function Obras() {
             onClick={() => setSwitch(true)}
             label="SwitchField"
             labelPosition="start"
-        >
+        >cc
 
         </SwitchField>
 

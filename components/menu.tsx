@@ -19,6 +19,9 @@ export default function SiteMenu() {
         <MenuItem onClick={() => (true)}>
             <Link href="/treino">Treino</Link>
         </MenuItem>
+        <MenuItem onClick={() => (true)}>
+            <Link href="/equipment">Equipment</Link>
+        </MenuItem>
         <MenuItem onClick={() => (false)}>
             Exit Menu
         </MenuItem>

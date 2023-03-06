@@ -6,37 +6,34 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
-function PeopleDetails() {
-    const { query, isReady } = useRouter()
+function peopledetails() {
+    const { query } = useRouter()
     const personid = query.peopleid
-    const [person, setPeople] = useState()
+    const [person, setPerson] = useState()
 
-    async function chamarpessoas() {
-
-
+    async function getperson() {
         try {
+            const personFromDatastore = await DataStore.query(People, personid);
+            setPerson(personFromDatastore)
 
-            const peopledainternet = await DataStore.query(People, personid);
-            setPeople(peopledainternet)
-
-            console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+            console.log("Posts retrieved successfully!", JSON.stringify(personFromDatastore, null, 2));
         } catch (error) {
             console.log("Error retrieving posts", error);
         }
-
-
-
     }
+
     useEffect(() => {
+
         if (!personid) {
             return
         }
-        chamarpessoas()
+        getperson()
     }, [personid])
 
     if (!person) {
-        return <loader />
+        return <Loader />
     }
+
     return <>
         <SiteMenu /><Grid>
             <Card variation="elevated">
@@ -49,8 +46,8 @@ function PeopleDetails() {
             <Card variation="elevated">
                 <PeopleUpdateForm id={personid} />
             </Card>
-        </Grid></>
+        </Grid>
+    </>
 }
 
-
-export default PeopleDetails
+export default peopledetails
