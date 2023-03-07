@@ -7,7 +7,7 @@ import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
 function peopledetails() {
-    const { query } = useRouter()
+    const { query, push } = useRouter()
     const personid = query.peopleid
     const [person, setPerson] = useState()
 
@@ -47,6 +47,7 @@ function peopledetails() {
                 <PeopleUpdateForm id={personid} />
             </Card>
         </Grid>
+
     </>
 }
 

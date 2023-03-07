@@ -62,7 +62,7 @@ export default function Obras() {
                         <div>{user.phonenumber}</div>
                         <div>{user.role}</div>
                         <Link href={"/people/" + user.id}>Edit</Link>
-                        <div><Link href={"/delete/" + user.id}>Delete</Link></div>
+                        <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
 
 
                     </Card>

@@ -8,13 +8,13 @@
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { People } from "../models";
+import { Job } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function PeopleUpdateForm(props) {
+export default function JobUpdateForm(props) {
   const {
     id: idProp,
-    people,
+    job,
     onSuccess,
     onError,
     onSubmit,
@@ -25,37 +25,31 @@ export default function PeopleUpdateForm(props) {
   } = props;
   const initialValues = {
     name: "",
-    phonenumber: "",
-    role: "",
+    address: "",
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [phonenumber, setPhonenumber] = React.useState(
-    initialValues.phonenumber
-  );
-  const [role, setRole] = React.useState(initialValues.role);
+  const [address, setAddress] = React.useState(initialValues.address);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = peopleRecord
-      ? { ...initialValues, ...peopleRecord }
+    const cleanValues = jobRecord
+      ? { ...initialValues, ...jobRecord }
       : initialValues;
     setName(cleanValues.name);
-    setPhonenumber(cleanValues.phonenumber);
-    setRole(cleanValues.role);
+    setAddress(cleanValues.address);
     setErrors({});
   };
-  const [peopleRecord, setPeopleRecord] = React.useState(people);
+  const [jobRecord, setJobRecord] = React.useState(job);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp ? await DataStore.query(People, idProp) : people;
-      setPeopleRecord(record);
+      const record = idProp ? await DataStore.query(Job, idProp) : job;
+      setJobRecord(record);
     };
     queryData();
-  }, [idProp, people]);
-  React.useEffect(resetStateValues, [peopleRecord]);
+  }, [idProp, job]);
+  React.useEffect(resetStateValues, [jobRecord]);
   const validations = {
-    name: [{ type: "Required" }],
-    phonenumber: [{ type: "Required" }],
-    role: [],
+    name: [],
+    address: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -84,8 +78,7 @@ export default function PeopleUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           name,
-          phonenumber,
-          role,
+          address,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -116,7 +109,7 @@ export default function PeopleUpdateForm(props) {
             }
           });
           await DataStore.save(
-            People.copyOf(peopleRecord, (updated) => {
+            Job.copyOf(jobRecord, (updated) => {
               Object.assign(updated, modelFields);
             })
           );
@@ -129,12 +122,12 @@ export default function PeopleUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PeopleUpdateForm")}
+      {...getOverrideProps(overrides, "JobUpdateForm")}
       {...rest}
     >
       <TextField
         label="Name"
-        isRequired={true}
+        isRequired={false}
         isReadOnly={false}
         value={name}
         onChange={(e) => {
@@ -142,8 +135,7 @@ export default function PeopleUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name: value,
-              phonenumber,
-              role,
+              address,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -159,56 +151,29 @@ export default function PeopleUpdateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Phonenumber"
-        isRequired={true}
-        isReadOnly={false}
-        value={phonenumber}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              phonenumber: value,
-              role,
-            };
-            const result = onChange(modelFields);
-            value = result?.phonenumber ?? value;
-          }
-          if (errors.phonenumber?.hasError) {
-            runValidationTasks("phonenumber", value);
-          }
-          setPhonenumber(value);
-        }}
-        onBlur={() => runValidationTasks("phonenumber", phonenumber)}
-        errorMessage={errors.phonenumber?.errorMessage}
-        hasError={errors.phonenumber?.hasError}
-        {...getOverrideProps(overrides, "phonenumber")}
-      ></TextField>
-      <TextField
-        label="Role"
+        label="Address"
         isRequired={false}
         isReadOnly={false}
-        value={role}
+        value={address}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
-              phonenumber,
-              role: value,
+              address: value,
             };
             const result = onChange(modelFields);
-            value = result?.role ?? value;
+            value = result?.address ?? value;
           }
-          if (errors.role?.hasError) {
-            runValidationTasks("role", value);
+          if (errors.address?.hasError) {
+            runValidationTasks("address", value);
           }
-          setRole(value);
+          setAddress(value);
         }}
-        onBlur={() => runValidationTasks("role", role)}
-        errorMessage={errors.role?.errorMessage}
-        hasError={errors.role?.hasError}
-        {...getOverrideProps(overrides, "role")}
+        onBlur={() => runValidationTasks("address", address)}
+        errorMessage={errors.address?.errorMessage}
+        hasError={errors.address?.hasError}
+        {...getOverrideProps(overrides, "address")}
       ></TextField>
       <Flex
         justifyContent="space-between"
@@ -221,7 +186,7 @@ export default function PeopleUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || people)}
+          isDisabled={!(idProp || job)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -233,8 +198,7 @@ export default function PeopleUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || people) ||
-              Object.values(errors).some((e) => e?.hasError)
+              !(idProp || job) || Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
