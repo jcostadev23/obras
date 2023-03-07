@@ -15,8 +15,6 @@ export default function Obras() {
         setSearchPeople(e.target.value)
     }
 
-
-
     async function chamarpessoas() {
         try {
 
@@ -85,8 +83,7 @@ export default function Obras() {
             onClick={() => setSwitch(true)}
             label="SwitchField"
             labelPosition="start"
-        >cc
-
+        >
         </SwitchField>
 
 
