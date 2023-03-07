@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Card, Link, Heading, Loader } from "@aws-amplify/ui-react";
+import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
 function itemdetails() {
     const { query, push } = useRouter()
@@ -43,16 +43,32 @@ function itemdetails() {
 
     return <>
         <SiteMenu />
-        <Grid>
+        <div className="container mx-auto"> <Grid>
+            <Alert
+                variation="warning"
+                isDismissible={false}
+                hasIcon={true}
+                heading="Atenttion"
+            >
+                This will delete the user
+            </Alert>
             <Card variation="elevated">
-                <div style={{ color: 'red' }}> (By Continue you gone delete all the data one this id)</div>
+
                 <Heading level={4}>{name.name}</Heading>
                 <div>{name.phonenumber}</div>
                 <div>{name.role}</div>
-                <button onClick={deleteitem}>Continue</button>
+
+                <Button
+                    variation="destructive"
+                    loadingText=""
+                    onClick={deleteitem}
+                    ariaLabel=""
+                >
+                    Delete
+                </Button>
                 <div><Link href="/obras">Exit</Link></div>
             </Card>
-        </Grid>
+        </Grid></div>
     </>
 }
 export default itemdetails

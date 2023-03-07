@@ -1,5 +1,8 @@
 export default function vamostestar() {
     return (
-        <div>aki</div>
+        <h1 className="text-3xl font-bold underline bg-slate-500 text-red-200">
+            Hello world!
+        </h1>
+
     )
 }
