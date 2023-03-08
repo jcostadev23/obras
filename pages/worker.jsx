@@ -35,7 +35,7 @@ export default function Obras() {
 
         ChamarPessoas()
 
-    }, [ChamarPessoas])
+    }, [])
 
 
     return <div>

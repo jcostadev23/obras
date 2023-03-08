@@ -1,5 +1,5 @@
 import JobCreateForm from "@/src/ui-components/JobCreateForm";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Heading, Grid, } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
@@ -27,7 +27,7 @@ export default function NewJob() {
 
         Findjob()
 
-    }, [Findjob])
+    }, [])
 
     return <div>
 

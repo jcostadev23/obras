@@ -28,7 +28,7 @@ function PeopleDetails() {
             return
         }
         GetPerson()
-    }, [GetPerson])
+    }, [])
 
     if (!person) {
         return <Loader />

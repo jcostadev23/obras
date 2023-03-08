@@ -37,7 +37,7 @@ function ItemDetails() {
             return
         }
         ItemName()
-    }, [ItemName])
+    }, [])
 
     if (!name) {
         return <Loader />

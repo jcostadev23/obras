@@ -1,20 +1,26 @@
-const [people, setPeople] = useState([])
-useEffect(() => {
-    async function chamarpessoas() {
-        try {
+import { Card, Heading, Grid, } from "@aws-amplify/ui-react";
 
-            const peopledainternet = await DataStore.query(People, c => c.name.contains("costa"));
-            setPeople(peopledainternet)
 
-            console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
-        } catch (error) {
-            pessoasearch,
-                console.log("Error retrieving posts", error);
-        }
+async function ChamarPessoas() {
+    const [people, setPeople] = useState([])
+    try {
+
+        const peopledainternet = await DataStore.query(People, c => c.name.contains("costa"));
+        setPeople(peopledainternet)
+
+        console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+    } catch (error) {
+        pessoasearch,
+            console.log("Error retrieving posts", error);
     }
 
-    return
-    <Grid>
+    useEffect(() => {
+
+        ChamarPessoas()
+
+    }, [people])
+
+    return <Grid>
         {people.map((user) => {
             return (
                 <Card variation="elevated" key={user.id}>
@@ -25,7 +31,8 @@ useEffect(() => {
             )
         })}
     </Grid>
+}
+export default ChamarPessoas()
 
-}, [])
 
 
