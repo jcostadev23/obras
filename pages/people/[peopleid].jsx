@@ -6,12 +6,12 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
-function peopledetails() {
-    const { query, push } = useRouter()
+function PeopleDetails() {
+    const { query, } = useRouter()
     const personid = query.peopleid
     const [person, setPerson] = useState()
 
-    async function getperson() {
+    async function GetPerson() {
         try {
             const personFromDatastore = await DataStore.query(People, personid);
             setPerson(personFromDatastore)
@@ -27,8 +27,8 @@ function peopledetails() {
         if (!personid) {
             return
         }
-        getperson()
-    }, [personid])
+        GetPerson()
+    }, [GetPerson])
 
     if (!person) {
         return <Loader />
@@ -51,4 +51,4 @@ function peopledetails() {
     </>
 }
 
-export default peopledetails
+export default PeopleDetails

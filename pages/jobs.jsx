@@ -1,6 +1,6 @@
 import JobCreateForm from "@/src/ui-components/JobCreateForm";
-import { useEffect, useState } from "react";
-import { Link, SwitchField, Card, Heading, Grid, SearchField } from "@aws-amplify/ui-react";
+import { useCallback, useEffect, useState } from "react";
+import { Card, Heading, Grid, } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 
@@ -23,11 +23,11 @@ export default function NewJob() {
         }
     }
 
-
     useEffect(() => {
 
         Findjob()
-    }, [])
+
+    }, [Findjob])
 
     return <div>
 
@@ -46,11 +46,6 @@ export default function NewJob() {
             <Card variation="elevated" >
                 <Heading level={4}>{"ADD Jobs"}</Heading>
                 <JobCreateForm
-                    onSubmit={(fields) => {
-                        // Example function to trim all string inputs
-                        console.log(fields)
-                        return fields
-                    }}
                 />  </Card>
         </Grid>
 

@@ -5,19 +5,22 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
-function itemdetails() {
+function ItemDetails() {
+
     const { query, push } = useRouter()
     const itemid = query.id
     const [name, setName] = useState()
 
-    async function deleteitem() {
+    async function DeleteItem() {
+
+
         const postToDelete = await DataStore.query(People, itemid);
         await DataStore.delete(postToDelete);
-        push("/obras")
+        push("/worker")
 
 
     }
-    async function itemname() {
+    async function ItemName() {
         try {
             const itemFromDatastore = await DataStore.query(People, itemid);
             setName(itemFromDatastore)
@@ -33,8 +36,8 @@ function itemdetails() {
         if (!itemid) {
             return
         }
-        itemname()
-    }, [itemid])
+        ItemName()
+    }, [ItemName])
 
     if (!name) {
         return <Loader />
@@ -61,15 +64,15 @@ function itemdetails() {
                 <Button
                     variation="destructive"
                     loadingText=""
-                    onClick={deleteitem}
+                    onClick={DeleteItem}
                     ariaLabel=""
                 >
                     Delete
                 </Button>
-                <div><Link href="/obras">Exit</Link></div>
+                <div><Link href="/worker">Exit</Link></div>
             </Card>
         </Grid></div>
     </>
 }
-export default itemdetails
+export default ItemDetails
 

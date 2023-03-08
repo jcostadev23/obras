@@ -1,9 +1,9 @@
 import SiteMenu from "@/components/menu";
 import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
-import { Link, SwitchField, Card, Heading, Grid, SearchField, View, colors, Button, useTheme } from "@aws-amplify/ui-react";
+import { Link, SwitchField, Card, Heading, Grid, SearchField } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
-import { useEffect, useState, } from "react";
+import { useEffect, useCallback, useState, } from "react";
 import * as React from 'react';
 
 
@@ -15,7 +15,9 @@ export default function Obras() {
         setSearchPeople(e.target.value)
     }
 
-    async function chamarpessoas() {
+    async function ChamarPessoas() {
+
+
         try {
 
             const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
@@ -28,12 +30,12 @@ export default function Obras() {
         }
 
     }
+
     useEffect(() => {
 
+        ChamarPessoas()
 
-        chamarpessoas()
-
-    }, [])
+    }, [ChamarPessoas])
 
 
     return <div>
@@ -44,7 +46,7 @@ export default function Obras() {
             type="text"
             onChange={(e) => {
                 setSearchPeople(e.target.value)
-                chamarpessoas()
+                ChamarPessoas()
             }
             } />
 
