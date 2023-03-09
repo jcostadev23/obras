@@ -11,24 +11,23 @@ function PeopleDetails() {
     const personid = query.peopleid
     const [person, setPerson] = useState()
 
-    async function GetPerson() {
-        try {
-            const personFromDatastore = await DataStore.query(People, personid);
-            setPerson(personFromDatastore)
-
-            console.log("Posts retrieved successfully!", JSON.stringify(personFromDatastore, null, 2));
-        } catch (error) {
-            console.log("Error retrieving posts", error);
-        }
-    }
-
     useEffect(() => {
+        async function GetPerson() {
+            try {
+                const personFromDatastore = await DataStore.query(People, personid);
+                setPerson(personFromDatastore)
+
+                console.log("Posts retrieved successfully!", JSON.stringify(personFromDatastore, null, 2));
+            } catch (error) {
+                console.log("Error retrieving posts", error);
+            }
+        }
 
         if (!personid) {
             return
         }
         GetPerson()
-    }, [])
+    }, [personid])
 
     if (!person) {
         return <Loader />

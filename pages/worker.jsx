@@ -55,20 +55,23 @@ export default function Obras() {
         <div>{searchpeople}</div>
 
         <Grid>
-            {people.map((user) => {
-                return (
-                    <Card variation="elevated" key={user.id}>
-                        <Heading level={4}>{user.name}</Heading>
-                        <div>{user.phonenumber}</div>
-                        <div>{user.role}</div>
-                        <Link href={"/people/" + user.id}>Edit</Link>
-                        <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
+            <h1 className="text-1.25xl ">
+                {people.map((user) => {
+                    return (
+                        <Card variation="elevated" key={user.id}>
+                            <Heading level={4}>{user.name}</Heading>
+                            <div>{user.phonenumber}</div>
+                            <div>{user.role}</div>
+                            <Link href={"/people/" + user.id}>Edit</Link>
+                            <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
 
 
-                    </Card>
-                )
-            })}
-        </Grid>
+
+
+                        </Card>
+                    )
+                })}
+            </h1>  </Grid>
         <Grid>
             <Card variation="elevated" >
                 <Heading level={4}>{"ADD WORKERS"}</Heading>
