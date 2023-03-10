@@ -8,6 +8,7 @@ import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
 function PeopleDetails() {
     const { query, } = useRouter()
+    const router = useRouter()
     const personid = query.peopleid
     const [person, setPerson] = useState()
 
@@ -43,7 +44,8 @@ function PeopleDetails() {
         </Grid>
         <Grid>
             <Card variation="elevated">
-                <PeopleUpdateForm id={personid} />
+                <PeopleUpdateForm id={personid}
+                    onSuccess={() => router.reload()} />
             </Card>
         </Grid>
 

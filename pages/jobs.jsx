@@ -4,11 +4,13 @@ import { Card, Heading, Grid, Link, SearchField } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import SiteMenu from "@/components/menu";
+import { useRouter } from "next/router"
 
 export default function NewJob() {
+    const router = useRouter()
     const [jobname, setJobname] = useState([])
     const [jobserch, setJobserch] = useState("")
-    const onPeopleChange = (e) => {
+    const onJobChange = (e) => {
         setJobserch(e.target.value)
     }
 
@@ -18,10 +20,10 @@ export default function NewJob() {
                 const serchjob = await DataStore.query(Job, c => c.name.contains(jobserch,));
                 setJobname(serchjob)
 
-                console.log("Posts retrieved successfully!", JSON.stringify(serchjob, null, 2));
+                console.log("Jobs retrieved successfully!", JSON.stringify(serchjob, null, 2));
             } catch (error) {
                 jobserch,
-                    console.log("Error retrieving posts", error);
+                    console.log("Error retrieving Jobs", error);
             }
         }
 
@@ -56,7 +58,8 @@ export default function NewJob() {
             <Grid>
                 <Card variation="elevated">
                     <Heading level={4}>{"ADD Jobs"}</Heading>
-                    <JobCreateForm />  </Card>
+                    <JobCreateForm
+                        onSuccess={() => router.reload()} />  </Card>
             </Grid>
 
         </div></>

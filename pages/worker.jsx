@@ -3,11 +3,13 @@ import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
 import { Link, SwitchField, Card, Heading, Grid, SearchField } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
-import { useEffect, useCallback, useState, } from "react";
+import { useEffect, useState, } from "react";
 import * as React from 'react';
+import { useRouter } from "next/router";
 
 
 export default function Obras() {
+    const router = useRouter()
     const [openswitch, setSwitch] = useState(false)
     const [people, setPeople] = useState([])
     const [searchpeople, setSearchPeople] = useState("")
@@ -17,16 +19,15 @@ export default function Obras() {
 
     async function ChamarPessoas() {
 
-
         try {
 
             const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
             setPeople(peopledainternet)
 
-            console.log("Posts retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+            console.log("Worker retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
         } catch (error) {
             searchpeople,
-                console.log("Error retrieving posts", error);
+                console.log("Error retrieving Worker", error);
         }
 
     }
@@ -65,9 +66,6 @@ export default function Obras() {
                             <Link href={"/people/" + user.id}>Edit</Link>
                             <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
 
-
-
-
                         </Card>
                     )
                 })}
@@ -76,11 +74,7 @@ export default function Obras() {
             <Card variation="elevated" >
                 <Heading level={4}>{"ADD WORKERS"}</Heading>
                 <PeopleCreateForm
-                    onSubmit={(fields) => {
-                        // Example function to trim all string inputs
-                        console.log(fields)
-                        return fields
-                    }}
+                    onSuccess={() => router.reload()}
                 />  </Card>
         </Grid>
 
@@ -93,7 +87,12 @@ export default function Obras() {
 
 
         {openswitch && <div>opcoes de escolha</div>}
-
+        <div
+            onClick={() => setSwitch(true)}
+            label="SwitchField"
+            labelPosition="start"
+        >
+        </div>
 
     </div>
 

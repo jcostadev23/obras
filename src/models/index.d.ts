@@ -6,6 +6,38 @@ import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@a
 
 
 
+type EagerEquipements = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Equipements, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Name?: string | null;
+  readonly Attachments?: string | null;
+  readonly Jobs?: (EquipementsJob | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyEquipements = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Equipements, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly Name?: string | null;
+  readonly Attachments?: string | null;
+  readonly Jobs: AsyncCollection<EquipementsJob>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Equipements = LazyLoading extends LazyLoadingDisabled ? EagerEquipements : LazyEquipements
+
+export declare const Equipements: (new (init: ModelInit<Equipements>) => Equipements) & {
+  copyOf(source: Equipements, mutator: (draft: MutableModel<Equipements>) => MutableModel<Equipements> | void): Equipements;
+}
+
 type EagerJob = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Job, 'id'>;
@@ -15,6 +47,7 @@ type EagerJob = {
   readonly name?: string | null;
   readonly address?: string | null;
   readonly people?: (JobPeople | null)[] | null;
+  readonly equipementss?: (EquipementsJob | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -28,6 +61,7 @@ type LazyJob = {
   readonly name?: string | null;
   readonly address?: string | null;
   readonly people: AsyncCollection<JobPeople>;
+  readonly equipementss: AsyncCollection<EquipementsJob>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -70,6 +104,40 @@ export declare type People = LazyLoading extends LazyLoadingDisabled ? EagerPeop
 
 export declare const People: (new (init: ModelInit<People>) => People) & {
   copyOf(source: People, mutator: (draft: MutableModel<People>) => MutableModel<People> | void): People;
+}
+
+type EagerEquipementsJob = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<EquipementsJob, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly equipementsId?: string | null;
+  readonly jobId?: string | null;
+  readonly equipements: Equipements;
+  readonly job: Job;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyEquipementsJob = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<EquipementsJob, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly equipementsId?: string | null;
+  readonly jobId?: string | null;
+  readonly equipements: AsyncItem<Equipements>;
+  readonly job: AsyncItem<Job>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type EquipementsJob = LazyLoading extends LazyLoadingDisabled ? EagerEquipementsJob : LazyEquipementsJob
+
+export declare const EquipementsJob: (new (init: ModelInit<EquipementsJob>) => EquipementsJob) & {
+  copyOf(source: EquipementsJob, mutator: (draft: MutableModel<EquipementsJob>) => MutableModel<EquipementsJob> | void): EquipementsJob;
 }
 
 type EagerJobPeople = {

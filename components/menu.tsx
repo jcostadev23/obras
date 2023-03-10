@@ -7,25 +7,25 @@ export default function SiteMenu() {
     return <Menu
         menuAlign="start"
     >
-        <MenuItem onClick={() => (true)}>
+        <MenuItem>
             <Link href="/">Home</Link>
         </MenuItem>
-        <MenuItem onClick={() => (true)}>
+        <MenuItem>
             <Link href="/worker">Worker</Link>
         </MenuItem>
-        <MenuItem onClick={() => (true)}>
+        <MenuItem>
             <Link href="/about">About</Link>
         </MenuItem>
-        <MenuItem onClick={() => (true)}>
+        <MenuItem>
             <Link href="/treino">Treino</Link>
         </MenuItem>
-        <MenuItem onClick={() => (true)}>
+        <MenuItem>
             <Link href="/jobs">Jobs</Link>
         </MenuItem>
-        <MenuItem onClick={() => (true)}>
-            <Link href="/equipment">Equipment</Link>
+        <MenuItem>
+            <Link href="/machines">Machines</Link>
         </MenuItem>
-        <MenuItem onClick={() => (false)}>
+        <MenuItem>
             Exit Menu
         </MenuItem>
 

@@ -7,6 +7,7 @@ import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
 
 export default function EditJobs() {
+    const router = useRouter()
     const { query, } = useRouter()
     const jobid = query.editjob
     const [name, setName] = useState()
@@ -17,9 +18,9 @@ export default function EditJobs() {
                 const joblist = await DataStore.query(Job, jobid);
                 setName(joblist)
 
-                console.log("Posts retrieved successfully!", JSON.stringify(joblist, null, 2));
+                console.log("Job retrieved successfully!", JSON.stringify(joblist, null, 2));
             } catch (error) {
-                console.log("Error retrieving posts", error);
+                console.log("Error retrieving Job", error);
             }
         }
         if (!jobid) {
@@ -40,7 +41,8 @@ export default function EditJobs() {
         </Grid>
         <Grid>
             <Card variation="elevated">
-                <JobUpdateForm id={jobid} />
+                <JobUpdateForm id={jobid}
+                    onSuccess={() => router.reload()} />
             </Card>
         </Grid>
 
