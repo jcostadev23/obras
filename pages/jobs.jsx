@@ -5,11 +5,12 @@ import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import SiteMenu from "@/components/menu";
 import { useRouter } from "next/router"
+import * as React from 'react';
 
 export default function NewJob() {
     const router = useRouter()
     const [jobname, setJobname] = useState([])
-    const [jobserch, setJobserch] = useState("")
+    const [jobserch, setJobserch] = React.useState("")
     const onJobChange = (e) => {
         setJobserch(e.target.value)
     }

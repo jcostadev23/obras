@@ -6,9 +6,9 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
-function PeopleDetails() {
-    const { query, } = useRouter()
+export default function PeopleDetails() {
     const router = useRouter()
+    const { query } = useRouter()
     const personid = query.editperson
     const [person, setPerson] = useState()
 
@@ -19,9 +19,9 @@ function PeopleDetails() {
                 const personFromDatastore = await DataStore.query(People, personid);
                 setPerson(personFromDatastore)
 
-                console.log("Posts retrieved successfully!", JSON.stringify(personFromDatastore, null, 2));
+                console.log("Person retrieved successfully!", JSON.stringify(personFromDatastore, null, 2));
             } catch (error) {
-                console.log("Error retrieving posts", error);
+                console.log("Error retrieving Person", error);
             }
         }
 
@@ -53,4 +53,3 @@ function PeopleDetails() {
     </>
 }
 
-export default PeopleDetails

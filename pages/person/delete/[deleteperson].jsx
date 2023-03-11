@@ -9,7 +9,9 @@ function ItemDetails() {
 
     const { query, push } = useRouter()
     const itemid = query.deleteperson
+
     const [name, setName] = useState()
+
 
     async function DeleteItem() {
 
@@ -27,9 +29,9 @@ function ItemDetails() {
                 const itemFromDatastore = await DataStore.query(People, itemid);
                 setName(itemFromDatastore)
 
-                console.log("Posts retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
+                console.log("Person retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
             } catch (error) {
-                console.log("Error retrieving posts", error);
+                console.log("Error retrieving Person", error);
             }
         }
 

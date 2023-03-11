@@ -12,7 +12,7 @@ export default function Obras() {
     const router = useRouter()
     const [openswitch, setSwitch] = useState(false)
     const [people, setPeople] = useState([])
-    const [searchpeople, setSearchPeople] = useState("")
+    const [searchpeople, setSearchPeople] = React.useState("")
     const onChange = (e) => {
         setSearchPeople(e.target.value)
     }
@@ -25,10 +25,10 @@ export default function Obras() {
                 const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
                 setPeople(peopledainternet)
 
-                console.log("Worker retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+                console.log("People retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
             } catch (error) {
                 searchpeople,
-                    console.log("Error retrieving Worker", error);
+                    console.log("Error retrieving People", error);
             }
 
         }
@@ -52,10 +52,6 @@ export default function Obras() {
             }
             } />
 
-
-
-        <div>{searchpeople}</div>
-
         <Grid>
             <h1 className="text-1.25xl ">
                 {people.map((user) => {
@@ -73,27 +69,11 @@ export default function Obras() {
             </h1>  </Grid>
         <Grid>
             <Card variation="elevated" >
-                <Heading level={4}>{"ADD WORKERS"}</Heading>
+                <Heading level={4}>{"ADD People"}</Heading>
                 <PeopleCreateForm
                     onSuccess={() => router.reload()}
                 />  </Card>
         </Grid>
-
-        <SwitchField
-            onClick={() => setSwitch(true)}
-            label="SwitchField"
-            labelPosition="start"
-        >
-        </SwitchField>
-
-
-        {openswitch && <div>opcoes de escolha</div>}
-        <div
-            onClick={() => setSwitch(true)}
-            label="SwitchField"
-            labelPosition="start"
-        >
-        </div>
 
     </div>
 
