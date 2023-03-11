@@ -49,7 +49,7 @@ export default function NewJob() {
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.address}</div>
                             <Link href={"/jobsfile/" + user.id}>Edit</Link>
-                            <div><Link href={"/jobsfile/deletejob/" + user.id}>Delete</Link></div>
+                            <div><Link href={"/jobsfile/delete/" + user.id}>Delete</Link></div>
 
                         </Card>
                     );

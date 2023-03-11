@@ -50,8 +50,8 @@ export default function CheckMachine() {
                         <Card variation="elevated" key={user.id}>
                             <Heading level={4}>{user.Name}</Heading>
                             <div>{user.Attachments}</div>
-                            <Link href={"/equip./" + user.id}>Edit</Link>
-                            <div><Link href={"/equip./deleteequip/" + user.id}>Delete</Link></div>
+                            <Link href={"/equipement/" + user.id}>Edit</Link>
+                            <div><Link href={"/equipement/delete/" + user.id}>Delete</Link></div>
                         </Card>
                     );
                 })}

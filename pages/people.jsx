@@ -17,26 +17,27 @@ export default function Obras() {
         setSearchPeople(e.target.value)
     }
 
-    async function ChamarPessoas() {
+    useEffect(() => {
+        async function ChamarPessoas() {
 
-        try {
+            try {
 
-            const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
-            setPeople(peopledainternet)
+                const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
+                setPeople(peopledainternet)
 
-            console.log("Worker retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
-        } catch (error) {
-            searchpeople,
-                console.log("Error retrieving Worker", error);
+                console.log("Worker retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+            } catch (error) {
+                searchpeople,
+                    console.log("Error retrieving Worker", error);
+            }
+
         }
 
-    }
 
-    useEffect(() => {
 
         ChamarPessoas()
 
-    }, [])
+    }, [searchpeople])
 
 
     return <div>
@@ -63,8 +64,8 @@ export default function Obras() {
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.phonenumber}</div>
                             <div>{user.role}</div>
-                            <Link href={"/people/" + user.id}>Edit</Link>
-                            <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
+                            <Link href={"/person/" + user.id}>Edit</Link>
+                            <div><Link href={"/person/delete/" + user.id}>Delete</Link></div>
 
                         </Card>
                     )

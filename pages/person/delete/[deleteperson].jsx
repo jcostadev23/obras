@@ -8,7 +8,7 @@ import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/u
 function ItemDetails() {
 
     const { query, push } = useRouter()
-    const itemid = query.id
+    const itemid = query.deleteperson
     const [name, setName] = useState()
 
     async function DeleteItem() {
@@ -16,7 +16,7 @@ function ItemDetails() {
 
         const postToDelete = await DataStore.query(People, itemid);
         await DataStore.delete(postToDelete);
-        push("/worker")
+        push("/people")
 
 
     }
@@ -69,7 +69,7 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/worker">Exit</Link></div>
+                <div><Link href="/people">Exit</Link></div>
             </Card>
         </Grid></div>
     </>

@@ -9,8 +9,9 @@ import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 function PeopleDetails() {
     const { query, } = useRouter()
     const router = useRouter()
-    const personid = query.peopleid
+    const personid = query.editperson
     const [person, setPerson] = useState()
+
 
     useEffect(() => {
         async function GetPerson() {
