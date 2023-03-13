@@ -1,24 +1,24 @@
 import SiteMenu from "@/components/menu";
 import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
-import { Link, SwitchField, Card, Heading, Grid, SearchField } from "@aws-amplify/ui-react";
+import { Link, Card, Heading, Grid, SearchField } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
 import { useRouter } from "next/router";
 
 
-export default function Obras() {
+export default function Getpeople() {
     const router = useRouter()
     const [openswitch, setSwitch] = useState(false)
     const [people, setPeople] = useState([])
-    const [searchpeople, setSearchPeople] = React.useState("")
+    const [searchpeople, setSearchPeople] = useState("")
     const onChange = (e) => {
         setSearchPeople(e.target.value)
     }
 
     useEffect(() => {
-        async function ChamarPessoas() {
+        async function GetPerson() {
 
             try {
 
@@ -35,7 +35,7 @@ export default function Obras() {
 
 
 
-        ChamarPessoas()
+        GetPerson()
 
     }, [searchpeople])
 
@@ -48,7 +48,7 @@ export default function Obras() {
             type="text"
             onChange={(e) => {
                 setSearchPeople(e.target.value)
-                ChamarPessoas()
+                GetPerson()
             }
             } />
 

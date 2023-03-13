@@ -1,7 +1,8 @@
 import SiteMenu from '@/components/menu';
 import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, SearchField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, SwitchField, TextField, PasswordField, Grid, Flex, Divider } from '@aws-amplify/ui-react';
 import { useState } from 'react';
-
+import React from "react";
+import Calendar from "../components/Calendar/Calendar";
 import { DiJsBadge } from 'react-icons/di';
 export default function Home() {
   const [mostrar, setMostrar] = useState(false)
@@ -157,5 +158,8 @@ export default function Home() {
 
     </div>
   )
+  function App() {
+    return <Calendar />;
+  }
 }
 
