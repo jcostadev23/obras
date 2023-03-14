@@ -18,7 +18,7 @@ export default function CheckMachine() {
     useEffect(() => {
         async function CallMachine() {
             try {
-                const serchmachine = await DataStore.query(Equipements, c => c.Name.contains(machineserch,));
+                const serchmachine = await DataStore.query(Equipements, c => c.name.contains(machineserch,));
                 setMachine(serchmachine)
 
                 console.log("Equipements retrieved successfully!", JSON.stringify(serchmachine, null, 2));
@@ -48,7 +48,7 @@ export default function CheckMachine() {
                 {machine.map((user) => {
                     return (
                         <Card variation="elevated" key={user.id}>
-                            <Heading level={4}>{user.Name}</Heading>
+                            <Heading level={4}>{user.name}</Heading>
                             <div>{user.Attachments}</div>
                             <Link href={"/equipement/" + user.id}>Edit</Link>
                             <div><Link href={"/equipement/delete/" + user.id}>Delete</Link></div>

@@ -37,7 +37,7 @@ function MachineDetails() {
     return <>
         <SiteMenu /><Grid>
             <Card variation="elevated">
-                <Heading level={4}>{machine.Name}</Heading>
+                <Heading level={4}>{machine.name}</Heading>
                 <div>{machine.Attachments}</div>
             </Card>
         </Grid>

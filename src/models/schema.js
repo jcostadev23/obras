@@ -1,5 +1,160 @@
 export const schema = {
     "models": {
+        "Calendar": {
+            "name": "Calendar",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "day": {
+                    "name": "day",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "person": {
+                    "name": "person",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "job": {
+                    "name": "job",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "equipement": {
+                    "name": "equipement",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Equipements": {
+                    "name": "Equipements",
+                    "isArray": false,
+                    "type": {
+                        "model": "Equipements"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "calendarEquipementsId"
+                        ]
+                    }
+                },
+                "Job": {
+                    "name": "Job",
+                    "isArray": false,
+                    "type": {
+                        "model": "Job"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "calendarJobId"
+                        ]
+                    }
+                },
+                "People": {
+                    "name": "People",
+                    "isArray": false,
+                    "type": {
+                        "model": "People"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "calendarPeopleId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "calendarEquipementsId": {
+                    "name": "calendarEquipementsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "calendarJobId": {
+                    "name": "calendarJobId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "calendarPeopleId": {
+                    "name": "calendarPeopleId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Calendars",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Equipements": {
             "name": "Equipements",
             "fields": {
@@ -23,22 +178,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "Jobs": {
-                    "name": "Jobs",
-                    "isArray": true,
-                    "type": {
-                        "model": "EquipementsJob"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "equipements"
-                        ]
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -105,38 +244,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "people": {
-                    "name": "people",
-                    "isArray": true,
-                    "type": {
-                        "model": "JobPeople"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "job"
-                        ]
-                    }
-                },
-                "equipementss": {
-                    "name": "equipementss",
-                    "isArray": true,
-                    "type": {
-                        "model": "EquipementsJob"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "job"
-                        ]
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -211,22 +318,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "jobs": {
-                    "name": "jobs",
-                    "isArray": true,
-                    "type": {
-                        "model": "JobPeople"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "people"
-                        ]
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -268,206 +359,10 @@ export const schema = {
                     }
                 }
             ]
-        },
-        "EquipementsJob": {
-            "name": "EquipementsJob",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "equipementsId": {
-                    "name": "equipementsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "jobId": {
-                    "name": "jobId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "equipements": {
-                    "name": "equipements",
-                    "isArray": false,
-                    "type": {
-                        "model": "Equipements"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "equipementsId"
-                        ]
-                    }
-                },
-                "job": {
-                    "name": "job",
-                    "isArray": false,
-                    "type": {
-                        "model": "Job"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "jobId"
-                        ]
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "EquipementsJobs",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byEquipements",
-                        "fields": [
-                            "equipementsId"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byJob",
-                        "fields": [
-                            "jobId"
-                        ]
-                    }
-                }
-            ]
-        },
-        "JobPeople": {
-            "name": "JobPeople",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "jobId": {
-                    "name": "jobId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "peopleId": {
-                    "name": "peopleId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "job": {
-                    "name": "job",
-                    "isArray": false,
-                    "type": {
-                        "model": "Job"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "jobId"
-                        ]
-                    }
-                },
-                "people": {
-                    "name": "people",
-                    "isArray": false,
-                    "type": {
-                        "model": "People"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "peopleId"
-                        ]
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "JobPeople",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byJob",
-                        "fields": [
-                            "jobId"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPeople",
-                        "fields": [
-                            "peopleId"
-                        ]
-                    }
-                }
-            ]
         }
     },
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "0d658d132830e16ca46375dfd0a18cee"
+    "version": "0c18c73c8104834ef50b7ee0320da6c0"
 };

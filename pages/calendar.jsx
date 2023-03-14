@@ -1,12 +1,13 @@
 import SiteMenu from "@/components/menu";
 import React from 'react';
-import { People, Job, Equipements } from "@/src/models";
+import { People, Job, Equipements, Calendar } from "@/src/models";
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { SelectField } from "@aws-amplify/ui-react";
+import { SelectField, Button, } from "@aws-amplify/ui-react";
 import { useEffect, useState, } from "react";
 import { DataStore } from "aws-amplify";
+
 
 export default function Example() {
     const [personid, setPersonid] = useState("")
@@ -19,7 +20,7 @@ export default function Example() {
 
     let footer = <p>Please pick a day.</p>;
     if (selected) {
-        footer = <p>You picked {format(selected, 'PP')}.</p>;
+        footer = <p>You picked {format(selected, 'PPPP')}.</p>;
     }
 
     useEffect(() => {
@@ -66,6 +67,17 @@ export default function Example() {
         CallMachine()
 
     }, [])
+    async function SaveCalender() {
+        try {
+            await DataStore.save(
+                new Calendar({
+                    day: format(selected, "dd/mm/aaaa"),
+                    person: personid,
+                    job: jobid,
+                    equipement: machineid
+                }))
+        } catch { }
+    }
 
     return <> <SiteMenu
     />
@@ -118,8 +130,11 @@ export default function Example() {
                     {user.Name}
                 </option>
             })}
+
         </SelectField>
         <div>{machineid}</div>
+
+        <Button onClick={SaveCalender}>Save</Button>
 
     </>
 }

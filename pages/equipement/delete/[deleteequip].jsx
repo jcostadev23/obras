@@ -53,7 +53,7 @@ function ItemDetails() {
             </Alert>
             <Card variation="elevated">
 
-                <Heading level={4}>{name.Name}</Heading>
+                <Heading level={4}>{name.name}</Heading>
                 <div>{name.Attachments}</div>
 
                 <Button
