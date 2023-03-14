@@ -1,3 +1,4 @@
+import SiteMenu from "@/components/menu";
 import React from 'react';
 import { People, Job, Equipements } from "@/src/models";
 import { format } from 'date-fns';
@@ -66,11 +67,13 @@ export default function Example() {
 
     }, [])
 
-    return <><DayPicker
-        mode="single"
-        selected={selected}
-        onSelect={setSelected}
-        footer={footer} />
+    return <> <SiteMenu
+    />
+        <DayPicker
+            mode="single"
+            selected={selected}
+            onSelect={setSelected}
+            footer={footer} />
 
         <SelectField
             label="People"

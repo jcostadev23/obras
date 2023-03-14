@@ -26,6 +26,9 @@ export default function SiteMenu() {
             <Link href="/equipements">Equipements</Link>
         </MenuItem>
         <MenuItem>
+            <Link href="/calendar">Calendar</Link>
+        </MenuItem>
+        <MenuItem>
             Exit Menu
         </MenuItem>
 
