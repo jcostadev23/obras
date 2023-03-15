@@ -69,16 +69,24 @@ export default function Example() {
     }, [])
     async function SaveCalender() {
         try {
+            const savedate = format(selected, "yyyy/MM/dd")
+            console.log("checking the date", savedate)
+
             const saveResponse = await DataStore.save(
                 new Calendar({
-                    day: format(selected, "dd/mm/aaaa"),
+                    day: savedate,
                     person: personid,
                     job: jobid,
                     equipement: machineid
-                }))
-            console.log(saveResponse)
-        } catch { console.log("estou no catch") }
+                })
+            );
+            console.log("esta a gravar", saveResponse);
+        } catch (error) {
+            console.log("estou no catch", error);
+        }
     }
+
+
 
     return <> <SiteMenu
     />
