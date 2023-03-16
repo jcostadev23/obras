@@ -69,7 +69,7 @@ export default function Example() {
     }, [])
     async function SaveCalender() {
         try {
-            const savedate = format(selected, "yyyy/MM/dd")
+            const savedate = format(selected, "yyyy-MM-dd")
             console.log("checking the date", savedate)
 
             const saveResponse = await DataStore.save(
