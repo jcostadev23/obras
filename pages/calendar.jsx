@@ -54,6 +54,7 @@ export default function Example() {
 
     useEffect(() => {
         async function CallMachine() {
+            console.log("estou no call machine")
             try {
                 const serchmachine = await DataStore.query(Equipements);
                 setMachine(serchmachine)
@@ -75,9 +76,9 @@ export default function Example() {
             const saveResponse = await DataStore.save(
                 new Calendar({
                     day: savedate,
-                    person: personid,
-                    job: jobid,
-                    equipement: machineid
+                    people: { id: personid },
+                    job: { id: jobid },
+                    equipement: { id: machineid },
                 })
             );
             console.log("esta a gravar", saveResponse);
@@ -98,7 +99,7 @@ export default function Example() {
 
         <SelectField
             label="People"
-            descriptiveText="Select a Person?"
+            descriptiveText="Select a People?"
             value={personid}
             onChange={(e) => setPersonid(e.target.value)} >
             <option></option>
@@ -134,9 +135,10 @@ export default function Example() {
             onChange={(e) => setMachineid(e.target.value)}>
             <option></option>
             {machine.map((user) => {
+                console.log("test 2 ")
                 return <option value={user.id}
                     key={user.id}>
-                    {user.Name}
+                    {user.name}
                 </option>
             })}
 

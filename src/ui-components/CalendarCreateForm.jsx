@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SelectField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Calendar } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -24,27 +30,19 @@ export default function CalendarCreateForm(props) {
   } = props;
   const initialValues = {
     day: "",
-    person: "",
-    job: "",
-    equipement: "",
+    asda: undefined,
   };
   const [day, setDay] = React.useState(initialValues.day);
-  const [person, setPerson] = React.useState(initialValues.person);
-  const [job, setJob] = React.useState(initialValues.job);
-  const [equipement, setEquipement] = React.useState(initialValues.equipement);
+  const [asda, setAsda] = React.useState(initialValues.asda);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDay(initialValues.day);
-    setPerson(initialValues.person);
-    setJob(initialValues.job);
-    setEquipement(initialValues.equipement);
+    setAsda(initialValues.asda);
     setErrors({});
   };
   const validations = {
     day: [],
-    person: [],
-    job: [],
-    equipement: [],
+    asda: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -73,9 +71,7 @@ export default function CalendarCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           day,
-          person,
-          job,
-          equipement,
+          asda,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -105,7 +101,10 @@ export default function CalendarCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new Calendar(modelFields));
+          const modelFieldsToSave = {
+            day: modelFields.day,
+          };
+          await DataStore.save(new Calendar(modelFieldsToSave));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -125,15 +124,14 @@ export default function CalendarCreateForm(props) {
         label="Day"
         isRequired={false}
         isReadOnly={false}
+        type="date"
         value={day}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               day: value,
-              person,
-              job,
-              equipement,
+              asda,
             };
             const result = onChange(modelFields);
             value = result?.day ?? value;
@@ -148,87 +146,30 @@ export default function CalendarCreateForm(props) {
         hasError={errors.day?.hasError}
         {...getOverrideProps(overrides, "day")}
       ></TextField>
-      <TextField
-        label="Person"
-        isRequired={false}
-        isReadOnly={false}
-        value={person}
+      <SelectField
+        label="Label"
+        placeholder="Please select an option"
+        value={asda}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               day,
-              person: value,
-              job,
-              equipement,
+              asda: value,
             };
             const result = onChange(modelFields);
-            value = result?.person ?? value;
+            value = result?.asda ?? value;
           }
-          if (errors.person?.hasError) {
-            runValidationTasks("person", value);
+          if (errors.asda?.hasError) {
+            runValidationTasks("asda", value);
           }
-          setPerson(value);
+          setAsda(value);
         }}
-        onBlur={() => runValidationTasks("person", person)}
-        errorMessage={errors.person?.errorMessage}
-        hasError={errors.person?.hasError}
-        {...getOverrideProps(overrides, "person")}
-      ></TextField>
-      <TextField
-        label="Job"
-        isRequired={false}
-        isReadOnly={false}
-        value={job}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              day,
-              person,
-              job: value,
-              equipement,
-            };
-            const result = onChange(modelFields);
-            value = result?.job ?? value;
-          }
-          if (errors.job?.hasError) {
-            runValidationTasks("job", value);
-          }
-          setJob(value);
-        }}
-        onBlur={() => runValidationTasks("job", job)}
-        errorMessage={errors.job?.errorMessage}
-        hasError={errors.job?.hasError}
-        {...getOverrideProps(overrides, "job")}
-      ></TextField>
-      <TextField
-        label="Equipement"
-        isRequired={false}
-        isReadOnly={false}
-        value={equipement}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              day,
-              person,
-              job,
-              equipement: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.equipement ?? value;
-          }
-          if (errors.equipement?.hasError) {
-            runValidationTasks("equipement", value);
-          }
-          setEquipement(value);
-        }}
-        onBlur={() => runValidationTasks("equipement", equipement)}
-        errorMessage={errors.equipement?.errorMessage}
-        hasError={errors.equipement?.hasError}
-        {...getOverrideProps(overrides, "equipement")}
-      ></TextField>
+        onBlur={() => runValidationTasks("asda", asda)}
+        errorMessage={errors.asda?.errorMessage}
+        hasError={errors.asda?.hasError}
+        {...getOverrideProps(overrides, "asda")}
+      ></SelectField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

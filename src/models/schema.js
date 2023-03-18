@@ -13,33 +13,12 @@ export const schema = {
                 "day": {
                     "name": "day",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "person": {
-                    "name": "person",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "job": {
-                    "name": "job",
-                    "isArray": false,
-                    "type": "String",
+                    "type": "AWSDate",
                     "isRequired": false,
                     "attributes": []
                 },
                 "equipement": {
                     "name": "equipement",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Equipements": {
-                    "name": "Equipements",
                     "isArray": false,
                     "type": {
                         "model": "Equipements"
@@ -52,12 +31,12 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "calendarEquipementsId"
+                            "calendarEquipementId"
                         ]
                     }
                 },
-                "Job": {
-                    "name": "Job",
+                "job": {
+                    "name": "job",
                     "isArray": false,
                     "type": {
                         "model": "Job"
@@ -74,8 +53,8 @@ export const schema = {
                         ]
                     }
                 },
-                "People": {
-                    "name": "People",
+                "people": {
+                    "name": "people",
                     "isArray": false,
                     "type": {
                         "model": "People"
@@ -108,8 +87,8 @@ export const schema = {
                     "attributes": [],
                     "isReadOnly": true
                 },
-                "calendarEquipementsId": {
-                    "name": "calendarEquipementsId",
+                "calendarEquipementId": {
+                    "name": "calendarEquipementId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -165,15 +144,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Name": {
-                    "name": "Name",
+                "name": {
+                    "name": "name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "Attachments": {
-                    "name": "Attachments",
+                "attachments": {
+                    "name": "attachments",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -364,5 +343,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "0c18c73c8104834ef50b7ee0320da6c0"
+    "version": "b50a463a7c5bc3bc462d1e732c956ada"
 };

@@ -25,23 +25,14 @@ export default function CalendarUpdateForm(props) {
   } = props;
   const initialValues = {
     day: "",
-    person: "",
-    job: "",
-    equipement: "",
   };
   const [day, setDay] = React.useState(initialValues.day);
-  const [person, setPerson] = React.useState(initialValues.person);
-  const [job, setJob] = React.useState(initialValues.job);
-  const [equipement, setEquipement] = React.useState(initialValues.equipement);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = calendarRecord
       ? { ...initialValues, ...calendarRecord }
       : initialValues;
     setDay(cleanValues.day);
-    setPerson(cleanValues.person);
-    setJob(cleanValues.job);
-    setEquipement(cleanValues.equipement);
     setErrors({});
   };
   const [calendarRecord, setCalendarRecord] = React.useState(calendar);
@@ -57,9 +48,6 @@ export default function CalendarUpdateForm(props) {
   React.useEffect(resetStateValues, [calendarRecord]);
   const validations = {
     day: [],
-    person: [],
-    job: [],
-    equipement: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -88,9 +76,6 @@ export default function CalendarUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           day,
-          person,
-          job,
-          equipement,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -141,15 +126,13 @@ export default function CalendarUpdateForm(props) {
         label="Day"
         isRequired={false}
         isReadOnly={false}
+        type="date"
         value={day}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               day: value,
-              person,
-              job,
-              equipement,
             };
             const result = onChange(modelFields);
             value = result?.day ?? value;
@@ -163,87 +146,6 @@ export default function CalendarUpdateForm(props) {
         errorMessage={errors.day?.errorMessage}
         hasError={errors.day?.hasError}
         {...getOverrideProps(overrides, "day")}
-      ></TextField>
-      <TextField
-        label="Person"
-        isRequired={false}
-        isReadOnly={false}
-        value={person}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              day,
-              person: value,
-              job,
-              equipement,
-            };
-            const result = onChange(modelFields);
-            value = result?.person ?? value;
-          }
-          if (errors.person?.hasError) {
-            runValidationTasks("person", value);
-          }
-          setPerson(value);
-        }}
-        onBlur={() => runValidationTasks("person", person)}
-        errorMessage={errors.person?.errorMessage}
-        hasError={errors.person?.hasError}
-        {...getOverrideProps(overrides, "person")}
-      ></TextField>
-      <TextField
-        label="Job"
-        isRequired={false}
-        isReadOnly={false}
-        value={job}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              day,
-              person,
-              job: value,
-              equipement,
-            };
-            const result = onChange(modelFields);
-            value = result?.job ?? value;
-          }
-          if (errors.job?.hasError) {
-            runValidationTasks("job", value);
-          }
-          setJob(value);
-        }}
-        onBlur={() => runValidationTasks("job", job)}
-        errorMessage={errors.job?.errorMessage}
-        hasError={errors.job?.hasError}
-        {...getOverrideProps(overrides, "job")}
-      ></TextField>
-      <TextField
-        label="Equipement"
-        isRequired={false}
-        isReadOnly={false}
-        value={equipement}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              day,
-              person,
-              job,
-              equipement: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.equipement ?? value;
-          }
-          if (errors.equipement?.hasError) {
-            runValidationTasks("equipement", value);
-          }
-          setEquipement(value);
-        }}
-        onBlur={() => runValidationTasks("equipement", equipement)}
-        errorMessage={errors.equipement?.errorMessage}
-        hasError={errors.equipement?.hasError}
-        {...getOverrideProps(overrides, "equipement")}
       ></TextField>
       <Flex
         justifyContent="space-between"

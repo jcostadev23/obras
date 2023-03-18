@@ -23,22 +23,22 @@ export default function EquipementsCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    Name: "",
-    Attachments: "",
+    name: "",
+    attachments: "",
   };
-  const [Name, setName] = React.useState(initialValues.Name);
-  const [Attachments, setAttachments] = React.useState(
-    initialValues.Attachments
+  const [name, setName] = React.useState(initialValues.name);
+  const [attachments, setAttachments] = React.useState(
+    initialValues.attachments
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setName(initialValues.Name);
-    setAttachments(initialValues.Attachments);
+    setName(initialValues.name);
+    setAttachments(initialValues.attachments);
     setErrors({});
   };
   const validations = {
-    Name: [],
-    Attachments: [],
+    name: [],
+    attachments: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -66,8 +66,8 @@ export default function EquipementsCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          Name,
-          Attachments,
+          name,
+          attachments,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -117,51 +117,51 @@ export default function EquipementsCreateForm(props) {
         label="Name"
         isRequired={false}
         isReadOnly={false}
-        value={Name}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              Name: value,
-              Attachments,
+              name: value,
+              attachments,
             };
             const result = onChange(modelFields);
-            value = result?.Name ?? value;
+            value = result?.name ?? value;
           }
-          if (errors.Name?.hasError) {
-            runValidationTasks("Name", value);
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
           }
           setName(value);
         }}
-        onBlur={() => runValidationTasks("Name", Name)}
-        errorMessage={errors.Name?.errorMessage}
-        hasError={errors.Name?.hasError}
-        {...getOverrideProps(overrides, "Name")}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
         label="Attachments"
         isRequired={false}
         isReadOnly={false}
-        value={Attachments}
+        value={attachments}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              Name,
-              Attachments: value,
+              name,
+              attachments: value,
             };
             const result = onChange(modelFields);
-            value = result?.Attachments ?? value;
+            value = result?.attachments ?? value;
           }
-          if (errors.Attachments?.hasError) {
-            runValidationTasks("Attachments", value);
+          if (errors.attachments?.hasError) {
+            runValidationTasks("attachments", value);
           }
           setAttachments(value);
         }}
-        onBlur={() => runValidationTasks("Attachments", Attachments)}
-        errorMessage={errors.Attachments?.errorMessage}
-        hasError={errors.Attachments?.hasError}
-        {...getOverrideProps(overrides, "Attachments")}
+        onBlur={() => runValidationTasks("attachments", attachments)}
+        errorMessage={errors.attachments?.errorMessage}
+        hasError={errors.attachments?.hasError}
+        {...getOverrideProps(overrides, "attachments")}
       ></TextField>
       <Flex
         justifyContent="space-between"

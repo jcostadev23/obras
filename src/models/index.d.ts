@@ -13,15 +13,12 @@ type EagerCalendar = {
   };
   readonly id: string;
   readonly day?: string | null;
-  readonly person?: string | null;
-  readonly job?: string | null;
-  readonly equipement?: string | null;
-  readonly Equipements?: Equipements | null;
-  readonly Job?: Job | null;
-  readonly People?: People | null;
+  readonly equipement?: Equipements | null;
+  readonly job?: Job | null;
+  readonly people?: People | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly calendarEquipementsId?: string | null;
+  readonly calendarEquipementId?: string | null;
   readonly calendarJobId?: string | null;
   readonly calendarPeopleId?: string | null;
 }
@@ -33,15 +30,12 @@ type LazyCalendar = {
   };
   readonly id: string;
   readonly day?: string | null;
-  readonly person?: string | null;
-  readonly job?: string | null;
-  readonly equipement?: string | null;
-  readonly Equipements: AsyncItem<Equipements | undefined>;
-  readonly Job: AsyncItem<Job | undefined>;
-  readonly People: AsyncItem<People | undefined>;
+  readonly equipement: AsyncItem<Equipements | undefined>;
+  readonly job: AsyncItem<Job | undefined>;
+  readonly people: AsyncItem<People | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly calendarEquipementsId?: string | null;
+  readonly calendarEquipementId?: string | null;
   readonly calendarJobId?: string | null;
   readonly calendarPeopleId?: string | null;
 }
@@ -58,8 +52,8 @@ type EagerEquipements = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Name?: string | null;
-  readonly Attachments?: string | null;
+  readonly name?: string | null;
+  readonly attachments?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -70,8 +64,8 @@ type LazyEquipements = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Name?: string | null;
-  readonly Attachments?: string | null;
+  readonly name?: string | null;
+  readonly attachments?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
