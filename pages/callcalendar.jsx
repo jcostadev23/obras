@@ -6,12 +6,10 @@ import React from "react";
 export default function CallCalendar() {
     const [mycalendar, setMycalendar] = useState([])
     const [callday, setCallday] = useState("")
-    const [person, setPerson] = useState()
+    const [people, setPeople] = useState([])
     const [models, setModels] = useState([])
     const onCalendarChange = (e) => {
         setCallday(e.target.value)
-
-        console.log("aqui em sima")
     }
     console.log("useeffect")
     useEffect(() => {
@@ -20,53 +18,24 @@ export default function CallCalendar() {
             try {
                 const days = await DataStore.query(Calendar,);
                 setMycalendar(days)
-                console.log("My calendar", JSON.stringify(days, null, 2));
+
+                const person = await mycalendar[0].people
+                setPeople(person)
+                console.log(person)
+
             } catch (error) {
                 console.log("Error don't get the callday", error);
+
             }
-            console.log("test2.1")
-            const pessoa = await DataStore.query(People, c => c.name.contains(mycalendar))
-            setPerson(pessoa)
-            console.log(pessoa)
-            console.log("test2")
-
-
         }
         GetDays()
-
-
-
-
     }, [])
-    console.log("test3")
 
-    useEffect(() => {
-        async function fetchData() {
-
-            DataStore.query(Calendar),
-                DataStore.query(People),
-                DataStore.query(Job),
-                DataStore.query(Equipements)
-
-            console.log("test4")
-
-
-        }
-
-
-        fetchData();
-    }, []);
-    console.log("test4.1")
     console.log(models)
-
-
-
-
-
-
+    console.log("test4.1")
 
     console.log(mycalendar)
-    console.log("test5")
+
     return (<><div> {mycalendar.map((item) => (
         <li key={item.id}>
             <p>day: {item.day}</p>
@@ -77,6 +46,7 @@ export default function CallCalendar() {
 
         </li>
     ))}
+
 
     </div>
 
