@@ -19,26 +19,18 @@ export default function Getpeople() {
 
     useEffect(() => {
         async function GetPerson() {
-
             try {
-
                 const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
                 setPeople(peopledainternet)
 
-                console.log("People retrieved successfully!", JSON.stringify(peopledainternet, null, 2));
+                console.log("People retrieved successfully!");
             } catch (error) {
-                searchpeople,
-                    console.log("Error retrieving People", error);
+                console.log("Error retrieving People", error);
             }
-
         }
-
-
-
         GetPerson()
 
     }, [searchpeople])
-
 
     return <div>
 
@@ -74,8 +66,5 @@ export default function Getpeople() {
                     onSuccess={() => router.reload()}
                 />  </Card>
         </Grid>
-
     </div>
-
-
 }

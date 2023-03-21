@@ -29,6 +29,10 @@ export default function SiteMenu() {
             <Link href="/calendar">Calendar</Link>
         </MenuItem>
         <MenuItem>
+            <Link href="/callcalendar">Callcalendar</Link>
+        </MenuItem>
+
+        <MenuItem>
             Exit Menu
         </MenuItem>
 

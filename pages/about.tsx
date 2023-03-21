@@ -11,6 +11,7 @@ export default function About() {
             isDisabled={false}
             label="SwitchField"
             labelPosition="start" />
+        <div>{"its still not build yet sorry"}</div>
     </div>
 
 
