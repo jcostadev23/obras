@@ -2,11 +2,13 @@ import { Calendar, People, Job, Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState } from "react";
 import React from "react";
-import { Card } from "@aws-amplify/ui-react";
+import { Card, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import SiteMenu from "@/components/menu";
+
 export default function CallCalendar() {
     const [mycalendar, setMycalendar] = useState([])
     const [callday, setCallday] = useState("")
+    const [day, setDay] = useState([])
     const onCalendarChange = (e) => {
         setCallday(e.target.value)
     }
@@ -15,6 +17,10 @@ export default function CallCalendar() {
 
             try {
                 const days = await DataStore.query(Calendar,);
+                console.log("teste1", days)
+                const dayId = days.map((calendar) => (calendar.id))
+                console.log(dayId)
+                setDay(dayId)
                 const promisedetals = await Promise.all(days.map(async (daysofCalendar) => {
                     return {
                         day: daysofCalendar.day,
@@ -31,19 +37,23 @@ export default function CallCalendar() {
         }
         GetDays()
     }, [])
+    console.log(mycalendar)
 
     return (<>
         <SiteMenu
-        /><Card>
+        />
+        <Grid>
             {mycalendar.map((item) => (
-                <li key={item.id}>
-                    <div>day: {item.day}</div>
+                <Card variation="elevated" key={item.id}>
+
+                    <Heading>day: {item.day}</Heading>
                     <div>people: {item.people.name}</div>
                     <div>job: {item.job.name}</div>
                     <div>equipement: {item.equipement.name}</div>
-                </li>
+                    <div><Link href={"/calendar/" + day}>Delete</Link></div>
+                </Card>
             ))}
-        </Card>
+        </Grid>
     </>
     )
 }

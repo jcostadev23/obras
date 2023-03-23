@@ -45,20 +45,20 @@ export default function CheckMachine() {
         <div>
 
             <Grid>
-                {machine.map((user) => {
+                {machine.map((equip) => {
                     return (
-                        <Card variation="elevated" key={user.id}>
-                            <Heading level={4}>{user.name}</Heading>
-                            <div>{user.Attachments}</div>
-                            <Link href={"/equipement/" + user.id}>Edit</Link>
-                            <div><Link href={"/equipement/delete/" + user.id}>Delete</Link></div>
+                        <Card variation="elevated" key={equip.id}>
+                            <Heading level={4}>{equip.name}</Heading>
+                            <div>{equip.attachments}</div>
+                            <Link href={"/equipement/" + equip.id}>Edit</Link>
+                            <div><Link href={"/equipement/delete/" + equip.id}>Delete</Link></div>
                         </Card>
                     );
                 })}
             </Grid>
             <Grid>
                 <Card variation="elevated">
-                    <Heading level={4}>{"ADD Machine"}</Heading>
+                    <Heading level={4}>{"ADD Equipement"}</Heading>
                     <EquipementsCreateForm
                         onSuccess={() => router.reload()} />  </Card>
             </Grid>
