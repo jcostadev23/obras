@@ -31,6 +31,7 @@ export default function Getpeople() {
         GetPerson()
 
     }, [searchpeople])
+    console.log("test", people)
 
     return <div>
 
