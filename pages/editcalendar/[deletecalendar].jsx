@@ -6,29 +6,32 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
 function ItemDetails() {
-    const { query, push } = useRouter()
-    const itemid = query.deletedays
+    console.log("teste 1")
+    const { query, router } = useRouter()
+    const calendarId = query.deletecalendar
     const [day, setDay] = useState()
+    console.log("teste2", calendarId)
 
     async function DeleteDays() {
-        const postToDelete = await DataStore.query(Calendar, itemid);
+        const postToDelete = await DataStore.query(Calendar, calendarId);
         await DataStore.delete(postToDelete);
         push("/callcalendar")
     }
+    console.log("teste3")
 
     useEffect(() => {
         async function Days() {
             try {
-                const itemFromDatastore = await DataStore.query(Calendar, itemid);
+                const itemFromDatastore = await DataStore.query(Calendar, calendarId);
                 setDay(itemFromDatastore)
-            } catch (error) { console.log("Itemname on catch") }
+            } catch (error) { console.log("Item name on catch") }
         }
 
-        if (!itemid) {
-            return
+        if (!calendarId) {
+            return <Loader />
         }
         Days()
-    }, [itemid])
+    }, [calendarId])
 
     if (!day) {
         return <Loader />
@@ -47,10 +50,6 @@ function ItemDetails() {
             </Alert>
             <Card variation="elevated">
 
-                <Heading level={4}>{day.day}</Heading>
-                <div>{day.people}</div>
-                <div>{day.job}</div>
-                <div>{day.equipement}</div>
 
                 <Button
                     variation="destructive"
@@ -65,4 +64,4 @@ function ItemDetails() {
         </Grid></div>
     </>
 }
-export default ItemDetails()
+export default ItemDetails

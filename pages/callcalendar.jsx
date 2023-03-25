@@ -33,9 +33,7 @@ export default function CallCalendar() {
         }
         GetDays()
     }, [])
-    console.log("test1", mycalendar)
-
-
+    console.log(mycalendar)
     return (<>
         <SiteMenu
         />
@@ -45,8 +43,8 @@ export default function CallCalendar() {
                     <Heading>day: {item.day}</Heading>
                     <div>people: {item.people.name}</div>
                     <div>job: {item.job.name}</div>
-                    <div>id: {item.id}</div>
                     <div>equipement: {item.equipement.name}</div>
+                    <div>id: {item.id} </div>
                     <div><Link href={"/editcalendar/" + item.id}>Delete</Link></div>
                 </Card>
             ))}

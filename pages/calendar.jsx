@@ -16,8 +16,8 @@ export default function Mainfunct() {
     const [people, setPeople] = useState([])
     const [jobid, setJobid] = useState("")
     const [jobname, setJobname] = useState([])
-    const [machineid, setMachineid] = useState("")
-    const [machine, setMachine] = useState([])
+    const [equipementid, setEquipementid] = useState("")
+    const [equipement, setEquipement] = useState([])
 
     let footer = <p>Please pick a day.</p>;
     if (selected) {
@@ -53,7 +53,7 @@ export default function Mainfunct() {
         async function CallMachine() {
             try {
                 const serchmachine = await DataStore.query(Equipements);
-                setMachine(serchmachine)
+                setEquipement(serchmachine)
             } catch (error) {
                 console.log("Error retrieving Equipements", error);
             }
@@ -70,7 +70,7 @@ export default function Mainfunct() {
                     day: savedate,
                     people: { id: personid },
                     job: { id: jobid },
-                    equipement: { id: machineid },
+                    equipement: { id: equipementid },
                 })
             );
         } catch (error) {
@@ -117,10 +117,10 @@ export default function Mainfunct() {
         <SelectField
             label="Equipement"
             descriptiveText="Select a Equipement?"
-            value={machineid}
-            onChange={(e) => setMachineid(e.target.value)}>
+            value={equipementid}
+            onChange={(e) => setEquipementid(e.target.value)}>
             <option></option>
-            {machine.map((user) => {
+            {equipement.map((user) => {
                 console.log("test 2 ")
                 return <option value={user.id}
                     key={user.id}>

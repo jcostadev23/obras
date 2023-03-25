@@ -6,17 +6,17 @@ import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
-function MachineDetails() {
+function EquipementDetails() {
     const router = useRouter()
     const { query, } = useRouter()
-    const machineid = query.editequip
-    const [machine, setMachine] = useState()
+    const equipementid = query.editequip
+    const [equipement, setEquipement] = useState()
 
     useEffect(() => {
-        async function FindMachine() {
+        async function FindEquipement() {
             try {
-                const machineFromDatastore = await DataStore.query(Equipements, machineid);
-                setMachine(machineFromDatastore)
+                const machineFromDatastore = await DataStore.query(Equipements, equipementid);
+                setEquipement(machineFromDatastore)
 
                 console.log("Equipements retrieved successfully!", JSON.stringify(machineFromDatastore, null, 2));
             } catch (error) {
@@ -24,26 +24,26 @@ function MachineDetails() {
             }
         }
 
-        if (!machineid) {
+        if (!equipementid) {
             return
         }
-        FindMachine()
-    }, [machineid])
+        FindEquipement()
+    }, [equipementid])
 
-    if (!machine) {
+    if (!equipement) {
         return <Loader />
     }
 
     return <>
         <SiteMenu /><Grid>
             <Card variation="elevated">
-                <Heading level={4}>{machine.name}</Heading>
-                <div>{machine.Attachments}</div>
+                <Heading level={4}>{equipement.name}</Heading>
+                <div>{equipement.Attachments}</div>
             </Card>
         </Grid>
         <Grid>
             <Card variation="elevated">
-                <EquipementsUpdateForm id={machineid}
+                <EquipementsUpdateForm id={equipementid}
                     onSuccess={() => router.reload()} />
             </Card>
         </Grid>
@@ -51,4 +51,4 @@ function MachineDetails() {
     </>
 }
 
-export default MachineDetails
+export default EquipementDetails
