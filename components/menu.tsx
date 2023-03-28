@@ -11,7 +11,7 @@ export default function SiteMenu() {
             <Link href="/">Home</Link>
         </MenuItem>
         <MenuItem>
-            <Link href="/people">People</Link>
+            <Link href="/allpeople">All People</Link>
         </MenuItem>
         <MenuItem>
             <Link href="/about">About</Link>
@@ -20,16 +20,16 @@ export default function SiteMenu() {
             <Link href="/treino">Treino</Link>
         </MenuItem>
         <MenuItem>
-            <Link href="/jobs">Jobs</Link>
+            <Link href="/alljobs">All Jobs</Link>
         </MenuItem>
         <MenuItem>
-            <Link href="/equipements">Equipements</Link>
+            <Link href="/allequipements">All Equipements</Link>
         </MenuItem>
         <MenuItem>
-            <Link href="/calendar">Calendar</Link>
+            <Link href="/allcalendar">All Calendar</Link>
         </MenuItem>
         <MenuItem>
-            <Link href="/callcalendar">Callcalendar</Link>
+            <Link href="/newcalendar">New Calendar</Link>
         </MenuItem>
 
         <MenuItem>

@@ -7,35 +7,34 @@ import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/u
 
 function ItemDetails() {
     console.log("teste 1")
-    const { query, router } = useRouter()
-    const calendarId = query.deletecalendar
+    const { query, push } = useRouter()
+    const calendarid = query.deletecalendar
     const [day, setDay] = useState()
-    console.log("teste2", calendarId)
+    console.log("teste2", calendarid)
 
     async function DeleteDays() {
-        const postToDelete = await DataStore.query(Calendar, calendarId);
+        const postToDelete = await DataStore.query(Calendar, calendarid);
         await DataStore.delete(postToDelete);
-        push("/callcalendar")
+        push("/allcalendar")
     }
     console.log("teste3")
 
     useEffect(() => {
         async function Days() {
             try {
-                const itemFromDatastore = await DataStore.query(Calendar, calendarId);
+                const itemFromDatastore = await DataStore.query(Calendar, calendarid);
                 setDay(itemFromDatastore)
             } catch (error) { console.log("Item name on catch") }
         }
-
-        if (!calendarId) {
-            return <Loader />
-        }
         Days()
-    }, [calendarId])
+    }, [])
 
     if (!day) {
         return <Loader />
     }
+
+    console.log("test3.1", day)
+
 
     return <>
         <SiteMenu />
@@ -46,11 +45,16 @@ function ItemDetails() {
                 hasIcon={true}
                 heading="Atenttion"
             >
-                This will delete the user
+                This will delete the Day
             </Alert>
+            <Grid>
+                {day.map((item) => (
+                    <Card variation="elevated" key={item.id}>
+                        <Heading>day: {item.day}</Heading>
+                    </Card>
+                ))}
+            </Grid>
             <Card variation="elevated">
-
-
                 <Button
                     variation="destructive"
                     loadingText=""
@@ -59,7 +63,7 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/Callcalendar">Exit</Link></div>
+                <div><Link href="/allcalendar">Exit</Link></div>
             </Card>
         </Grid></div>
     </>

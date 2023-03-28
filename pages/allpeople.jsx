@@ -31,7 +31,6 @@ export default function Getpeople() {
         GetPerson()
 
     }, [searchpeople])
-    console.log("test", people)
 
     return <div>
 
@@ -62,7 +61,7 @@ export default function Getpeople() {
             </h1>  </Grid>
         <Grid>
             <Card variation="elevated" >
-                <Heading level={4}>{"ADD People"}</Heading>
+                <Heading level={4}>{"ADD Person"}</Heading>
                 <PeopleCreateForm
                     onSuccess={() => router.reload()}
                 />  </Card>

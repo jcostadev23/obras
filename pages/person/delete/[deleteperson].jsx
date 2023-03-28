@@ -9,18 +9,13 @@ function ItemDetails() {
 
     const { query, push } = useRouter()
     const itemid = query.deleteperson
-
     const [name, setName] = useState()
-
 
     async function DeleteItem() {
 
-
         const postToDelete = await DataStore.query(People, itemid);
         await DataStore.delete(postToDelete);
-        push("/people")
-
-
+        push("/allpeople")
     }
 
     useEffect(() => {
@@ -71,7 +66,7 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/people">Exit</Link></div>
+                <div><Link href="/allpeople">Exit</Link></div>
             </Card>
         </Grid></div>
     </>

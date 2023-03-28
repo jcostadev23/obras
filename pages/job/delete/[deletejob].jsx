@@ -15,7 +15,7 @@ function JobDetails() {
 
         const jobToDelete = await DataStore.query(Job, jobid);
         await DataStore.delete(jobToDelete);
-        push("/jobs")
+        push("/alljobs")
     }
 
     useEffect(() => {
@@ -64,7 +64,7 @@ function JobDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/jobs">Exit</Link></div>
+                <div><Link href="/alljobs">Exit</Link></div>
             </Card>
         </Grid></div>
     </>

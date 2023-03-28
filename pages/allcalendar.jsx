@@ -16,6 +16,7 @@ export default function CallCalendar() {
 
             try {
                 const days = await DataStore.query(Calendar);
+                console.log("teste1.1", days)
                 const promisedetals = await Promise.all(days.map(async (daysofCalendar) => {
                     return {
                         day: daysofCalendar.day,
@@ -34,6 +35,7 @@ export default function CallCalendar() {
         GetDays()
     }, [])
     console.log(mycalendar)
+
     return (<>
         <SiteMenu
         />
@@ -45,7 +47,7 @@ export default function CallCalendar() {
                     <div>job: {item.job.name}</div>
                     <div>equipement: {item.equipement.name}</div>
                     <div>id: {item.id} </div>
-                    <div><Link href={"/editcalendar/" + item.id}>Delete</Link></div>
+                    <div><Link href={"/calendar/" + item.id}>Delete</Link></div>
                 </Card>
             ))}
         </Grid>

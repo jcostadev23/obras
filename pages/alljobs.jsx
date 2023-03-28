@@ -49,8 +49,8 @@ export default function NewJob() {
                         <Card variation="elevated" key={user.id}>
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.address}</div>
-                            <Link href={"/jobsfile/" + user.id}>Edit</Link>
-                            <div><Link href={"/jobsfile/delete/" + user.id}>Delete</Link></div>
+                            <Link href={"/job/" + user.id}>Edit</Link>
+                            <div><Link href={"/job/delete/" + user.id}>Delete</Link></div>
 
                         </Card>
                     );

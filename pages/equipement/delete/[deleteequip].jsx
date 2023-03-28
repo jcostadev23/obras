@@ -64,7 +64,7 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/equipements">Exit</Link></div>
+                <div><Link href="/allequipements">Exit</Link></div>
             </Card>
         </Grid></div>
     </>
