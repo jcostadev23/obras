@@ -15,7 +15,7 @@ function ItemDetails() {
 
         const postToDelete = await DataStore.query(People, itemid);
         await DataStore.delete(postToDelete);
-        push("/allpeople")
+        push("/people")
     }
 
     useEffect(() => {
@@ -66,7 +66,7 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/allpeople">Exit</Link></div>
+                <div><Link href="/people">Exit</Link></div>
             </Card>
         </Grid></div>
     </>

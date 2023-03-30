@@ -52,19 +52,12 @@ export default function Getpeople() {
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.phonenumber}</div>
                             <div>{user.role}</div>
-                            <Link href={"/person/" + user.id}>Edit</Link>
-                            <div><Link href={"/person/delete/" + user.id}>Delete</Link></div>
+                            <Link href={"/people/" + user.id}>Edit</Link>
+                            <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
 
                         </Card>
                     )
                 })}
             </h1>  </Grid>
-        <Grid>
-            <Card variation="elevated" >
-                <Heading level={4}>{"ADD Person"}</Heading>
-                <PeopleCreateForm
-                    onSuccess={() => router.reload()}
-                />  </Card>
-        </Grid>
     </div>
 }

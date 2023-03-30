@@ -23,7 +23,6 @@ function JobDetails() {
             try {
                 const JobFromDatastore = await DataStore.query(Job, jobid);
                 setName(JobFromDatastore)
-
                 console.log("Posts retrieved successfully!", JSON.stringify(JobFromDatastore, null, 2));
             } catch (error) {
                 console.log("Error retrieving posts", error);
