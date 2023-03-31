@@ -9,7 +9,7 @@ import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
 export default function EditJobs() {
     const router = useRouter()
     const { query, } = useRouter()
-    const jobid = query.editjob
+    const jobid = query.id
     const [name, setName] = useState()
 
     useEffect(() => {

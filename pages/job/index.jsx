@@ -1,6 +1,6 @@
-import JobCreateForm from "@/src/ui-components/JobCreateForm";
+
 import { useEffect, useState } from "react";
-import { Card, Heading, Grid, Link, SearchField } from "@aws-amplify/ui-react";
+import { Card, Heading, Grid, Link, SearchField, Button } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import SiteMenu from "@/components/menu";
@@ -49,19 +49,16 @@ export default function NewJob() {
                         <Card variation="elevated" key={user.id}>
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.address}</div>
-                            <Link href={"/job/" + user.id}>Edit</Link>
-                            <div><Link href={"/job/delete/" + user.id}>Delete</Link></div>
+                            <Link href={"/job/" + user.id + "/edit"}>Edit</Link>
+                            <div><Link href={"/job/" + user.id + "/delete"}>Delete</Link></div>
 
                         </Card>
                     );
                 })}
             </Grid>
-            <Grid>
-                <Card variation="elevated">
-                    <Heading level={4}>{"ADD Jobs"}</Heading>
-                    <JobCreateForm
-                        onSuccess={() => router.reload()} />  </Card>
-            </Grid>
+            <Button>
+                <div> <Link href={"/job/create/"}>Create Job</Link>
+                </div></Button>
 
         </div></>
 

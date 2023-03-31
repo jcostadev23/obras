@@ -1,45 +1,43 @@
 import SiteMenu from "@/components/menu";
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
-import { People } from "@/src/models";
+import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
-function ItemDetails() {
+function JobDetails() {
 
     const { query, push } = useRouter()
-    const itemid = query.deleteperson
+    const jobid = query.id
     const [name, setName] = useState()
 
-    async function DeleteItem() {
+    async function DeleteJob() {
 
-        const postToDelete = await DataStore.query(People, itemid);
-        await DataStore.delete(postToDelete);
-        push("/people")
+        const jobToDelete = await DataStore.query(Job, jobid);
+        await DataStore.delete(jobToDelete);
+        push("/job")
     }
 
     useEffect(() => {
-        async function ItemName() {
+        async function JobName() {
             try {
-                const itemFromDatastore = await DataStore.query(People, itemid);
-                setName(itemFromDatastore)
-
-                console.log("Person retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
+                const JobFromDatastore = await DataStore.query(Job, jobid);
+                setName(JobFromDatastore)
+                console.log("Posts retrieved successfully!", JSON.stringify(JobFromDatastore, null, 2));
             } catch (error) {
-                console.log("Error retrieving Person", error);
+                console.log("Error retrieving posts", error);
             }
         }
 
-        if (!itemid) {
+        if (!jobid) {
             return
         }
-        ItemName()
-    }, [itemid])
+        JobName()
+    }, [jobid])
 
     if (!name) {
         return <Loader />
     }
-
 
     return <>
         <SiteMenu />
@@ -50,26 +48,24 @@ function ItemDetails() {
                 hasIcon={true}
                 heading="Atenttion"
             >
-                This will delete the user
+                This will delete the Job
             </Alert>
             <Card variation="elevated">
 
                 <Heading level={4}>{name.name}</Heading>
-                <div>{name.phonenumber}</div>
-                <div>{name.role}</div>
+                <div>{name.address}</div>
 
                 <Button
                     variation="destructive"
                     loadingText=""
-                    onClick={DeleteItem}
+                    onClick={DeleteJob}
                     ariaLabel=""
                 >
                     Delete
                 </Button>
-                <div><Link href="/people">Exit</Link></div>
+                <div><Link href="/job">Exit</Link></div>
             </Card>
         </Grid></div>
     </>
 }
-export default ItemDetails
-
+export default JobDetails

@@ -9,7 +9,7 @@ import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 export default function PeopleDetails() {
     const router = useRouter()
     const { query } = useRouter()
-    const personid = query.editperson
+    const personid = query.id
     const [person, setPerson] = useState()
 
 

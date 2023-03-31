@@ -1,7 +1,7 @@
 import SiteMenu from "@/components/menu";
 import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
-import { Link, Card, Heading, Grid, SearchField } from "@aws-amplify/ui-react";
+import { Link, Card, Heading, Grid, SearchField, Button } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 
 export default function Getpeople() {
     const router = useRouter()
-    const [openswitch, setSwitch] = useState(false)
     const [people, setPeople] = useState([])
     const [searchpeople, setSearchPeople] = useState("")
     const onChange = (e) => {
@@ -52,12 +51,15 @@ export default function Getpeople() {
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.phonenumber}</div>
                             <div>{user.role}</div>
-                            <Link href={"/people/" + user.id}>Edit</Link>
-                            <div><Link href={"/people/delete/" + user.id}>Delete</Link></div>
+                            <Link href={"/people/" + user.id + "/edit"}>Edit</Link>
+                            <div><Link href={"/people/" + user.id + "/delete"}>Delete</Link></div>
 
                         </Card>
                     )
                 })}
             </h1>  </Grid>
+        <Button>
+            <div> <Link href={"/people/create/"}>Create People</Link>
+            </div></Button>
     </div>
 }
