@@ -6,10 +6,10 @@ import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
-function EquipementDetails() {
+export default function EquipementDetails() {
     const router = useRouter()
-    const { query, } = useRouter()
-    const equipementid = query.editequip
+    const { query } = useRouter()
+    const equipementid = query.id
     const [equipement, setEquipement] = useState()
 
     useEffect(() => {
@@ -50,5 +50,3 @@ function EquipementDetails() {
 
     </>
 }
-
-export default EquipementDetails

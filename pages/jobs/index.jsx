@@ -49,15 +49,15 @@ export default function NewJob() {
                         <Card variation="elevated" key={user.id}>
                             <Heading level={4}>{user.name}</Heading>
                             <div>{user.address}</div>
-                            <Link href={"/job/" + user.id + "/edit"}>Edit</Link>
-                            <div><Link href={"/job/" + user.id + "/delete"}>Delete</Link></div>
+                            <Link href={"/jobs/" + user.id + "/edit"}>Edit</Link>
+                            <div><Link href={"/jobs/" + user.id + "/delete"}>Delete</Link></div>
 
                         </Card>
                     );
                 })}
             </Grid>
             <Button>
-                <div> <Link href={"/job/create/"}>Create Job</Link>
+                <div> <Link href={"/jobs/create/"}>Create Job</Link>
                 </div></Button>
 
         </div></>

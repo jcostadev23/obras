@@ -8,7 +8,7 @@ import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/u
 function ItemDetails() {
 
     const { query, push } = useRouter()
-    const itemid = query.deleteequip
+    const itemid = query.id
     const [name, setName] = useState([])
 
     async function DeleteItem() {
@@ -18,18 +18,17 @@ function ItemDetails() {
         push("/equipements")
     }
 
-
-    async function ItemName() {
-        try {
-            const itemFromDatastore = await DataStore.query(Equipements, itemid);
-            setName(itemFromDatastore)
-
-            console.log("Posts retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
-        } catch (error) {
-            console.log("Error retrieving posts", error);
-        }
-    }
     useEffect(() => {
+        async function ItemName() {
+            try {
+                const itemFromDatastore = await DataStore.query(Equipements, itemid);
+                setName(itemFromDatastore)
+
+                console.log("Posts retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
+            } catch (error) {
+                console.log("Error retrieving posts", error);
+            }
+        }
         if (!itemid) {
             return
         }
@@ -64,7 +63,7 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/allequipements">Exit</Link></div>
+                <div><Link href="/equipements">Exit</Link></div>
             </Card>
         </Grid></div>
     </>

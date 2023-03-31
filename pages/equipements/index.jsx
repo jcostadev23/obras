@@ -1,6 +1,6 @@
-import EquipementsCreateForm from "@/src/ui-components/EquipementsCreateForm";
+
 import { useEffect, useState } from "react";
-import { Card, Heading, Grid, Link, SearchField } from "@aws-amplify/ui-react";
+import { Card, Heading, Grid, Link, SearchField, Button } from "@aws-amplify/ui-react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import SiteMenu from "@/components/menu";
@@ -39,7 +39,6 @@ export default function CheckMachine() {
             type="text"
             onChange={(e) => {
                 setMachineserch(e.target.value)
-
             }
             } />
         <div>
@@ -50,19 +49,15 @@ export default function CheckMachine() {
                         <Card variation="elevated" key={equip.id}>
                             <Heading level={4}>{equip.name}</Heading>
                             <div>{equip.attachments}</div>
-                            <Link href={"/equipement/" + equip.id}>Edit</Link>
-                            <div><Link href={"/equipement/delete/" + equip.id}>Delete</Link></div>
+                            <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
+                            <div><Link href={"/equipements/delete/" + equip.id + "/delete"}>Delete</Link></div>
                         </Card>
                     );
                 })}
             </Grid>
-            <Grid>
-                <Card variation="elevated">
-                    <Heading level={4}>{"ADD Equipement"}</Heading>
-                    <EquipementsCreateForm
-                        onSuccess={() => router.reload()} />  </Card>
-            </Grid>
-
+            <Button>
+                <div> <Link href={"/equipements/create/"}>Create Equipement</Link>
+                </div></Button>
         </div></>
 
 

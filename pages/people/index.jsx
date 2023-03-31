@@ -39,7 +39,6 @@ export default function Getpeople() {
             type="text"
             onChange={(e) => {
                 setSearchPeople(e.target.value)
-                GetPerson()
             }
             } />
 
