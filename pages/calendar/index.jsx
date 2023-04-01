@@ -46,7 +46,6 @@ export default function CallCalendar() {
                     <div>people: {item.people.name}</div>
                     {item.job && <div>job: {item.job.name}</div>}
                     {item.equipement && <div>equipement: {item.equipement.name}</div>}
-                    <div>id: {item.id} </div>
                     <div><Link href={"/calendar/" + item.id + "/delete"}>Delete</Link></div>
                 </Card>
             ))}

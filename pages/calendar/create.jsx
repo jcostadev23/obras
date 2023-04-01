@@ -10,9 +10,10 @@ import { DataStore } from "aws-amplify";
 import { useRouter } from "next/router";
 
 export default function Mainfunct() {
+    const today = new Date();
     const router = useRouter()
     const [personid, setPersonid] = useState("")
-    const [selected, setSelected] = useState();
+    const [selected, setSelected] = useState(today);
     const [people, setPeople] = useState([])
     const [jobid, setJobid] = useState("")
     const [jobname, setJobname] = useState([])
@@ -77,10 +78,13 @@ export default function Mainfunct() {
         }
         router.reload()
     }
+    console.log("test1", selected)
+    console.log("today:", today)
     return <> <SiteMenu
     />
         <DayPicker
             mode="single"
+            required
             selected={selected}
             onSelect={setSelected}
             footer={footer} />
