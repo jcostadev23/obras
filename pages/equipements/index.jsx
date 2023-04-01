@@ -50,7 +50,7 @@ export default function CheckMachine() {
                             <Heading level={4}>{equip.name}</Heading>
                             <div>{equip.attachments}</div>
                             <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
-                            <div><Link href={"/equipements/delete/" + equip.id + "/delete"}>Delete</Link></div>
+                            <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
                         </Card>
                     );
                 })}

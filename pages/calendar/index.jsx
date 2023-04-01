@@ -44,10 +44,10 @@ export default function CallCalendar() {
                 <Card variation="elevated" key={item.id}>
                     <Heading>day: {item.day}</Heading>
                     <div>people: {item.people.name}</div>
-                    <div>job: {item.job.name}</div>
-                    <div>equipement: {item.equipement.name}</div>
+                    {item.job && <div>job: {item.job.name}</div>}
+                    {item.equipement && <div>equipement: {item.equipement.name}</div>}
                     <div>id: {item.id} </div>
-                    <div><Link href={"/calendar/" + item.id}>Delete</Link></div>
+                    <div><Link href={"/calendar/" + item.id + "/delete"}>Delete</Link></div>
                 </Card>
             ))}
         </Grid>

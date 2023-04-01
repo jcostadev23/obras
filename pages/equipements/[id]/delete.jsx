@@ -5,7 +5,7 @@ import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
-function ItemDetails() {
+export default function ItemDetails() {
 
     const { query, push } = useRouter()
     const itemid = query.id
@@ -53,7 +53,7 @@ function ItemDetails() {
             <Card variation="elevated">
 
                 <Heading level={4}>{name.name}</Heading>
-                <div>{name.Attachments}</div>
+                <div>{name.attachments}</div>
 
                 <Button
                     variation="destructive"
@@ -68,4 +68,4 @@ function ItemDetails() {
         </Grid></div>
     </>
 }
-export default ItemDetails
+

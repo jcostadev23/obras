@@ -5,19 +5,17 @@ import { Calendar } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
-function ItemDetails() {
+export default function ItemDetails() {
     console.log("teste 1")
     const { query, push } = useRouter()
-    const calendarid = query.deletecalendar
+    const calendarid = query.id
     const [day, setDay] = useState()
-    console.log("teste2", calendarid)
 
     async function DeleteDays() {
         const postToDelete = await DataStore.query(Calendar, calendarid);
         await DataStore.delete(postToDelete);
-        push("/allcalendar")
+        push("/calendar")
     }
-    console.log("teste3")
 
     useEffect(() => {
         async function Days() {
@@ -26,17 +24,17 @@ function ItemDetails() {
                 setDay(itemFromDatastore)
             } catch (error) { console.log("Item name on catch") }
         }
-        Days()
-    }, [])
+
+        calendarid && Days()
+
+    }, [calendarid])
 
     if (!day) {
         return <Loader />
     }
 
-    console.log("test3.1", day)
-
-
     return <>
+
         <SiteMenu />
         <div className="container mx-auto"> <Grid>
             <Alert
@@ -48,11 +46,10 @@ function ItemDetails() {
                 This will delete the Day
             </Alert>
             <Grid>
-                {day.map((item) => (
-                    <Card variation="elevated" key={item.id}>
-                        <Heading>day: {item.day}</Heading>
-                    </Card>
-                ))}
+                <Card variation="elevated" key={day.id}>
+                    <Heading>day: {day.day}</Heading>
+                    <div>id: {day.id} </div>
+                </Card>
             </Grid>
             <Card variation="elevated">
                 <Button
@@ -63,9 +60,8 @@ function ItemDetails() {
                 >
                     Delete
                 </Button>
-                <div><Link href="/allcalendar">Exit</Link></div>
+                <div><Link href="/calendar">Exit</Link></div>
             </Card>
         </Grid></div>
     </>
 }
-export default ItemDetails
