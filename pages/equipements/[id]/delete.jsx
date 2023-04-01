@@ -6,13 +6,11 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
 
 export default function ItemDetails() {
-
     const { query, push } = useRouter()
     const itemid = query.id
     const [name, setName] = useState([])
 
     async function DeleteItem() {
-
         const postToDelete = await DataStore.query(Equipements, itemid);
         await DataStore.delete(postToDelete);
         push("/equipements")

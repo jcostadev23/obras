@@ -8,17 +8,14 @@ import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
 export default function PeopleDetails() {
     const router = useRouter()
-    const { query } = useRouter()
-    const personid = query.id
+    const personid = router.query.id
     const [person, setPerson] = useState()
-
 
     useEffect(() => {
         async function GetPerson() {
             try {
                 const personFromDatastore = await DataStore.query(People, personid);
                 setPerson(personFromDatastore)
-
                 console.log("Person retrieved successfully!", JSON.stringify(personFromDatastore, null, 2));
             } catch (error) {
                 console.log("Error retrieving Person", error);

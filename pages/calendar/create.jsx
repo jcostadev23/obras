@@ -78,63 +78,65 @@ export default function Mainfunct() {
         }
         router.reload()
     }
-    console.log("test1", selected)
-    console.log("today:", today)
+
     return <> <SiteMenu
     />
-        <DayPicker
-            mode="single"
-            required
-            selected={selected}
-            onSelect={setSelected}
-            footer={footer} />
+        <form onSubmit={SaveCalender}>
+            <DayPicker
+                mode="single"
+                required
+                selected={selected}
+                onSelect={setSelected}
+                footer={footer} />
 
-        <SelectField
-            label="People"
-            descriptiveText="Select a People?"
-            value={personid}
-            onChange={(e) => setPersonid(e.target.value)} >
-            <option></option>
-            {people.map((user) => {
-                return <option value={user.id}
-                    key={user.id}>
-                    {user.name}
-                </option>
-            })}
+            <SelectField
+                label="People"
+                required
+                descriptiveText="Select a People?"
+                value={personid}
+                onChange={(e) => setPersonid(e.target.value)} >
+                <option></option>
+                {people.map((user) => {
+                    return <option value={user.id}
+                        key={user.id}>
+                        {user.name}
+                    </option>
+                })}
 
-        </SelectField>
+            </SelectField>
 
-        <SelectField
-            label="Job"
-            descriptiveText="Select a Job?"
-            value={jobid}
-            onChange={(e) => setJobid(e.target.value)}>
-            <option></option>
-            {jobname.map((user) => {
-                return <option value={user.id}
-                    key={user.id}>
-                    {user.name}
-                </option>
-            })}
-        </SelectField>
+            <SelectField
+                label="Job"
+                required
+                descriptiveText="Select a Job?"
+                value={jobid}
+                onChange={(e) => setJobid(e.target.value)}>
+                <option></option>
+                {jobname.map((user) => {
+                    return <option value={user.id}
+                        key={user.id}>
+                        {user.name}
+                    </option>
+                })}
+            </SelectField>
 
-        <SelectField
-            label="Equipement"
-            descriptiveText="Select a Equipement?"
-            value={equipementid}
-            onChange={(e) => setEquipementid(e.target.value)}>
-            <option></option>
-            {equipement.map((user) => {
-                console.log("test 2 ")
-                return <option value={user.id}
-                    key={user.id}>
-                    {user.name}
-                </option>
-            })}
+            <SelectField
+                label="Equipement"
+                descriptiveText="Select a Equipement?"
+                value={equipementid}
+                onChange={(e) => setEquipementid(e.target.value)}>
+                <option></option>
+                {equipement.map((user) => {
+                    console.log("test 2 ")
+                    return <option value={user.id}
+                        key={user.id}>
+                        {user.name}
+                    </option>
+                })}
 
 
-        </SelectField>
-        <Button onClick={SaveCalender}>Save
-        </Button>
+            </SelectField>
+            <Button type="submit">Save
+            </Button></form>
     </>
 }

@@ -5,14 +5,14 @@ import { useRouter } from "next/router";
 
 
 export default function Create() {
-    const { push } = useRouter()
+    const router = useRouter()
     return (
         <><SiteMenu />
             <Grid>
                 <Card variation="elevated">
                     <Heading level={4}>{"ADD Person"}</Heading>
                     <PeopleCreateForm
-                        onSuccess={() => push("/people")} />  </Card>
+                        onSuccess={() => router.push("/people")} />  </Card>
             </Grid>
         </>
     )
