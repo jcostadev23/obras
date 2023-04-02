@@ -1,39 +1,15 @@
-import SiteMenu from '@/components/menu';
+import Layout from '@/components/Layout';
 import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, TextField, PasswordField, Grid, Flex, } from '@aws-amplify/ui-react';
 import { useState } from 'react';
 import { DiJsBadge } from 'react-icons/di';
 export default function Home() {
   const [mostrar, setMostrar] = useState(false)
   return (
-    <div>
-      <SiteMenu />
+    <Layout>
 
-      <Menu
-        menuAlign="start"
-      >
-        <MenuItem onClick={() => setMostrar(true)}>
-          Enviar msg
-        </MenuItem>
 
-        <MenuItem onClick={() => setMostrar(false)}>
-          Exit Menu
-        </MenuItem>
-
-      </Menu>
-      {mostrar && <div>mostrar apos enviar msg</div>}
-      <Flex direction="column">
-
-      </Flex>
-      <PasswordField
-        autoComplete="new-password"
-        descriptiveText="Please enter password"
-        label="Password"
-        name="password"
-        size="small"
-      />
-
-      ola eu sou costa e este e o meu site
-      <div style={{ background: "blue", color: "pink" }}>para ti minha princesa </div>
+      Ola sou o Costa este e o meu site
+      <div style={{ background: "gold", color: "blue" }}>para ti minha princesa </div>
       <Button variation="primary">costa</Button>
       <div><input></input></div>
       <div>
@@ -142,7 +118,6 @@ export default function Home() {
 1 7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2zM9 9l4.34-4.34L12 10h9v2l-3 7H9V9zM1 9h4v12H1z"
               /> Gosto disto</div>
               <div><Icon ariaLabel="Javascript" as={DiJsBadge} /> Eu gosto Javascrip</div>
-
             </Card>
           </div>
         </Card>
@@ -153,8 +128,7 @@ export default function Home() {
           Footer
         </Card>
       </Grid>
-
-    </div>
+    </Layout>
   )
 }
 
