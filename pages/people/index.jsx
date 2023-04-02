@@ -6,6 +6,8 @@ import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
 import { useRouter } from "next/router";
+const breadcrumbItems = [{ label: "People", url: "/people" },
+];
 
 export default function Getpeople() {
     const router = useRouter()
@@ -29,19 +31,16 @@ export default function Getpeople() {
         GetPerson()
 
     }, [searchpeople])
-    const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Create", url: "/people/create" },
-    ];
-    return <Layout>
 
+    return <Layout>
+        <Breadcrumb items={breadcrumbItems} />
         <SearchField
             type="text"
             onChange={(e) => {
                 setSearchPeople(e.target.value)
             }
             } />
-        <p></p>
-        <Breadcrumb path={breadcrumbItems} />
-
+        <div></div>
         <Grid>
             <h1 className="text-1.25xl ">
                 {people.map((user) => {

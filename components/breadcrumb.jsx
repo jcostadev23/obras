@@ -1,12 +1,13 @@
 import { Link } from "@aws-amplify/ui-react";
-export default function Breadcrumb({ path }) {
+
+export default function Breadcrumb({ items }) {
 
     return (<div>
-        {path.map((item) => {
+        <Link href="/">Home</Link>
+        {items.map((item) => {
             return (
                 <div key={item}>
                     <Link href={item.url}> {item.label}</Link>
-
                 </div>
             )
         }
