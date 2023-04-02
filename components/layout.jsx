@@ -2,11 +2,11 @@ import SiteMenu from "@/components/menu";
 export default function Layout({ children }) {
     return (
         <div className="container mx-auto">
-            <p></p>
-            <div> <SiteMenu /></div>
-            <p></p>
+            <div></div>
+            <div><SiteMenu /></div>
+            <div></div>
             <div>{children}</div>
-            <p></p>
+            <div></div>
             <div className="text-center">{new Date().getFullYear()} - MADE BY COSTA</div>
         </div>
     );

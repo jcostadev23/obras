@@ -9,7 +9,6 @@ export default function Home() {
 
 
       Ola sou o Costa este e o meu site
-      <div style={{ background: "gold", color: "blue" }}>para ti minha princesa </div>
       <Button variation="primary">costa</Button>
       <div><input></input></div>
       <div>

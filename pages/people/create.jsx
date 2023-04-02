@@ -2,6 +2,7 @@ import Layout from "@/components/layout"
 import { Card, Heading, Grid } from "@aws-amplify/ui-react";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
 import { useRouter } from "next/router";
+import Breadcrumb from "../../components/breadcrumb";
 
 
 export default function Create() {

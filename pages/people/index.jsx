@@ -1,12 +1,11 @@
 import Layout from "@/components/layout"
+import Breadcrumb from "@/components/breadcrumb"
 import { People } from "@/src/models";
-import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
 import { Link, Card, Heading, Grid, SearchField, Button } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
 import { useRouter } from "next/router";
-
 
 export default function Getpeople() {
     const router = useRouter()
@@ -30,14 +29,18 @@ export default function Getpeople() {
         GetPerson()
 
     }, [searchpeople])
-
+    const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Create", url: "/people/create" },
+    ];
     return <Layout>
+
         <SearchField
             type="text"
             onChange={(e) => {
                 setSearchPeople(e.target.value)
             }
             } />
+        <p></p>
+        <Breadcrumb path={breadcrumbItems} />
 
         <Grid>
             <h1 className="text-1.25xl ">
