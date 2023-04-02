@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from "@/components/layout"
 import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, TextField, PasswordField, Grid, Flex, } from '@aws-amplify/ui-react';
 import { useState } from 'react';
 import { DiJsBadge } from 'react-icons/di';

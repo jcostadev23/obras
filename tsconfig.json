@@ -33,7 +33,7 @@
     "components/menu.jsx",
     "pages/treino.jsx",
     "pages/about.jsx",
-    "pages/home.jsx"
+    "pages/index.jsx"
   ],
   "exclude": [
     "node_modules"

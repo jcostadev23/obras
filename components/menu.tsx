@@ -1,7 +1,5 @@
 import { Menu, MenuItem } from "@aws-amplify/ui-react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 export default function SiteMenu() {
     const router = useRouter()
