@@ -1,11 +1,10 @@
-import SiteMenu from "@/components/menu";
-import React from 'react';
+import Layout from "@/components/layout"
 import { People, Job, Equipements, Calendar } from "@/src/models";
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { SelectField, Button, } from "@aws-amplify/ui-react";
-import { useEffect, useState, } from "react";
+import { SelectField, Button } from "@aws-amplify/ui-react";
+import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import { useRouter } from "next/router";
 
@@ -79,64 +78,64 @@ export default function Mainfunct() {
         router.reload()
     }
 
-    return <> <SiteMenu
-    />
-        <form onSubmit={SaveCalender}>
-            <DayPicker
-                mode="single"
-                required
-                selected={selected}
-                onSelect={setSelected}
-                footer={footer} />
+    return (
+        <Layout>
+            <form onSubmit={SaveCalender}>
+                <DayPicker
+                    mode="single"
+                    required
+                    selected={selected}
+                    onSelect={setSelected}
+                    footer={footer} />
 
-            <SelectField
-                label="People"
-                required
-                descriptiveText="Select a People?"
-                value={personid}
-                onChange={(e) => setPersonid(e.target.value)} >
-                <option></option>
-                {people.map((user) => {
-                    return <option value={user.id}
-                        key={user.id}>
-                        {user.name}
-                    </option>
-                })}
+                <SelectField
+                    label="People"
+                    required
+                    descriptiveText="Select a People?"
+                    value={personid}
+                    onChange={(e) => setPersonid(e.target.value)} >
+                    <option></option>
+                    {people.map((user) => {
+                        return <option value={user.id}
+                            key={user.id}>
+                            {user.name}
+                        </option>
+                    })}
 
-            </SelectField>
+                </SelectField>
 
-            <SelectField
-                label="Job"
-                required
-                descriptiveText="Select a Job?"
-                value={jobid}
-                onChange={(e) => setJobid(e.target.value)}>
-                <option></option>
-                {jobname.map((user) => {
-                    return <option value={user.id}
-                        key={user.id}>
-                        {user.name}
-                    </option>
-                })}
-            </SelectField>
+                <SelectField
+                    label="Job"
+                    required
+                    descriptiveText="Select a Job?"
+                    value={jobid}
+                    onChange={(e) => setJobid(e.target.value)}>
+                    <option></option>
+                    {jobname.map((user) => {
+                        return <option value={user.id}
+                            key={user.id}>
+                            {user.name}
+                        </option>
+                    })}
+                </SelectField>
 
-            <SelectField
-                label="Equipement"
-                descriptiveText="Select a Equipement?"
-                value={equipementid}
-                onChange={(e) => setEquipementid(e.target.value)}>
-                <option></option>
-                {equipement.map((user) => {
-                    console.log("test 2 ")
-                    return <option value={user.id}
-                        key={user.id}>
-                        {user.name}
-                    </option>
-                })}
+                <SelectField
+                    label="Equipement"
+                    descriptiveText="Select a Equipement?"
+                    value={equipementid}
+                    onChange={(e) => setEquipementid(e.target.value)}>
+                    <option></option>
+                    {equipement.map((user) => {
+                        console.log("test 2 ")
+                        return <option value={user.id}
+                            key={user.id}>
+                            {user.name}
+                        </option>
+                    })}
 
-
-            </SelectField>
-            <Button type="submit">Save
-            </Button></form>
-    </>
+                </SelectField>
+                <Button type="submit">Save
+                </Button></form>
+        </Layout>
+    )
 }

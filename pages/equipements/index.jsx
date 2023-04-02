@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, Heading, Grid, Link, SearchField, Button } from "@aws-amplify/ui-react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import * as React from 'react';
 import { useRouter } from "next/router"
 
@@ -28,39 +28,36 @@ export default function CheckMachine() {
             }
         }
 
-
         CallMachine()
 
     }, [machineserch,])
 
-    return <><SiteMenu />
-
-        <SearchField
-            type="text"
-            onChange={(e) => {
-                setMachineserch(e.target.value)
-            }
-            } />
-        <div>
-
-            <Grid>
-                {machine.map((equip) => {
-                    return (
-                        <Card variation="elevated" key={equip.id}>
-                            <Heading level={4}>{equip.name}</Heading>
-                            <div>{equip.attachments}</div>
-                            <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
-                            <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
-                        </Card>
-                    );
-                })}
-            </Grid>
-            <Button>
-                <div> <Link href={"/equipements/create/"}>Create Equipement</Link>
-                </div></Button>
-        </div></>
-
-
+    return (
+        <Layout>
+            <SearchField
+                type="text"
+                onChange={(e) => {
+                    setMachineserch(e.target.value)
+                }} />
+            <div>
+                <Grid>
+                    {machine.map((equip) => {
+                        return (
+                            <Card variation="elevated" key={equip.id}>
+                                <Heading level={4}>{equip.name}</Heading>
+                                <div>{equip.attachments}</div>
+                                <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
+                                <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
+                            </Card>
+                        );
+                    })}
+                </Grid>
+                <Button>
+                    <div> <Link href={"/equipements/create/"}>Create Equipement</Link>
+                    </div></Button>
+            </div>
+        </Layout>
+    )
 }
 
 

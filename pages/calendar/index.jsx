@@ -3,7 +3,7 @@ import { DataStore } from "aws-amplify";
 import { useEffect, useState } from "react";
 import React from "react";
 import { Card, Grid, Heading, Link } from "@aws-amplify/ui-react";
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 
 export default function CallCalendar() {
     const [mycalendar, setMycalendar] = useState([])
@@ -11,9 +11,9 @@ export default function CallCalendar() {
     const onCalendarChange = (e) => {
         setCallday(e.target.value)
     }
+
     useEffect(() => {
         async function GetDays() {
-
             try {
                 const days = await DataStore.query(Calendar);
                 console.log("teste1.1", days)
@@ -36,20 +36,19 @@ export default function CallCalendar() {
     }, [])
     console.log(mycalendar)
 
-    return (<>
-        <SiteMenu
-        />
-        <Grid>
-            {mycalendar.map((item) => (
-                <Card variation="elevated" key={item.id}>
-                    <Heading>day: {item.day}</Heading>
-                    <div>people: {item.people.name}</div>
-                    {item.job && <div>job: {item.job.name}</div>}
-                    {item.equipement && <div>equipement: {item.equipement.name}</div>}
-                    <div><Link href={"/calendar/" + item.id + "/delete"}>Delete</Link></div>
-                </Card>
-            ))}
-        </Grid>
-    </>
+    return (
+        <Layout>
+            <Grid>
+                {mycalendar.map((item) => (
+                    <Card variation="elevated" key={item.id}>
+                        <Heading>day: {item.day}</Heading>
+                        <div>people: {item.people.name}</div>
+                        {item.job && <div>job: {item.job.name}</div>}
+                        {item.equipement && <div>equipement: {item.equipement.name}</div>}
+                        <div><Link href={"/calendar/" + item.id + "/delete"}>Delete</Link></div>
+                    </Card>
+                ))}
+            </Grid>
+        </Layout>
     )
 }

@@ -1,4 +1,4 @@
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Calendar } from "@/src/models";
@@ -33,35 +33,33 @@ export default function ItemDetails() {
         return <Loader />
     }
 
-    return <>
-
-        <SiteMenu />
-        <div className="container mx-auto"> <Grid>
-            <Alert
-                variation="warning"
-                isDismissible={false}
-                hasIcon={true}
-                heading="Atenttion"
-            >
-                This will delete the Day
-            </Alert>
-            <Grid>
-                <Card variation="elevated" key={day.id}>
-                    <Heading>day: {day.day}</Heading>
-                    <div>id: {day.id} </div>
+    return (
+        <Layout>
+            <div className="container mx-auto"> <Grid>
+                <Alert
+                    variation="warning"
+                    isDismissible={false}
+                    hasIcon={true}
+                    heading="Atenttion">
+                    This will delete the Day
+                </Alert>
+                <Grid>
+                    <Card variation="elevated" key={day.id}>
+                        <Heading>day: {day.day}</Heading>
+                        <div>id: {day.id} </div>
+                    </Card>
+                </Grid>
+                <Card variation="elevated">
+                    <Button
+                        variation="destructive"
+                        loadingText=""
+                        onClick={DeleteDays}
+                        ariaLabel="">
+                        Delete
+                    </Button>
+                    <div><Link href="/calendar">Exit</Link></div>
                 </Card>
-            </Grid>
-            <Card variation="elevated">
-                <Button
-                    variation="destructive"
-                    loadingText=""
-                    onClick={DeleteDays}
-                    ariaLabel=""
-                >
-                    Delete
-                </Button>
-                <div><Link href="/calendar">Exit</Link></div>
-            </Card>
-        </Grid></div>
-    </>
+            </Grid></div>
+        </Layout>
+    )
 }

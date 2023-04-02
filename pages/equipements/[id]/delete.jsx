@@ -1,4 +1,4 @@
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Equipements } from "@/src/models";
@@ -21,7 +21,6 @@ export default function ItemDetails() {
             try {
                 const itemFromDatastore = await DataStore.query(Equipements, itemid);
                 setName(itemFromDatastore)
-
                 console.log("Posts retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
             } catch (error) {
                 console.log("Error retrieving posts", error);
@@ -37,33 +36,31 @@ export default function ItemDetails() {
         return <Loader />
     }
 
-    return <>
-        <SiteMenu />
-        <div className="container mx-auto"> <Grid>
-            <Alert
-                variation="warning"
-                isDismissible={false}
-                hasIcon={true}
-                heading="Atenttion"
-            >
-                This will delete the Job
-            </Alert>
-            <Card variation="elevated">
-
-                <Heading level={4}>{name.name}</Heading>
-                <div>{name.attachments}</div>
-
-                <Button
-                    variation="destructive"
-                    loadingText=""
-                    onClick={DeleteItem}
-                    ariaLabel=""
+    return (
+        <Layout>
+            <div className="container mx-auto"> <Grid>
+                <Alert
+                    variation="warning"
+                    isDismissible={false}
+                    hasIcon={true}
+                    heading="Atenttion"
                 >
-                    Delete
-                </Button>
-                <div><Link href="/equipements">Exit</Link></div>
-            </Card>
-        </Grid></div>
-    </>
+                    This will delete the Job
+                </Alert>
+                <Card variation="elevated">
+                    <Heading level={4}>{name.name}</Heading>
+                    <div>{name.attachments}</div>
+                    <Button
+                        variation="destructive"
+                        loadingText=""
+                        onClick={DeleteItem}
+                        ariaLabel="">
+                        Delete
+                    </Button>
+                    <div><Link href="/equipements">Exit</Link></div>
+                </Card>
+            </Grid></div>
+        </Layout>
+    )
 }
 

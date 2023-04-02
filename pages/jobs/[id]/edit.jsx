@@ -1,4 +1,4 @@
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Job } from "@/src/models";
@@ -16,7 +16,6 @@ export default function EditJobs() {
             try {
                 const joblist = await DataStore.query(Job, jobid);
                 setName(joblist)
-
                 console.log("Job retrieved successfully!", JSON.stringify(joblist, null, 2));
             } catch (error) {
                 console.log("Error retrieving Job", error);
@@ -31,20 +30,20 @@ export default function EditJobs() {
         return <Loader />
     }
 
-    return <>
-        <SiteMenu /><Grid>
-            <Card variation="elevated">
-                <Heading level={4}>{name.name}</Heading>
-                <div>{name.address}</div>
-            </Card>
-        </Grid>
-        <Grid>
-            <Card variation="elevated">
-                <JobUpdateForm id={jobid}
-                    onSuccess={() => router.reload()} />
-            </Card>
-        </Grid>
-
-    </>
-
+    return (
+        <Layout>
+            <Grid>
+                <Card variation="elevated">
+                    <Heading level={4}>{name.name}</Heading>
+                    <div>{name.address}</div>
+                </Card>
+            </Grid>
+            <Grid>
+                <Card variation="elevated">
+                    <JobUpdateForm id={jobid}
+                        onSuccess={() => router.reload()} />
+                </Card>
+            </Grid>
+        </Layout>
+    )
 }

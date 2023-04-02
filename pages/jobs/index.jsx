@@ -3,12 +3,10 @@ import { useEffect, useState } from "react";
 import { Card, Heading, Grid, Link, SearchField, Button } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import SiteMenu from "@/components/menu";
-import { useRouter } from "next/router"
+import Layout from "@/components/layout"
 import * as React from 'react';
 
 export default function NewJob() {
-    const router = useRouter()
     const [jobname, setJobname] = useState([])
     const [jobserch, setJobserch] = React.useState("")
     const onJobChange = (e) => {
@@ -28,39 +26,34 @@ export default function NewJob() {
             }
         }
 
-
         Findjob()
 
     }, [jobserch,])
 
-    return <><SiteMenu />
-        <SearchField
-            type="text"
-            onChange={(e) => {
-                setJobserch(e.target.value)
-
-            }
-            } />
-        <div>
-
-            <Grid>
-                {jobname.map((user) => {
-                    return (
-                        <Card variation="elevated" key={user.id}>
-                            <Heading level={4}>{user.name}</Heading>
-                            <div>{user.address}</div>
-                            <Link href={"/jobs/" + user.id + "/edit"}>Edit</Link>
-                            <div><Link href={"/jobs/" + user.id + "/delete"}>Delete</Link></div>
-
-                        </Card>
-                    );
-                })}
-            </Grid>
-            <Button>
-                <div> <Link href={"/jobs/create/"}>Create Job</Link>
-                </div></Button>
-
-        </div></>
-
-
+    return (
+        <Layout>
+            <SearchField
+                type="text"
+                onChange={(e) => {
+                    setJobserch(e.target.value)
+                }} />
+            <div>
+                <Grid>
+                    {jobname.map((user) => {
+                        return (
+                            <Card variation="elevated" key={user.id}>
+                                <Heading level={4}>{user.name}</Heading>
+                                <div>{user.address}</div>
+                                <Link href={"/jobs/" + user.id + "/edit"}>Edit</Link>
+                                <div><Link href={"/jobs/" + user.id + "/delete"}>Delete</Link></div>
+                            </Card>
+                        );
+                    })}
+                </Grid>
+                <Button>
+                    <div> <Link href={"/jobs/create/"}>Create Job</Link>
+                    </div></Button>
+            </div>
+        </Layout>
+    )
 }

@@ -1,4 +1,4 @@
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import EquipementsUpdateForm from "@/src/ui-components/EquipementsUpdateForm";
@@ -8,8 +8,7 @@ import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 
 export default function EquipementDetails() {
     const router = useRouter()
-    const { query } = useRouter()
-    const equipementid = query.id
+    const equipementid = router.query.id
     const [equipement, setEquipement] = useState()
 
     useEffect(() => {
@@ -34,19 +33,20 @@ export default function EquipementDetails() {
         return <Loader />
     }
 
-    return <>
-        <SiteMenu /><Grid>
-            <Card variation="elevated">
-                <Heading level={4}>{equipement.name}</Heading>
-                <div>{equipement.Attachments}</div>
-            </Card>
-        </Grid>
-        <Grid>
-            <Card variation="elevated">
-                <EquipementsUpdateForm id={equipementid}
-                    onSuccess={() => router.reload()} />
-            </Card>
-        </Grid>
-
-    </>
+    return (
+        <Layout>
+            <Grid>
+                <Card variation="elevated">
+                    <Heading level={4}>{equipement.name}</Heading>
+                    <div>{equipement.Attachments}</div>
+                </Card>
+            </Grid>
+            <Grid>
+                <Card variation="elevated">
+                    <EquipementsUpdateForm id={equipementid}
+                        onSuccess={() => router.reload()} />
+                </Card>
+            </Grid>
+        </Layout>
+    )
 }

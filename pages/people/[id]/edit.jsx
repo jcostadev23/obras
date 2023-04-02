@@ -1,4 +1,4 @@
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import PeopleUpdateForm from "@/src/ui-components/PeopleUpdateForm";
@@ -32,21 +32,23 @@ export default function PeopleDetails() {
         return <Loader />
     }
 
-    return <>
-        <SiteMenu /><Grid>
-            <Card variation="elevated">
-                <Heading level={4}>{person.name}</Heading>
-                <div>{person.phonenumber}</div>
-                <div>{person.role}</div>
-            </Card>
-        </Grid>
-        <Grid>
-            <Card variation="elevated">
-                <PeopleUpdateForm id={personid}
-                    onSuccess={() => router.reload()} />
-            </Card>
-        </Grid>
+    return (
+        <Layout>
+            <Grid>
+                <Card variation="elevated">
+                    <Heading level={4}>{person.name}</Heading>
+                    <div>{person.phonenumber}</div>
+                    <div>{person.role}</div>
+                </Card>
+            </Grid>
+            <Grid>
+                <Card variation="elevated">
+                    <PeopleUpdateForm id={personid}
+                        onSuccess={() => router.reload()} />
+                </Card>
+            </Grid>
 
-    </>
+        </Layout>
+    )
 }
 

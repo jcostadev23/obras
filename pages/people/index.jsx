@@ -1,4 +1,4 @@
-import SiteMenu from "@/components/menu";
+import Layout from "@/components/layout"
 import { People } from "@/src/models";
 import PeopleCreateForm from "@/src/ui-components/PeopleCreateForm";
 import { Link, Card, Heading, Grid, SearchField, Button } from "@aws-amplify/ui-react";
@@ -31,10 +31,7 @@ export default function Getpeople() {
 
     }, [searchpeople])
 
-    return <div>
-
-        <SiteMenu
-        />
+    return <Layout>
         <SearchField
             type="text"
             onChange={(e) => {
@@ -60,5 +57,5 @@ export default function Getpeople() {
         <Button>
             <div> <Link href={"/people/create/"}>Create People</Link>
             </div></Button>
-    </div>
+    </Layout>
 }
