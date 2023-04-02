@@ -1,45 +1,25 @@
 import { Menu, MenuItem } from "@aws-amplify/ui-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function SiteMenu() {
+    const router = useRouter()
 
     return <Menu
-        menuAlign="start"
+        menuAlign="center"
     >
-        <MenuItem>
-            <Link href="/">Home</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/people">People</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/about">About</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/treino">Treino</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/alljobs">All Jobs</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/allequipements">All Equipements</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/allcalendar">All Calendar</Link>
-        </MenuItem>
-        <MenuItem>
-            <Link href="/newcalendar">New Calendar</Link>
-        </MenuItem>
-
+        <MenuItem onClick={() => router.push("/calendar/create")}>Create Calendar</MenuItem>
+        <MenuItem onClick={() => router.push("/calendar")}>Calendar</MenuItem>
+        <MenuItem onClick={() => router.push("/people")}>People</MenuItem>
+        <MenuItem onClick={() => router.push("/jobs")}>Jobs</MenuItem>
+        <MenuItem onClick={() => router.push("/equipements")}>Equipements</MenuItem>
+        <MenuItem onClick={() => router.push("/about")}>About</MenuItem>
+        <MenuItem onClick={() => router.push("/treino")}>Treino </MenuItem>
         <MenuItem>
             Exit Menu
         </MenuItem>
-
     </Menu>
-
-
-
 }
 
 
