@@ -7,7 +7,7 @@ import Layout from "@/components/layout"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 
-const breadcrumbItems = [{ label: "Jobs", url: "/jobs" },
+const breadcrumbItems = [{ label: "Jobs" },
 ];
 
 export default function NewJob() {
@@ -37,30 +37,22 @@ export default function NewJob() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <SearchField
-                type="text"
-                onChange={(e) => {
-                    setJobserch(e.target.value)
-                }} />
-            <div>
 
-                <Collection items={jobname} isPaginated itemsPerPage={10}>
-                    {(job) => {
-                        return <div><Grid>
-                            <Card variation="elevated" key={job.name}>
-                                <Heading>{job.name}</Heading>
-                                <div>Address: {job.address}</div>
-                                <div><Link href={"/jobs/" + job.id + "/edit"}>Edit</Link></div>
-                                <div><Link href={"/jobs/" + job.id + "/delete"}>Delete</Link></div>
-                            </Card>
-                        </Grid></div>
-                    }}
-                </Collection>
-
-                <Button>
-                    <div> <Link href={"/jobs/create/"}>Create Job</Link>
-                    </div></Button>
-            </div>
+            <Collection items={jobname} isPaginated itemsPerPage={10} isSearchable>
+                {(job) => {
+                    return <div><Grid>
+                        <Card variation="elevated" key={job.name}>
+                            <Heading>{job.name}</Heading>
+                            <div>Address: {job.address}</div>
+                            <div><Link href={"/jobs/" + job.id + "/edit"}>Edit</Link></div>
+                            <div><Link href={"/jobs/" + job.id + "/delete"}>Delete</Link></div>
+                        </Card>
+                    </Grid></div>
+                }}
+            </Collection>
+            <Button>
+                <Link href={"/jobs/create/"}>Create Job</Link>
+            </Button>
         </Layout>
     )
 }

@@ -7,7 +7,7 @@ import Layout from "@/components/layout"
 import * as React from 'react';
 import { useRouter } from "next/router"
 import Breadcrumb from "@/components/breadcrumb"
-const breadcrumbItems = [{ label: "Equipements", url: "/equipements" },
+const breadcrumbItems = [{ label: "Equipements", },
 ];
 
 export default function CheckMachine() {
@@ -38,28 +38,20 @@ export default function CheckMachine() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <SearchField
-                type="text"
-                onChange={(e) => {
-                    setMachineserch(e.target.value)
-                }} />
-            <div>
-                <Collection items={machine} isPaginated itemsPerPage={10}>
-                    {(equip) => {
-                        return <div><Grid>
-                            <Card variation="elevated" key={equip.name}>
-                                <Heading>{equip.name}</Heading>
-                                <div>Attachments: {equip.attachments}</div>
-                                <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
-                                <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
-                            </Card></Grid></div>
-                    }}
-                </Collection>
-
-                <Button>
-                    <div> <Link href={"/equipements/create/"}>Create Equipement</Link>
-                    </div></Button>
-            </div>
+            <div><Collection items={machine} isPaginated itemsPerPage={10} isSearchable>
+                {(equip) => {
+                    return <div><Grid>
+                        <Card variation="elevated" key={equip.id}>
+                            <Heading>{equip.name}</Heading>
+                            <div>Attachments: {equip.attachments}</div>
+                            <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
+                            <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
+                        </Card></Grid></div>
+                }}
+            </Collection></div>
+            <Button>
+                <Link href={"/equipements/create/"}>Create Equipement</Link>
+            </Button>
         </Layout>
     )
 }

@@ -5,21 +5,16 @@ import React from "react";
 import { Card, Collection, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
-const breadcrumbItems = [{ label: "Calendar", url: "/calendar" },
+const breadcrumbItems = [{ label: "Calendar" },
 ];
 
 export default function CallCalendar() {
     const [mycalendar, setMycalendar] = useState([])
-    const [callday, setCallday] = useState("")
-    const onCalendarChange = (e) => {
-        setCallday(e.target.value)
-    }
 
     useEffect(() => {
         async function GetDays() {
             try {
                 const days = await DataStore.query(Calendar);
-                console.log("teste1.1", days)
                 const promisedetals = await Promise.all(days.map(async (daysofCalendar) => {
                     return {
                         day: daysofCalendar.day,
@@ -37,17 +32,16 @@ export default function CallCalendar() {
         }
         GetDays()
     }, [])
-    console.log(mycalendar)
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Collection items={mycalendar} isPaginated itemsPerPage={10}>
+            <Collection items={mycalendar} isPaginated itemsPerPage={10} isSearchable>
                 {(days) => {
                     return <div><Grid>
-                        <Card variation="elevated" key={days.day}>
+                        <Card variation="elevated" key={days.id}>
                             <Heading>{days.day}</Heading>
-                            <div>People: {days.day.name}</div>
+                            <div>People: {days.people.name}</div>
                             {days.job && <div>Job: {days.job.name}</div>}
                             {days.equipement && <div>Equipement: {days.equipement.name}</div>}
                             <div><Link href={"/calendar/" + days.id + "/delete"}>Delete</Link></div>

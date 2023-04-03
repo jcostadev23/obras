@@ -39,9 +39,9 @@ export default function ItemDetails() {
         return <Loader />
     }
 
-    return (
+    return (<div>
         <Layout>
-            <Breadcrumb items={breadcrumbItems} />
+            <div><Breadcrumb items={breadcrumbItems} /></div>
             <div className="container mx-auto"> <Grid>
                 <Alert
                     variation="warning"
@@ -65,6 +65,6 @@ export default function ItemDetails() {
                 </Card>
             </Grid></div>
         </Layout>
-    )
+    </div>)
 }
 

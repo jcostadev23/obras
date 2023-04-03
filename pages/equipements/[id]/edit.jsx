@@ -36,9 +36,9 @@ export default function EquipementDetails() {
         return <Loader />
     }
 
-    return (
+    return (<div>
         <Layout>
-            <Breadcrumb items={breadcrumbItems} />
+            <div><Breadcrumb items={breadcrumbItems} /></div>
             <Grid>
                 <Card variation="elevated">
                     <Heading level={4}>{equipement.name}</Heading>
@@ -52,5 +52,5 @@ export default function EquipementDetails() {
                 </Card>
             </Grid>
         </Layout>
-    )
+    </div>)
 }

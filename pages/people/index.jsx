@@ -1,13 +1,13 @@
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
 import { People } from "@/src/models";
-import { Link, Collection, Card, Heading, Grid, SearchField, Button, Pagination } from "@aws-amplify/ui-react";
+import { Link, Collection, Card, Heading, Grid, Button, } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
 import { useRouter } from "next/router";
 
-const breadcrumbItems = [{ label: "People", url: "/people" },
+const breadcrumbItems = [{ label: "People" },
 ];
 
 export default function Getpeople() {
@@ -23,7 +23,6 @@ export default function Getpeople() {
             try {
                 const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
                 setPeople(peopledainternet)
-
                 console.log("People retrieved successfully!");
             } catch (error) {
                 console.log("Error retrieving People", error);
@@ -34,17 +33,10 @@ export default function Getpeople() {
 
     return <Layout>
         <Breadcrumb items={breadcrumbItems} />
-        <SearchField
-            type="text"
-            onChange={(e) => {
-                setSearchPeople(e.target.value)
-            }
-            } />
-        <div></div>
-        <Collection items={people} isPaginated itemsPerPage={10}>
+        <Collection items={people} isPaginated itemsPerPage={10} isSearchable >
             {(person) => {
                 return <div><Grid>
-                    <Card variation="elevated" key={person.name}>
+                    <Card variation="elevated" key={person.id}>
                         <Heading>{person.name}</Heading>
                         <div>Phone: {person.phonenumber}</div>
                         <div>Role: {person.role}</div>
@@ -56,7 +48,7 @@ export default function Getpeople() {
         </Collection>
         <div></div>
         <Button>
-            <div> <Link href={"/people/create/"}>Create People</Link>
-            </div></Button>
+            <Link href={"/people/create/"}>Create People</Link>
+        </Button>
     </Layout>
 }
