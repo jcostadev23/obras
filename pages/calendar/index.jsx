@@ -2,8 +2,11 @@ import { Calendar, People, Job, Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState } from "react";
 import React from "react";
-import { Card, Grid, Heading, Link } from "@aws-amplify/ui-react";
+import { Card, Collection, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Calendar", url: "/calendar" },
+];
 
 export default function CallCalendar() {
     const [mycalendar, setMycalendar] = useState([])
@@ -38,17 +41,20 @@ export default function CallCalendar() {
 
     return (
         <Layout>
-            <Grid>
-                {mycalendar.map((item) => (
-                    <Card variation="elevated" key={item.id}>
-                        <Heading>day: {item.day}</Heading>
-                        <div>people: {item.people.name}</div>
-                        {item.job && <div>job: {item.job.name}</div>}
-                        {item.equipement && <div>equipement: {item.equipement.name}</div>}
-                        <div><Link href={"/calendar/" + item.id + "/delete"}>Delete</Link></div>
-                    </Card>
-                ))}
-            </Grid>
+            <Breadcrumb items={breadcrumbItems} />
+            <Collection items={mycalendar} isPaginated itemsPerPage={10}>
+                {(days) => {
+                    return <div><Grid>
+                        <Card variation="elevated" key={days.day}>
+                            <Heading>{days.day}</Heading>
+                            <div>People: {days.day.name}</div>
+                            {days.job && <div>Job: {days.job.name}</div>}
+                            {days.equipement && <div>Equipement: {days.equipement.name}</div>}
+                            <div><Link href={"/calendar/" + days.id + "/delete"}>Delete</Link></div>
+                        </Card>
+                    </Grid></div>
+                }}
+            </Collection>
         </Layout>
     )
 }

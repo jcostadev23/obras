@@ -8,9 +8,8 @@ export default function Home() {
     <Layout>
 
 
-      Ola sou o Costa este e o meu site
+      <div className="bg-green-400 "> you can wright here</div>
       <Button variation="primary">costa</Button>
-      <div><input></input></div>
       <div>
         <textarea></textarea>
       </div>

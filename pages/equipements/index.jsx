@@ -1,11 +1,14 @@
 
 import { useEffect, useState } from "react";
-import { Card, Heading, Grid, Link, SearchField, Button } from "@aws-amplify/ui-react";
+import { Card, Heading, Grid, Link, SearchField, Button, Collection } from "@aws-amplify/ui-react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import Layout from "@/components/layout"
 import * as React from 'react';
 import { useRouter } from "next/router"
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Equipements", url: "/equipements" },
+];
 
 export default function CheckMachine() {
     const router = useRouter()
@@ -34,24 +37,25 @@ export default function CheckMachine() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <SearchField
                 type="text"
                 onChange={(e) => {
                     setMachineserch(e.target.value)
                 }} />
             <div>
-                <Grid>
-                    {machine.map((equip) => {
-                        return (
-                            <Card variation="elevated" key={equip.id}>
-                                <Heading level={4}>{equip.name}</Heading>
-                                <div>{equip.attachments}</div>
+                <Collection items={machine} isPaginated itemsPerPage={10}>
+                    {(equip) => {
+                        return <div><Grid>
+                            <Card variation="elevated" key={equip.name}>
+                                <Heading>{equip.name}</Heading>
+                                <div>Attachments: {equip.attachments}</div>
                                 <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
                                 <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
-                            </Card>
-                        );
-                    })}
-                </Grid>
+                            </Card></Grid></div>
+                    }}
+                </Collection>
+
                 <Button>
                     <div> <Link href={"/equipements/create/"}>Create Equipement</Link>
                     </div></Button>

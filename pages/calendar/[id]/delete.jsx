@@ -4,6 +4,9 @@ import { useEffect, useState, } from "react";
 import { Calendar } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Delete" }
+];
 
 export default function ItemDetails() {
     console.log("teste 1")
@@ -35,6 +38,7 @@ export default function ItemDetails() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <div className="container mx-auto"> <Grid>
                 <Alert
                     variation="warning"

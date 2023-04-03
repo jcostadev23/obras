@@ -5,6 +5,9 @@ import EquipementsUpdateForm from "@/src/ui-components/EquipementsUpdateForm";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Edit" }
+];
 
 export default function EquipementDetails() {
     const router = useRouter()
@@ -35,6 +38,7 @@ export default function EquipementDetails() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <Grid>
                 <Card variation="elevated">
                     <Heading level={4}>{equipement.name}</Heading>

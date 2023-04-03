@@ -1,10 +1,14 @@
 
 import { useEffect, useState } from "react";
-import { Card, Heading, Grid, Link, SearchField, Button } from "@aws-amplify/ui-react";
+import { Card, Heading, Grid, Link, SearchField, Button, Collection } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import Layout from "@/components/layout"
 import * as React from 'react';
+import Breadcrumb from "@/components/breadcrumb"
+
+const breadcrumbItems = [{ label: "Jobs", url: "/jobs" },
+];
 
 export default function NewJob() {
     const [jobname, setJobname] = useState([])
@@ -32,24 +36,27 @@ export default function NewJob() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <SearchField
                 type="text"
                 onChange={(e) => {
                     setJobserch(e.target.value)
                 }} />
             <div>
-                <Grid>
-                    {jobname.map((user) => {
-                        return (
-                            <Card variation="elevated" key={user.id}>
-                                <Heading level={4}>{user.name}</Heading>
-                                <div>{user.address}</div>
-                                <Link href={"/jobs/" + user.id + "/edit"}>Edit</Link>
-                                <div><Link href={"/jobs/" + user.id + "/delete"}>Delete</Link></div>
+
+                <Collection items={jobname} isPaginated itemsPerPage={10}>
+                    {(job) => {
+                        return <div><Grid>
+                            <Card variation="elevated" key={job.name}>
+                                <Heading>{job.name}</Heading>
+                                <div>Address: {job.address}</div>
+                                <div><Link href={"/jobs/" + job.id + "/edit"}>Edit</Link></div>
+                                <div><Link href={"/jobs/" + job.id + "/delete"}>Delete</Link></div>
                             </Card>
-                        );
-                    })}
-                </Grid>
+                        </Grid></div>
+                    }}
+                </Collection>
+
                 <Button>
                     <div> <Link href={"/jobs/create/"}>Create Job</Link>
                     </div></Button>

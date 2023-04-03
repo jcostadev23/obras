@@ -5,6 +5,9 @@ import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Edit" }
+];
 
 export default function EditJobs() {
     const router = useRouter()
@@ -32,6 +35,7 @@ export default function EditJobs() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <Grid>
                 <Card variation="elevated">
                     <Heading level={4}>{name.name}</Heading>

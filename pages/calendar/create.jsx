@@ -7,6 +7,9 @@ import { SelectField, Button } from "@aws-amplify/ui-react";
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import { useRouter } from "next/router";
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Create" }
+];
 
 export default function Mainfunct() {
     const today = new Date();
@@ -80,6 +83,7 @@ export default function Mainfunct() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <form onSubmit={SaveCalender}>
                 <DayPicker
                     mode="single"
@@ -126,7 +130,6 @@ export default function Mainfunct() {
                     onChange={(e) => setEquipementid(e.target.value)}>
                     <option></option>
                     {equipement.map((user) => {
-                        console.log("test 2 ")
                         return <option value={user.id}
                             key={user.id}>
                             {user.name}

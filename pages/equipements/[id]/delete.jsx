@@ -4,6 +4,9 @@ import { useEffect, useState, } from "react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
+import Breadcrumb from "@/components/breadcrumb"
+const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Delete" }
+];
 
 export default function ItemDetails() {
     const { query, push } = useRouter()
@@ -38,6 +41,7 @@ export default function ItemDetails() {
 
     return (
         <Layout>
+            <Breadcrumb items={breadcrumbItems} />
             <div className="container mx-auto"> <Grid>
                 <Alert
                     variation="warning"

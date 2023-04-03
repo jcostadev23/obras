@@ -6,7 +6,6 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
-
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Edit" }
 ];
 export default function PeopleDetails() {
