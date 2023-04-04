@@ -15,16 +15,22 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type CalendarCreateFormInputValues = {
     day?: string;
     asda?: string;
+    workerTimeMinutes?: number;
+    equipmentTimeMinutes?: number;
 };
 export declare type CalendarCreateFormValidationValues = {
     day?: ValidationFunction<string>;
     asda?: ValidationFunction<string>;
+    workerTimeMinutes?: ValidationFunction<number>;
+    equipmentTimeMinutes?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type CalendarCreateFormOverridesProps = {
     CalendarCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     day?: PrimitiveOverrideProps<TextFieldProps>;
     asda?: PrimitiveOverrideProps<SelectFieldProps>;
+    workerTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
+    equipmentTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type CalendarCreateFormProps = React.PropsWithChildren<{
     overrides?: CalendarCreateFormOverridesProps | undefined | null;

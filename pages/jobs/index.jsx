@@ -40,14 +40,14 @@ export default function NewJob() {
 
             <Collection items={jobname} isPaginated itemsPerPage={10} isSearchable>
                 {(job) => {
-                    return <div><Grid>
+                    return <Grid>
                         <Card variation="elevated" key={job.name}>
                             <Heading>{job.name}</Heading>
                             <div>Address: {job.address}</div>
-                            <div><Link href={"/jobs/" + job.id + "/edit"}>Edit</Link></div>
-                            <div><Link href={"/jobs/" + job.id + "/delete"}>Delete</Link></div>
+                            <Link href={"/jobs/" + job.id + "/edit"}>Edit</Link>
+                            <Link href={"/jobs/" + job.id + "/delete"}>Delete</Link>
                         </Card>
-                    </Grid></div>
+                    </Grid>
                 }}
             </Collection>
             <Button>

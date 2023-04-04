@@ -15,14 +15,20 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type CalendarUpdateFormInputValues = {
     day?: string;
+    workerTimeMinutes?: number;
+    equipmentTimeMinutes?: number;
 };
 export declare type CalendarUpdateFormValidationValues = {
     day?: ValidationFunction<string>;
+    workerTimeMinutes?: ValidationFunction<number>;
+    equipmentTimeMinutes?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type CalendarUpdateFormOverridesProps = {
     CalendarUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     day?: PrimitiveOverrideProps<TextFieldProps>;
+    workerTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
+    equipmentTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type CalendarUpdateFormProps = React.PropsWithChildren<{
     overrides?: CalendarUpdateFormOverridesProps | undefined | null;

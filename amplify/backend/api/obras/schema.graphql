@@ -4,6 +4,8 @@ type Calendar @model @auth(rules: [{allow: public}]) {
   equipement: Equipements @hasOne
   job: Job @hasOne
   people: People @hasOne
+  workerTimeMinutes: Int
+  equipmentTimeMinutes: Int
 }
 
 type Equipements @model @auth(rules: [{allow: public}]) {
@@ -23,4 +25,5 @@ type People @model @auth(rules: [{allow: public}]) {
   name: String!
   phonenumber: String!
   role: String
-} 
+}
+ 

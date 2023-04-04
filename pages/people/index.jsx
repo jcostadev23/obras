@@ -35,15 +35,15 @@ export default function Getpeople() {
         <Breadcrumb items={breadcrumbItems} />
         <Collection items={people} isPaginated itemsPerPage={10} isSearchable >
             {(person) => {
-                return <div><Grid>
+                return <Grid>
                     <Card variation="elevated" key={person.id}>
                         <Heading>{person.name}</Heading>
                         <div>Phone: {person.phonenumber}</div>
                         <div>Role: {person.role}</div>
-                        <div><Link href={"/people/" + person.id + "/edit"}>Edit</Link></div>
-                        <div><Link href={"/people/" + person.id + "/delete"}>Delete</Link></div>
+                        <Link href={"/people/" + person.id + "/edit"}>Edit</Link>
+                        <Link href={"/people/" + person.id + "/delete"}>Delete</Link>
                     </Card>
-                </Grid></div>
+                </Grid>
             }}
         </Collection>
         <div></div>

@@ -71,6 +71,20 @@ export const schema = {
                         ]
                     }
                 },
+                "workerTimeMinutes": {
+                    "name": "workerTimeMinutes",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "equipmentTimeMinutes": {
+                    "name": "equipmentTimeMinutes",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -343,5 +357,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "b50a463a7c5bc3bc462d1e732c956ada"
+    "version": "13cf6d4d0cc0446a8566181127d0bca8"
 };

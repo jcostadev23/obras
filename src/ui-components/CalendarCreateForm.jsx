@@ -31,18 +31,30 @@ export default function CalendarCreateForm(props) {
   const initialValues = {
     day: "",
     asda: undefined,
+    workerTimeMinutes: "",
+    equipmentTimeMinutes: "",
   };
   const [day, setDay] = React.useState(initialValues.day);
   const [asda, setAsda] = React.useState(initialValues.asda);
+  const [workerTimeMinutes, setWorkerTimeMinutes] = React.useState(
+    initialValues.workerTimeMinutes
+  );
+  const [equipmentTimeMinutes, setEquipmentTimeMinutes] = React.useState(
+    initialValues.equipmentTimeMinutes
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDay(initialValues.day);
     setAsda(initialValues.asda);
+    setWorkerTimeMinutes(initialValues.workerTimeMinutes);
+    setEquipmentTimeMinutes(initialValues.equipmentTimeMinutes);
     setErrors({});
   };
   const validations = {
     day: [],
     asda: [],
+    workerTimeMinutes: [],
+    equipmentTimeMinutes: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -72,6 +84,8 @@ export default function CalendarCreateForm(props) {
         let modelFields = {
           day,
           asda,
+          workerTimeMinutes,
+          equipmentTimeMinutes,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -103,6 +117,8 @@ export default function CalendarCreateForm(props) {
           });
           const modelFieldsToSave = {
             day: modelFields.day,
+            workerTimeMinutes: modelFields.workerTimeMinutes,
+            equipmentTimeMinutes: modelFields.equipmentTimeMinutes,
           };
           await DataStore.save(new Calendar(modelFieldsToSave));
           if (onSuccess) {
@@ -132,6 +148,8 @@ export default function CalendarCreateForm(props) {
             const modelFields = {
               day: value,
               asda,
+              workerTimeMinutes,
+              equipmentTimeMinutes,
             };
             const result = onChange(modelFields);
             value = result?.day ?? value;
@@ -156,6 +174,8 @@ export default function CalendarCreateForm(props) {
             const modelFields = {
               day,
               asda: value,
+              workerTimeMinutes,
+              equipmentTimeMinutes,
             };
             const result = onChange(modelFields);
             value = result?.asda ?? value;
@@ -170,6 +190,72 @@ export default function CalendarCreateForm(props) {
         hasError={errors.asda?.hasError}
         {...getOverrideProps(overrides, "asda")}
       ></SelectField>
+      <TextField
+        label="Worker time minutes"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={workerTimeMinutes}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              day,
+              asda,
+              workerTimeMinutes: value,
+              equipmentTimeMinutes,
+            };
+            const result = onChange(modelFields);
+            value = result?.workerTimeMinutes ?? value;
+          }
+          if (errors.workerTimeMinutes?.hasError) {
+            runValidationTasks("workerTimeMinutes", value);
+          }
+          setWorkerTimeMinutes(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("workerTimeMinutes", workerTimeMinutes)
+        }
+        errorMessage={errors.workerTimeMinutes?.errorMessage}
+        hasError={errors.workerTimeMinutes?.hasError}
+        {...getOverrideProps(overrides, "workerTimeMinutes")}
+      ></TextField>
+      <TextField
+        label="Equipment time minutes"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={equipmentTimeMinutes}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              day,
+              asda,
+              workerTimeMinutes,
+              equipmentTimeMinutes: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.equipmentTimeMinutes ?? value;
+          }
+          if (errors.equipmentTimeMinutes?.hasError) {
+            runValidationTasks("equipmentTimeMinutes", value);
+          }
+          setEquipmentTimeMinutes(value);
+        }}
+        onBlur={() =>
+          runValidationTasks("equipmentTimeMinutes", equipmentTimeMinutes)
+        }
+        errorMessage={errors.equipmentTimeMinutes?.errorMessage}
+        hasError={errors.equipmentTimeMinutes?.hasError}
+        {...getOverrideProps(overrides, "equipmentTimeMinutes")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

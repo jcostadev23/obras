@@ -20,8 +20,10 @@ export default function CallCalendar() {
                         day: daysofCalendar.day,
                         id: daysofCalendar.id,
                         people: await daysofCalendar.people,
+                        workerTimeMinutes: daysofCalendar.workerTimeMinutes,
                         job: await daysofCalendar.job,
                         equipement: await daysofCalendar.equipement,
+                        equipmentTimeMinutes: daysofCalendar.equipmentTimeMinutes
                     };
                 })
                 )
@@ -38,15 +40,17 @@ export default function CallCalendar() {
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={mycalendar} isPaginated itemsPerPage={10} isSearchable>
                 {(days) => {
-                    return <div><Grid>
+                    return <Grid>
                         <Card variation="elevated" key={days.id}>
                             <Heading>{days.day}</Heading>
                             <div>People: {days.people.name}</div>
+                            {days.workerTimeMinutes && <div>Hours: {days.workerTimeMinutes / 60}</div>}
                             {days.job && <div>Job: {days.job.name}</div>}
                             {days.equipement && <div>Equipement: {days.equipement.name}</div>}
-                            <div><Link href={"/calendar/" + days.id + "/delete"}>Delete</Link></div>
+                            {days.equipmentTimeMinutes && <div>Hours: {days.equipmentTimeMinutes / 60}</div>}
+                            <Link href={"/calendar/" + days.id + "/delete"}>Delete</Link>
                         </Card>
-                    </Grid></div>
+                    </Grid>
                 }}
             </Collection>
         </Layout>

@@ -30,25 +30,23 @@ export default function CheckMachine() {
                     console.log("Error retrieving Equipements", error);
             }
         }
-
         CallMachine()
-
     }, [machineserch,])
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <div><Collection items={machine} isPaginated itemsPerPage={10} isSearchable>
+            <Collection items={machine} isPaginated itemsPerPage={10} isSearchable>
                 {(equip) => {
-                    return <div><Grid>
+                    return <Grid>
                         <Card variation="elevated" key={equip.id}>
                             <Heading>{equip.name}</Heading>
                             <div>Attachments: {equip.attachments}</div>
                             <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
-                            <div><Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link></div>
-                        </Card></Grid></div>
+                            <Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link>
+                        </Card></Grid>
                 }}
-            </Collection></div>
+            </Collection>
             <Button>
                 <Link href={"/equipements/create/"}>Create Equipement</Link>
             </Button>

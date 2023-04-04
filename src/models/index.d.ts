@@ -16,6 +16,8 @@ type EagerCalendar = {
   readonly equipement?: Equipements | null;
   readonly job?: Job | null;
   readonly people?: People | null;
+  readonly workerTimeMinutes?: number | null;
+  readonly equipmentTimeMinutes?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly calendarEquipementId?: string | null;
@@ -33,6 +35,8 @@ type LazyCalendar = {
   readonly equipement: AsyncItem<Equipements | undefined>;
   readonly job: AsyncItem<Job | undefined>;
   readonly people: AsyncItem<People | undefined>;
+  readonly workerTimeMinutes?: number | null;
+  readonly equipmentTimeMinutes?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly calendarEquipementId?: string | null;

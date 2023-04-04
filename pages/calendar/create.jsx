@@ -3,11 +3,12 @@ import { People, Job, Equipements, Calendar } from "@/src/models";
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { SelectField, Button } from "@aws-amplify/ui-react";
+import { SelectField, Button, StepperField } from "@aws-amplify/ui-react";
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import { useRouter } from "next/router";
 import Breadcrumb from "@/components/breadcrumb"
+
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Create" }
 ];
 
@@ -21,6 +22,11 @@ export default function Mainfunct() {
     const [jobname, setJobname] = useState([])
     const [equipementid, setEquipementid] = useState("")
     const [equipement, setEquipement] = useState([])
+    const [workerhours, setWorkerhours] = useState()
+    const [equipementhours, setEquipementhours] = useState()
+
+    const daylyHours = (Hours) => setWorkerhours(Hours);
+    const equipHours = (Hours) => setEquipementhours(Hours);
 
     let footer = <p>Please pick a day.</p>;
     if (selected) {
@@ -67,13 +73,15 @@ export default function Mainfunct() {
     async function SaveCalender() {
         try {
             const savedate = format(selected, "yyyy-MM-dd")
-            console.log("checking the date", savedate)
             const saveResponse = await DataStore.save(
                 new Calendar({
                     day: savedate,
                     people: { id: personid },
+                    workerTimeMinutes: (workerhours * 60),
                     job: { id: jobid },
                     equipement: { id: equipementid },
+                    equipmentTimeMinutes: (equipementhours * 60)
+
                 })
             );
         } catch (error) {
@@ -95,7 +103,7 @@ export default function Mainfunct() {
                 <SelectField
                     label="People"
                     required
-                    descriptiveText="Select a People?"
+                    descriptiveText="Select a People"
                     value={personid}
                     onChange={(e) => setPersonid(e.target.value)} >
                     <option></option>
@@ -105,13 +113,13 @@ export default function Mainfunct() {
                             {user.name}
                         </option>
                     })}
-
                 </SelectField>
+                <StepperField label="Worker time in hours" value={workerhours} onStepChange={daylyHours} defaultValue={0} min={0} max={16} step={0.5} />
 
                 <SelectField
                     label="Job"
                     required
-                    descriptiveText="Select a Job?"
+                    descriptiveText="Select a Job"
                     value={jobid}
                     onChange={(e) => setJobid(e.target.value)}>
                     <option></option>
@@ -125,7 +133,7 @@ export default function Mainfunct() {
 
                 <SelectField
                     label="Equipement"
-                    descriptiveText="Select a Equipement?"
+                    descriptiveText="Select a Equipement"
                     value={equipementid}
                     onChange={(e) => setEquipementid(e.target.value)}>
                     <option></option>
@@ -135,8 +143,8 @@ export default function Mainfunct() {
                             {user.name}
                         </option>
                     })}
-
                 </SelectField>
+                <StepperField label={"Equipement time in hours"} value={equipementhours} onStepChange={equipHours} defaultValue={0} min={0} max={16} step={0.5} />
                 <Button type="submit">Save
                 </Button></form>
         </Layout>
