@@ -1,8 +1,8 @@
-import { Calendar, People, Job, Equipements } from "@/src/models";
+import { Calendar, } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState } from "react";
 import React from "react";
-import { Card, Collection, Grid, Heading, Link } from "@aws-amplify/ui-react";
+import { Card, Collection, Button, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "Calendar" },
@@ -34,25 +34,42 @@ export default function CallCalendar() {
         }
         GetDays()
     }, [])
+    console.log(mycalendar)
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={mycalendar} isPaginated itemsPerPage={10} isSearchable>
                 {(days) => {
+                    function FormatTime(minutes) {
+                        const h = Math.floor(minutes / 60);
+                        const remainingMinutes = minutes % 60;
+                        let formatTime = `${h}h`;
+                        {
+                            remainingMinutes !== 0 && (
+                                formatTime += `:${remainingMinutes}m`)
+                        }
+                        return (formatTime)
+                    }
+
                     return <Grid>
                         <Card variation="elevated" key={days.id}>
                             <Heading>{days.day}</Heading>
                             <div>People: {days.people.name}</div>
-                            {days.workerTimeMinutes && <div>Hours: {days.workerTimeMinutes / 60}</div>}
+                            {days.workerTimeMinutes && <div>Hours: {FormatTime(days.workerTimeMinutes)}</div>}
                             {days.job && <div>Job: {days.job.name}</div>}
                             {days.equipement && <div>Equipement: {days.equipement.name}</div>}
-                            {days.equipmentTimeMinutes && <div>Hours: {days.equipmentTimeMinutes / 60}</div>}
+                            {/* need to do something to resole when is not hours selected */}
+                            {days.equipmentTimeMinutes && <div>Equipement Hours: {FormatTime(days.equipmentTimeMinutes)}</div>}
                             <Link href={"/calendar/" + days.id + "/delete"}>Delete</Link>
                         </Card>
                     </Grid>
-                }}
+                }
+                }
             </Collection>
+            <Button>
+                <Link href={"/calendar/create/"}>Add new day</Link>
+            </Button>
         </Layout>
     )
 }

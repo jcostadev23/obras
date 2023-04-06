@@ -9,7 +9,6 @@ const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Dele
 ];
 
 export default function ItemDetails() {
-    console.log("teste 1")
     const { query, push } = useRouter()
     const calendarid = query.id
     const [day, setDay] = useState()
@@ -27,9 +26,7 @@ export default function ItemDetails() {
                 setDay(itemFromDatastore)
             } catch (error) { console.log("Item name on catch") }
         }
-
         calendarid && Days()
-
     }, [calendarid])
 
     if (!day) {
@@ -50,7 +47,6 @@ export default function ItemDetails() {
                 <Grid>
                     <Card variation="elevated" key={day.id}>
                         <Heading>day: {day.day}</Heading>
-                        <div>id: {day.id} </div>
                     </Card>
                 </Grid>
                 <Card variation="elevated">

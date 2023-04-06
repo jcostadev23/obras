@@ -25,9 +25,6 @@ export default function Mainfunct() {
     const [workerhours, setWorkerhours] = useState()
     const [equipementhours, setEquipementhours] = useState()
 
-    const daylyHours = (Hours) => setWorkerhours(Hours);
-    const equipHours = (Hours) => setEquipementhours(Hours);
-
     let footer = <p>Please pick a day.</p>;
     if (selected) {
         footer = <p>You picked {format(selected, 'PPPP')}.</p>;
@@ -73,6 +70,8 @@ export default function Mainfunct() {
     async function SaveCalender() {
         try {
             const savedate = format(selected, "yyyy-MM-dd")
+
+
             const saveResponse = await DataStore.save(
                 new Calendar({
                     day: savedate,
@@ -81,7 +80,6 @@ export default function Mainfunct() {
                     job: { id: jobid },
                     equipement: { id: equipementid },
                     equipmentTimeMinutes: (equipementhours * 60)
-
                 })
             );
         } catch (error) {
@@ -114,7 +112,8 @@ export default function Mainfunct() {
                         </option>
                     })}
                 </SelectField>
-                <StepperField label="Worker time in hours" value={workerhours} onStepChange={daylyHours} defaultValue={0} min={0} max={16} step={0.5} />
+
+                <StepperField label="Worker time in hours" value={workerhours} onStepChange={(Hours) => setWorkerhours(Hours)} defaultValue={0} min={0} max={16} step={0.5} />
 
                 <SelectField
                     label="Job"
@@ -144,7 +143,7 @@ export default function Mainfunct() {
                         </option>
                     })}
                 </SelectField>
-                <StepperField label={"Equipement time in hours"} value={equipementhours} onStepChange={equipHours} defaultValue={0} min={0} max={16} step={0.5} />
+                <StepperField label={"Equipement time in hours"} value={equipementhours} onStepChange={(Hours) => setEquipementhours(Hours)} defaultValue={0} min={0} max={16} step={0.5} />
                 <Button type="submit">Save
                 </Button></form>
         </Layout>
