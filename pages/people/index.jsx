@@ -35,19 +35,22 @@ export default function Getpeople() {
         <Breadcrumb items={breadcrumbItems} />
         <Collection items={people} isPaginated itemsPerPage={10} isSearchable >
             {(person) => {
-                return <Grid>
+                return <Grid >
                     <Card variation="elevated" key={person.id}>
-                        <Heading>{person.name}</Heading>
-                        <div>Phone: {person.phonenumber}</div>
-                        <div>Role: {person.role}</div>
-                        <Link href={"/people/" + person.id + "/edit"}>Edit</Link>
-                        <Link href={"/people/" + person.id + "/delete"}>Delete</Link>
+                        <Heading level={3} color="blue" fontWeight="bold">{person.name}</Heading>
+                        <div >Phone: {person.phonenumber}</div>
+                        <div >Role: {person.role}</div>
+                        <Link class="inline-block px-6 py-3 mt-4 font-bold text-center text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-yellow-500 to-orange-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
+                            href={"/people/" + person.id + "/edit"}>Edit</Link>
+                        <Link class="inline-block px-6 py-3 mt-4 font-bold text-center text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-purple-700 to-red-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
+                            href={"/people/" + person.id + "/delete"}>Delete</Link>
                     </Card>
                 </Grid>
             }}
         </Collection>
-        <div></div>
-        <Button>
+
+        <Button class="inline-block px-6 py-3 mt-4 font-bold text-center text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-red-400 to-red-700 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
+        >
             <Link href={"/people/create/"}>Create People</Link>
         </Button>
     </Layout>

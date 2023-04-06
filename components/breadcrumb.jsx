@@ -12,7 +12,7 @@ export default function Breadcrumb({ items }) {
             }
             return (
                 <span key={index}>
-                    <Link href={item.url}>
+                    <Link className="my- bg-red-600" href={item.url}>
                         {item.label}
                     </Link>
                     {index !== items.length - 1 && ' / '}
