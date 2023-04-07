@@ -31,12 +31,11 @@ export default function CallCalendar() {
                 )
                 setMycalendar(promisedetals)
             } catch (error) {
-                console.log("Error don't get the callday", error);
+                console.log("Error don't get the CallCalendar", error);
             }
         }
         GetDays()
     }, [])
-    console.log(mycalendar)
 
     return (
         <Layout>

@@ -1,5 +1,4 @@
 import { useRouter } from "next/router"
-import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person" }
 ];
 
