@@ -44,6 +44,7 @@ export default function CheckMachine() {
                             <Heading>{equip.name}</Heading>
                             <div>Attachments: {equip.attachments}</div>
                             <Link href={"/equipements/" + equip.id + "/edit"}>Edit</Link>
+                            <Link href={"/equipements/" + equip.id}>Equipements Info</Link>
                             <Link href={"/equipements/" + equip.id + "/delete"}>Delete</Link>
                         </Card></Grid>
                 }}
