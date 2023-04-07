@@ -46,6 +46,7 @@ export default function NewJob() {
                             <Heading>{job.name}</Heading>
                             <div>Address: {job.address}</div>
                             <Link href={"/jobs/" + job.id + "/edit"}>Edit</Link>
+                            <Link href={"/jobs/" + job.id + "/jobinfo"}>Job Info</Link>
                             <Link href={"/jobs/" + job.id + "/delete"}>Delete</Link>
                         </Card>
                     </Grid>

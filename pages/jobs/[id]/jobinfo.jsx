@@ -8,54 +8,56 @@ import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/helpers/button"
 import FormatTime from "../../../components/helpers/formattime";
 import { useRouter } from "next/router"
-const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person Info" }
+const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Job Info" }
 ];
 
-export default function PersonInfo() {
-    const [person, setPerson] = useState()
+export default function JobInfo() {
+    const [job, setJob] = useState()
     const router = useRouter()
-    const personId = router.query.id
-
+    const jobId = router.query.id
+    console.log("test", jobId)
     useEffect(() => {
-        async function GetDetails() {
+
+        async function JobDetails() {
             try {
-                const details = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
-                const promisedetals = await Promise.all(details.map(async (PersonInformation) => {
+                const details = await DataStore.query(Calendar, (c) => c.calendarJobId.eq(jobId));
+                console.log("test1", details)
+                const promisedetals = await Promise.all(details.map(async (JobInfo) => {
                     return {
-                        day: PersonInformation.day,
-                        id: PersonInformation.id,
-                        people: await PersonInformation.people,
-                        workerTimeMinutes: PersonInformation.workerTimeMinutes,
-                        job: await PersonInformation.job,
-                        equipement: await PersonInformation.equipement,
-                        equipmentTimeMinutes: PersonInformation.equipmentTimeMinutes
+                        day: JobInfo.day,
+                        id: JobInfo.id,
+                        people: await JobInfo.people,
+                        workerTimeMinutes: JobInfo.workerTimeMinutes,
+                        job: await JobInfo.job,
+                        equipement: await JobInfo.equipement,
+                        equipmentTimeMinutes: JobInfo.equipmentTimeMinutes
                     };
                 })
                 )
-                setPerson(promisedetals)
+                setJob(promisedetals)
             } catch (error) {
-                console.log("Error don't get the GetDetails", error);
+                console.log("Error don't get the JobDetails", error);
             }
         }
-        if (!personId) {
-            GetDetails()
+        if (jobId) {
+            JobDetails()
         }
-    }, [personId])
-    if (!person) {
+    }, [jobId])
+    if (!job) {
         return <div>Loading...</div>
     }
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Collection items={person} isPaginated itemsPerPage={10} isSearchable>
+            <Collection items={job} isPaginated itemsPerPage={10} isSearchable>
                 {(info) => {
                     return <Grid>
                         <Card variation="elevated" key={info.id}>
                             <Heading>{info.day}</Heading>
+                            {info.job && <div>Job: {info.job.name}</div>}
                             <div>People: {info.people.name}</div>
                             {info.workerTimeMinutes && <div>Hours: {FormatTime(info.workerTimeMinutes)}</div>}
-                            {info.job && <div>Job: {info.job.name}</div>}
                             {info.equipement && <div>Equipement: {info.equipement.name}</div>}
                             {/* need to do something to resole when is not hours selected */}
                             {info.equipmentTimeMinutes && <div>Equipement Hours: {FormatTime(info.equipmentTimeMinutes)}</div>}
@@ -63,7 +65,7 @@ export default function PersonInfo() {
                     </Grid>
                 }}
             </Collection>
-            <CustomButton color={"green"} link={"/people/"} text={"Return"} />
+            <CustomButton color={"green"} link={"/jobs/"} text={"Return"} />
         </Layout>
     )
 }
