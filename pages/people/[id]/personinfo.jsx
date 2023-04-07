@@ -2,10 +2,11 @@ import { Calendar, } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import React from "react";
+import { Card, Collection, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/helpers/button"
-import CalendarList from "../../../components/helpers/calendarlist";
+import FormatTime from "../../../components/helpers/formattime";
 import { useRouter } from "next/router"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person Info" }
 ];
@@ -47,7 +48,21 @@ export default function PersonInfo() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={person} />
+            <Collection items={person} isPaginated itemsPerPage={10} isSearchable>
+                {(info) => {
+                    return <Grid>
+                        <Card variation="elevated" key={info.id}>
+                            <Heading>{info.day}</Heading>
+                            <div>People: {info.people.name}</div>
+                            {info.workerTimeMinutes && <div>Hours: {FormatTime(info.workerTimeMinutes)}</div>}
+                            {info.job && <div>Job: {info.job.name}</div>}
+                            {info.equipement && <div>Equipement: {info.equipement.name}</div>}
+                            {/* need to do something to resole when is not hours selected */}
+                            {info.equipmentTimeMinutes && <div>Equipement Hours: {FormatTime(info.equipmentTimeMinutes)}</div>}
+                        </Card>
+                    </Grid>
+                }}
+            </Collection>
             <CustomButton color={"green"} link={"/people/"} text={"Return"} />
         </Layout>
     )
