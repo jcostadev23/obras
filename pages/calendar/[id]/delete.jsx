@@ -3,8 +3,9 @@ import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Calendar } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
+import { Grid, Alert, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
+import Button from "@/components/helpers/button"
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Delete" }
 ];
 
@@ -57,7 +58,7 @@ export default function ItemDetails() {
                         ariaLabel="">
                         Delete
                     </Button>
-                    <div><Link href="/calendar">Exit</Link></div>
+                    <Button link={"/calendar/"} text={"Exit"} />
                 </Card>
             </Grid></div>
         </Layout>

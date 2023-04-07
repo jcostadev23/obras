@@ -2,9 +2,11 @@ import { Calendar, } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState } from "react";
 import React from "react";
-import { Card, Collection, Button, Grid, Heading, Link } from "@aws-amplify/ui-react";
+import { Card, Collection, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
+import Button from "@/components/helpers/button"
+import FormatTime from "../../components/helpers/formattime";
 const breadcrumbItems = [{ label: "Calendar" },
 ];
 
@@ -41,17 +43,6 @@ export default function CallCalendar() {
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={mycalendar} isPaginated itemsPerPage={10} isSearchable>
                 {(days) => {
-                    function FormatTime(minutes) {
-                        const h = Math.floor(minutes / 60);
-                        const remainingMinutes = minutes % 60;
-                        let formatTime = `${h}h`;
-                        {
-                            remainingMinutes !== 0 && (
-                                formatTime += `:${remainingMinutes}m`)
-                        }
-                        return (formatTime)
-                    }
-
                     return <Grid>
                         <Card variation="elevated" key={days.id}>
                             <Heading>{days.day}</Heading>
@@ -66,9 +57,7 @@ export default function CallCalendar() {
                     </Grid>
                 }}
             </Collection>
-            <Button type="button" class="inline-block px-6 py-3 mb-4 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-blue-200 to-blue-700 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">
-                <Link href={"/calendar/create/"}>Add new day</Link>
-            </Button>
+            <Button link={"/calendar/create/"} text={"Add New Day"} />
         </Layout>
     )
 }

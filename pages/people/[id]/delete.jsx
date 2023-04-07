@@ -1,9 +1,10 @@
 import Layout from "@/components/layout"
+import Button from "@/components/helpers/button"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
+import { Grid, Alert, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Delete" }
 ];
@@ -68,7 +69,7 @@ function ItemDetails() {
                     >
                         Delete
                     </Button>
-                    <div><Link href="/people">Exit</Link></div>
+                    <Button link={"/people/"} text={"Exit"} />
                 </Card>
             </Grid></div>
         </Layout>

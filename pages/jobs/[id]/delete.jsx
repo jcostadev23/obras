@@ -1,9 +1,10 @@
 import Layout from "@/components/layout"
+import Button from "@/components/helpers/button"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Alert, Card, Button, Link, Heading, Loader } from "@aws-amplify/ui-react";
+import { Grid, Alert, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];
@@ -65,7 +66,7 @@ function JobDetails() {
                     >
                         Delete
                     </Button>
-                    <div><Link href="/jobs">Exit</Link></div>
+                    <Button link={"/jobs/"} text={"Exit"} />
                 </Card>
             </Grid></div>
         </Layout>
