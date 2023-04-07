@@ -4,7 +4,7 @@ import { Card, Heading, Grid, Link, Collection } from "@aws-amplify/ui-react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import Layout from "@/components/layout"
-import Button from "@/components/helpers/button"
+import CustomButton from "@/components/helpers/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 
@@ -51,7 +51,7 @@ export default function NewJob() {
                     </Grid>
                 }}
             </Collection>
-            <Button link={"/jobs/create/"} text={"Create Jobs"} />
+            <CustomButton link={"/jobs/create/"} color={"green"} text={"Create Jobs"} />
         </Layout>
     )
 }

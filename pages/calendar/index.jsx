@@ -5,7 +5,7 @@ import React from "react";
 import { Card, Collection, Grid, Heading, Link } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
-import Button from "@/components/helpers/button"
+import CustomButton from "@/components/helpers/button"
 import FormatTime from "../../components/helpers/formattime";
 const breadcrumbItems = [{ label: "Calendar" },
 ];
@@ -57,7 +57,7 @@ export default function CallCalendar() {
                     </Grid>
                 }}
             </Collection>
-            <Button link={"/calendar/create/"} text={"Add New Day"} />
+            <CustomButton color={"green"} link={"/calendar/create/"} text={"Add New Day"} />
         </Layout>
     )
 }

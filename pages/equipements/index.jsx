@@ -4,7 +4,7 @@ import { Card, Heading, Grid, Link, Collection } from "@aws-amplify/ui-react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import Layout from "@/components/layout"
-import Button from "@/components/helpers/button"
+import CustomButton from "@/components/helpers/button"
 import * as React from 'react';
 import { useRouter } from "next/router"
 import Breadcrumb from "@/components/breadcrumb"
@@ -48,7 +48,7 @@ export default function CheckMachine() {
                         </Card></Grid>
                 }}
             </Collection>
-            <Button link={"/equipements/create/"} text={"Create Equipements"} />
+            <CustomButton color={"green"} link={"/equipements/create/"} text={"Create Equipements"} />
         </Layout>
     )
 }
