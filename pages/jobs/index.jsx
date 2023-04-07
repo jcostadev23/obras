@@ -24,7 +24,7 @@ export default function NewJob() {
                 const serchjob = await DataStore.query(Job, c => c.name.contains(jobserch,));
                 setJobname(serchjob)
 
-                console.log("Jobs retrieved successfully!", JSON.stringify(serchjob, null, 2));
+                console.log("Jobs retrieved successfully!");
             } catch (error) {
                 jobserch,
                     console.log("Error retrieving Jobs", error);
@@ -38,7 +38,6 @@ export default function NewJob() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-
             <Collection items={jobname} isPaginated itemsPerPage={10} isSearchable>
                 {(job) => {
                     return <Grid>

@@ -25,7 +25,7 @@ export default function CheckMachine() {
                 const serchmachine = await DataStore.query(Equipements, c => c.name.contains(machineserch,));
                 setMachine(serchmachine)
 
-                console.log("Equipements retrieved successfully!", JSON.stringify(serchmachine, null, 2));
+                console.log("Equipements retrieved successfully!");
             } catch (error) {
                 machineserch,
                     console.log("Error retrieving Equipements", error);

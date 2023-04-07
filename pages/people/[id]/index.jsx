@@ -29,8 +29,7 @@ export default function PersonInfo() {
                         equipement: await PersonInformation.equipement,
                         equipmentTimeMinutes: PersonInformation.equipmentTimeMinutes
                     };
-                })
-                )
+                }))
                 setPerson(promisedetals)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
