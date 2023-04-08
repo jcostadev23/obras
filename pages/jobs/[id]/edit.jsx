@@ -6,20 +6,21 @@ import { DataStore } from "aws-amplify";
 import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
 import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
 import Breadcrumb from "@/components/breadcrumb"
+import JobCard from "@/components/helpers/jobcard";
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Edit" }
 ];
 
 export default function EditJobs() {
     const router = useRouter()
     const jobid = router.query.id
-    const [name, setName] = useState()
+    const [job, setJob] = useState()
 
     useEffect(() => {
         async function JobName() {
             try {
                 const joblist = await DataStore.query(Job, jobid);
-                setName(joblist)
-                console.log("Job retrieved successfully!", JSON.stringify(joblist, null, 2));
+                setJob(joblist)
+                console.log("Job retrieved successfully!");
             } catch (error) {
                 console.log("Error retrieving Job", error);
             }
@@ -29,7 +30,7 @@ export default function EditJobs() {
         }
         JobName()
     }, [jobid])
-    if (!name) {
+    if (!job) {
         return <Loader />
     }
 
@@ -37,17 +38,12 @@ export default function EditJobs() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <Card variation="elevated">
-                    <Heading level={4}>{name.name}</Heading>
-                    <div>{name.address}</div>
-                </Card>
-            </Grid>
-            <Grid>
-                <Card variation="elevated">
+                <JobCard props={job}>
                     <JobUpdateForm id={jobid}
                         onSuccess={() => router.reload()} />
-                </Card>
+                </JobCard>
             </Grid>
+
         </Layout>
     )
 }

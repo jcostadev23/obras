@@ -1,5 +1,6 @@
 import { Calendar, } from "@/src/models";
 import { DataStore } from "aws-amplify";
+import { Grid, Collection } from "@aws-amplify/ui-react";
 import { useEffect, useState, } from "react";
 import React from "react";
 import Layout from "@/components/layout"
@@ -46,7 +47,13 @@ export default function PersonInfo() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={person} />
+            <Collection items={person} isPaginated itemsPerPage={10} isSearchable>
+                {(details) => {
+                    return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
+                        <CalendarList props={details} />
+                    </Grid>
+                }}
+            </Collection>
             <CustomButton color={"green"} link={"/people/"} text={"Return"} />
         </Layout>
     )

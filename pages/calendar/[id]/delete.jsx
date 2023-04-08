@@ -6,6 +6,7 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Heading, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/helpers/button"
+import CalendarList from "../../../components/helpers/calendarlist";
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Delete" }
 ];
 
@@ -37,7 +38,7 @@ export default function ItemDetails() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <div className="container mx-auto"> <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
+            <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                 <Alert
                     variation="warning"
                     isDismissible={false}
@@ -45,22 +46,18 @@ export default function ItemDetails() {
                     heading="Atenttion">
                     This will delete the Day
                 </Alert>
-                <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                    <Card variation="elevated" key={day.id}>
-                        <Heading>day: {day.day}</Heading>
-                    </Card>
-                </Grid>
-                <Card variation="elevated">
+
+                <CalendarList props={day} >
                     <Button
                         variation="destructive"
                         loadingText=""
                         onClick={DeleteDays}
                         ariaLabel="">
                         Delete
-                    </Button>
+                    </Button> {"  "}
                     <CustomButton color={"green"} link={"/calendar/"} text={"Exit"} />
-                </Card>
-            </Grid></div>
+                </CalendarList>
+            </Grid>
         </Layout>
     )
 }

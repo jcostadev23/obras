@@ -6,6 +6,7 @@ import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Card, Heading, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
+import JobCard from "../../../components/helpers/jobcard";
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];
 
@@ -25,7 +26,7 @@ function JobDetails() {
             try {
                 const JobFromDatastore = await DataStore.query(Job, jobid);
                 setName(JobFromDatastore)
-                console.log("Posts retrieved successfully!", JSON.stringify(JobFromDatastore, null, 2));
+                console.log("Posts retrieved successfully!");
             } catch (error) {
                 console.log("Error retrieving posts", error);
             }
@@ -44,31 +45,26 @@ function JobDetails() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <div className="container mx-auto"> <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
+            <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg 
+             bg-gradient-to-tl from-gray-400 to-gray-500 ">
                 <Alert
                     variation="warning"
                     isDismissible={false}
                     hasIcon={true}
-                    heading="Atenttion"
-                >
+                    heading="Atenttion">
                     This will delete the Job
                 </Alert>
-                <Card variation="elevated">
-
-                    <Heading level={4}>{name.name}</Heading>
-                    <div>{name.address}</div>
-
+                <JobCard props={name}>
                     <Button
                         variation="destructive"
                         loadingText=""
                         onClick={DeleteJob}
-                        ariaLabel=""
-                    >
+                        ariaLabel="">
                         Delete
-                    </Button>
+                    </Button>{"  "}
                     <CustomButton link={"/jobs/"} color={"green"} text={"Exit"} />
-                </Card>
-            </Grid></div>
+                </JobCard>
+            </Grid>
         </Layout>
     )
 }

@@ -12,17 +12,12 @@ const breadcrumbItems = [{ label: "People" },
 ];
 
 export default function Getpeople() {
-    const router = useRouter()
     const [people, setPeople] = useState([])
-    const [searchpeople, setSearchPeople] = useState("")
-    const onChange = (e) => {
-        setSearchPeople(e.target.value)
-    }
 
     useEffect(() => {
         async function GetPerson() {
             try {
-                const peopledainternet = await DataStore.query(People, c => c.name.contains(searchpeople,));
+                const peopledainternet = await DataStore.query(People,);
                 setPeople(peopledainternet)
                 console.log("People retrieved successfully!");
             } catch (error) {
@@ -30,14 +25,13 @@ export default function Getpeople() {
             }
         }
         GetPerson()
-    }, [searchpeople])
+    }, [])
 
     return <Layout>
         <Breadcrumb items={breadcrumbItems} />
         <Collection color="black" items={people} isPaginated itemsPerPage={10} isSearchable >
             {(person) => {
-                return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 "
-                >
+                return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                     <PersonCard props={person}>
                         <Link style={{ display: "flex", justifyContent: "center" }} class="inline-block my-5 px-6 py-3 mt-4 font-bold text-center align-middle transition-all border-0 rounded-lg  lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-green-400 to-green-700 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
                             href={"/people/" + person.id + "/edit"}>Edit</Link>
