@@ -1,10 +1,11 @@
 import Layout from "@/components/layout"
 import CustomButton from "@/components/helpers/button"
+import PersonCard from "@/components/helpers/personcard"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Alert, Card, Heading, Loader, Button } from "@aws-amplify/ui-react";
+import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Delete" }
 ];
@@ -12,7 +13,7 @@ const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Delete" 
 function ItemDetails() {
     const { query, push } = useRouter()
     const itemid = query.id
-    const [name, setName] = useState()
+    const [person, setPerson] = useState()
 
     async function DeleteItem() {
 
@@ -25,7 +26,7 @@ function ItemDetails() {
         async function ItemName() {
             try {
                 const itemFromDatastore = await DataStore.query(People, itemid);
-                setName(itemFromDatastore)
+                setPerson(itemFromDatastore)
 
                 console.log("Person retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
             } catch (error) {
@@ -39,14 +40,14 @@ function ItemDetails() {
         ItemName()
     }, [itemid])
 
-    if (!name) {
+    if (!person) {
         return <Loader />
     }
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <div className="container mx-auto"> <Grid>
+            <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                 <Alert
                     variation="warning"
                     isDismissible={false}
@@ -55,12 +56,7 @@ function ItemDetails() {
                 >
                     This will delete the user
                 </Alert>
-                <Card variation="elevated">
-
-                    <Heading level={4}>{name.name}</Heading>
-                    <div>{name.phonenumber}</div>
-                    <div>{name.role}</div>
-
+                <PersonCard props={person}>
                     <Button className="my-5"
                         variation="destructive"
                         loadingText=""
@@ -68,10 +64,10 @@ function ItemDetails() {
                         ariaLabel=""
                     >
                         Delete
-                    </Button>
+                    </Button>{"  "}
                     <CustomButton link={"/people/"} text={"Exit"} color={"green"} />
-                </Card>
-            </Grid></div>
+                </PersonCard>
+            </Grid>
         </Layout>
     )
 }

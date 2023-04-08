@@ -52,7 +52,7 @@ export default function JobInfo() {
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={job} isPaginated itemsPerPage={10} isSearchable>
                 {(info) => {
-                    return <Grid>
+                    return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                         <Card variation="elevated" key={info.id}>
                             <Heading>{info.day}</Heading>
                             {info.job && <div>Job: {info.job.name}</div>}

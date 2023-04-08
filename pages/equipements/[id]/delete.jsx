@@ -43,7 +43,7 @@ export default function ItemDetails() {
     return (<div>
         <Layout>
             <div><Breadcrumb items={breadcrumbItems} /></div>
-            <div className="container mx-auto"> <Grid>
+            <div className="container mx-auto"> <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                 <Alert
                     variation="warning"
                     isDismissible={false}

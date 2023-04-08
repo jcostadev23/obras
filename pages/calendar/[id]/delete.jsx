@@ -37,7 +37,7 @@ export default function ItemDetails() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <div className="container mx-auto"> <Grid>
+            <div className="container mx-auto"> <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                 <Alert
                     variation="warning"
                     isDismissible={false}
@@ -45,7 +45,7 @@ export default function ItemDetails() {
                     heading="Atenttion">
                     This will delete the Day
                 </Alert>
-                <Grid>
+                <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                     <Card variation="elevated" key={day.id}>
                         <Heading>day: {day.day}</Heading>
                     </Card>

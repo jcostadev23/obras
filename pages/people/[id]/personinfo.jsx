@@ -50,7 +50,7 @@ export default function PersonInfo() {
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={person} isPaginated itemsPerPage={10} isSearchable>
                 {(info) => {
-                    return <Grid>
+                    return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                         <Card variation="elevated" key={info.id}>
                             <Heading>{info.day}</Heading>
                             <div>People: {info.people.name}</div>

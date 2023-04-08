@@ -39,7 +39,7 @@ export default function CallCalendar() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={mycalendar} link={"/calendar/" + mycalendar.id + "/delete"} />
+            <CalendarList props={mycalendar} />
             <CustomButton color={"green"} link={"/calendar/create/"} text={"Add New Day"} />
         </Layout>
     )

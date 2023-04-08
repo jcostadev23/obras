@@ -4,8 +4,10 @@ import { useEffect, useState } from "react"
 import PeopleUpdateForm from "@/src/ui-components/PeopleUpdateForm";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Card, Heading, Loader } from "@aws-amplify/ui-react";
+import { Grid, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
+import PersonCard from "@/components/helpers/personcard"
+
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Edit" }
 ];
 export default function PeopleDetails() {
@@ -37,18 +39,11 @@ export default function PeopleDetails() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Grid>
-                <Card variation="elevated">
-                    <Heading level={4}>{person.name}</Heading>
-                    <div>{person.phonenumber}</div>
-                    <div>{person.role}</div>
-                </Card>
-            </Grid>
-            <Grid>
-                <Card variation="elevated">
+            <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
+                <PersonCard props={person}>
                     <PeopleUpdateForm id={personid}
                         onSuccess={() => router.reload()} />
-                </Card>
+                </PersonCard>
             </Grid>
 
         </Layout>

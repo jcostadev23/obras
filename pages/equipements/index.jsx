@@ -39,7 +39,7 @@ export default function CheckMachine() {
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={machine} isPaginated itemsPerPage={10} isSearchable>
                 {(equip) => {
-                    return <Grid>
+                    return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                         <Card variation="elevated" key={equip.id}>
                             <Heading>{equip.name}</Heading>
                             <div>Attachments: {equip.attachments}</div>

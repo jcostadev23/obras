@@ -40,7 +40,7 @@ export default function NewJob() {
             <Breadcrumb items={breadcrumbItems} />
             <Collection items={jobname} isPaginated itemsPerPage={10} isSearchable>
                 {(job) => {
-                    return <Grid>
+                    return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                         <Card variation="elevated" key={job.name}>
                             <Heading>{job.name}</Heading>
                             <div>Address: {job.address}</div>
