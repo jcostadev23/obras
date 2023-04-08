@@ -113,7 +113,10 @@ export default function Mainfunct() {
                     })}
                 </SelectField>
 
-                <StepperField label="Worker time in hours" value={workerhours} onStepChange={(Hours) => setWorkerhours(Hours)} defaultValue={0} min={0} max={16} step={0.5} />
+                <StepperField
+                    label="Worker time in hours"
+                    value={workerhours} onStepChange={(Hours) => setWorkerhours(Hours)}
+                    defaultValue={0} min={0} max={16} step={0.5} />
 
                 <SelectField
                     label="Job"
@@ -143,7 +146,10 @@ export default function Mainfunct() {
                         </option>
                     })}
                 </SelectField>
-                <StepperField label={"Equipement time in hours"} value={equipementhours} onStepChange={(Hours) => setEquipementhours(Hours)} defaultValue={0} min={0} max={16} step={0.5} />
+                <StepperField label={"Equipement time in hours"}
+                    value={equipementhours}
+                    onStepChange={(Hours) => setEquipementhours(Hours)}
+                    defaultValue={0} min={0} max={16} step={0.5} />
                 <Button type="submit">Save
                 </Button></form>
         </Layout>

@@ -12,12 +12,10 @@ export default function Create() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <Card variation="elevated">
-                    <Heading level={4}>{"ADD Person"}</Heading>
-                    <PeopleCreateForm
-                        onSuccess={() => router.push("/people")} />  </Card>
-            </Grid>
+            <Card class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-300 to-gray-400 " variation="elevated">
+                <Heading level={4}>{"ADD Person"}</Heading>
+                <PeopleCreateForm
+                    onSuccess={() => router.push("/people")} />  </Card>
         </Layout>
     )
 }
