@@ -1,6 +1,6 @@
 describe('Creating a new person', () => {
   it('can check off an item as completed', () => {
-    const randomName = 'Jose Costa teste 6 ' + Math.floor(Math.random() * 10)
+    const randomName = 'Jose Costa teste  ' + Math.floor(Math.random() * 10)
     const randomPhone = '07700344350' + Math.floor(Math.random() * 10)
     const randomRole = 'Caminho do cabouco'
 
@@ -23,11 +23,11 @@ describe('Creating a new person', () => {
     // Enter values into the form fields
     cy.get('body').click()
     cy.get(':nth-child(1) > .amplify-label').click()
-      .type('Jose Costa');
+      .type(randomName);
     cy.get(':nth-child(2) > .amplify-label').click()
-      .type('07700344350');
+      .type(randomPhone);
     cy.get(':nth-child(3) > .amplify-label').click()
-      .type('Builder');
+      .type(randomRole);
 
 
     // Click the submit button
@@ -35,7 +35,7 @@ describe('Creating a new person', () => {
 
     // Verify that the new person was created successfully
     cy.url().should('contain', '/people')
-    cy.contains("Jose Costa").should('exist')
+    cy.contains(randomName).should('exist')
   })
 
 

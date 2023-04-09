@@ -44,6 +44,6 @@ export default function Getpeople() {
             }}
         </Collection>
 
-        <CustomButton color={"lightgreen"} link={"/people/create/"} text={"Create people"} />
+        <CustomButton color={"green"} link={"/people/create/"} text={"Create people"} />
     </Layout>
 }
