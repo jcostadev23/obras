@@ -1,11 +1,16 @@
 describe('Creating a new person', () => {
-  it('can check off an item as completed', () => {
-    const randomName = 'Jose Costa teste  ' + Math.floor(Math.random() * 10)
-    const randomPhone = '07700344350' + Math.floor(Math.random() * 10)
-    const randomRole = 'Caminho do cabouco'
+  it('passes', () => {
+    const randomName = 'Jose Costa  ' + Math.floor(Math.random() * 20)
+    const randomPhone = '07700344350' + Math.floor(Math.random() * 20)
+    const randomRole = 'Caminho do cabouco' + Math.floor(Math.random() * 20)
 
-    // Visit the "/people/create" page
-    cy.visit('http://localhost:3000/people/')
+
+    cy.visit('http://localhost:3000')
+
+    // Moving to page People
+    cy.get('[data-testid="amplify-menu-trigger-test-id"]').click()
+
+    cy.contains('People').click()
 
     // Click the submit button
     cy.contains('Create people').click()
@@ -18,7 +23,7 @@ describe('Creating a new person', () => {
     // by traversing up the dom to the parent element. From there, we can `find`
     // the child checkbox <input> element and use the `check` command to check it.
 
-    cy.get('body').click();
+    cy.get('body').click()
 
     // Enter values into the form fields
     cy.get('body').click()
@@ -31,15 +36,11 @@ describe('Creating a new person', () => {
 
 
     // Click the submit button
-    cy.get('[type="submit"]').click()
+    cy.get('[type="submit"]').click();
 
     // Verify that the new person was created successfully
     cy.url().should('contain', '/people')
     cy.contains(randomName).should('exist')
   })
-
-
-
-
 
 })
