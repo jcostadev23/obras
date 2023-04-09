@@ -7,7 +7,7 @@ import Layout from "@/components/layout"
 import CustomButton from "@/components/helpers/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
-import JobCard from "../../components/helpers/jobcard";
+import JobCard from "../../components/jobcard";
 
 const breadcrumbItems = [{ label: "Jobs" },
 ];

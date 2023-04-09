@@ -1,6 +1,6 @@
 import Layout from "@/components/layout"
 import CustomButton from "@/components/helpers/button"
-import PersonCard from "@/components/helpers/personcard"
+import PersonCard from "@/components/personcard"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";

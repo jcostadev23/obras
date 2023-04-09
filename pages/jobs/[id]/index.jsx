@@ -6,7 +6,7 @@ import React from "react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/helpers/button"
-import CalendarList from "../../../components/helpers/calendarlist";
+import CalendarList from "../../../components/calendarlist";
 import { useRouter } from "next/router"
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Job Info" }
 ];

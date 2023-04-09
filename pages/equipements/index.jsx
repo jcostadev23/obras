@@ -1,14 +1,13 @@
 
 import { useEffect, useState } from "react";
-import { Card, Heading, Grid, Link, Collection } from "@aws-amplify/ui-react";
+import { Grid, Link, Collection } from "@aws-amplify/ui-react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import Layout from "@/components/layout"
 import CustomButton from "@/components/helpers/button"
 import * as React from 'react';
-import { useRouter } from "next/router"
 import Breadcrumb from "@/components/breadcrumb"
-import EquipementCard from "../../components/helpers/equipementcard";
+import EquipementCard from "../../components/equipementcard";
 const breadcrumbItems = [{ label: "Equipements", },
 ];
 

@@ -1,13 +1,12 @@
 import Layout from "@/components/layout"
 import CustomButton from "@/components/helpers/button"
 import Breadcrumb from "@/components/breadcrumb"
-import { Link, Collection, Card, Heading, Grid, } from "@aws-amplify/ui-react";
+import { Link, Collection, Grid, } from "@aws-amplify/ui-react";
 import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
-import { useRouter } from "next/router";
-import PersonCard from "@/components/helpers/personcard"
+import PersonCard from "@/components/personcard"
 const breadcrumbItems = [{ label: "People" },
 ];
 

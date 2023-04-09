@@ -1,5 +1,5 @@
 import Layout from "@/components/layout"
-import { Card, Heading, Grid, } from "@aws-amplify/ui-react";
+import { Card, Heading, } from "@aws-amplify/ui-react";
 import JobCreateForm from "@/src/ui-components/JobCreateForm";
 import { useRouter } from "next/router"
 import Breadcrumb from "@/components/breadcrumb"

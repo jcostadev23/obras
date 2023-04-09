@@ -4,9 +4,9 @@ import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Alert, Card, Heading, Loader, Button } from "@aws-amplify/ui-react";
+import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
-import JobCard from "../../../components/helpers/jobcard";
+import JobCard from "../../../components/jobcard";
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];
 

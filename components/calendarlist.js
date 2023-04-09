@@ -1,5 +1,5 @@
 
-import FormatTime from "../../components/helpers/formattime";
+import FormatTime from "./helpers/formattime";
 
 export default function CalendarList({ props, children }) {
     return (<card>

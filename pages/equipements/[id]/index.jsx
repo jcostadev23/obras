@@ -7,7 +7,7 @@ import { useEffect, useState, } from "react";
 import React from "react";
 import Layout from "@/components/layout"
 import CustomButton from "@/components/helpers/button"
-import CalendarList from "../../../components/helpers/calendarlist";
+import CalendarList from "../../../components/calendarlist";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "EquipementsId" }
 ];
 

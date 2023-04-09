@@ -4,9 +4,9 @@ import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Grid, Alert, Card, Heading, Loader, Button } from "@aws-amplify/ui-react";
+import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
-import EquipementCard from "../../../components/helpers/equipementcard";
+import EquipementCard from "../../../components/equipementcard";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Delete" }
 ];
 

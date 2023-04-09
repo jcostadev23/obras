@@ -6,7 +6,7 @@ import { Equipements } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
-import EquipementCard from "../../../components/helpers/equipementcard";
+import EquipementCard from "../../../components/equipementcard";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Edit" }
 ];
 
