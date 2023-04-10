@@ -58,7 +58,7 @@ export default function EquipementsCreateForm(props) {
     return validationResponse;
   };
   return (
-    <Grid class=" border-2 rounded-lg  bg-gradient-to-tl from-gray-200 to-gray-300 "
+    <Grid
       as="form"
       rowGap="15px"
       columnGap="15px"

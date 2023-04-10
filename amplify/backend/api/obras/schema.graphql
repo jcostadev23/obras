@@ -6,6 +6,7 @@ type Calendar @model @auth(rules: [{allow: public}]) {
   people: People @hasOne
   workerTimeMinutes: Int
   equipmentTimeMinutes: Int
+  description: String
 }
 
 type Equipements @model @auth(rules: [{allow: public}]) {

@@ -27,6 +27,7 @@ export default function CalendarUpdateForm(props) {
     day: "",
     workerTimeMinutes: "",
     equipmentTimeMinutes: "",
+    description: "",
   };
   const [day, setDay] = React.useState(initialValues.day);
   const [workerTimeMinutes, setWorkerTimeMinutes] = React.useState(
@@ -34,6 +35,9 @@ export default function CalendarUpdateForm(props) {
   );
   const [equipmentTimeMinutes, setEquipmentTimeMinutes] = React.useState(
     initialValues.equipmentTimeMinutes
+  );
+  const [description, setDescription] = React.useState(
+    initialValues.description
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -43,6 +47,7 @@ export default function CalendarUpdateForm(props) {
     setDay(cleanValues.day);
     setWorkerTimeMinutes(cleanValues.workerTimeMinutes);
     setEquipmentTimeMinutes(cleanValues.equipmentTimeMinutes);
+    setDescription(cleanValues.description);
     setErrors({});
   };
   const [calendarRecord, setCalendarRecord] = React.useState(calendar);
@@ -60,6 +65,7 @@ export default function CalendarUpdateForm(props) {
     day: [],
     workerTimeMinutes: [],
     equipmentTimeMinutes: [],
+    description: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -90,6 +96,7 @@ export default function CalendarUpdateForm(props) {
           day,
           workerTimeMinutes,
           equipmentTimeMinutes,
+          description,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -149,6 +156,7 @@ export default function CalendarUpdateForm(props) {
               day: value,
               workerTimeMinutes,
               equipmentTimeMinutes,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.day ?? value;
@@ -179,6 +187,7 @@ export default function CalendarUpdateForm(props) {
               day,
               workerTimeMinutes: value,
               equipmentTimeMinutes,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.workerTimeMinutes ?? value;
@@ -211,6 +220,7 @@ export default function CalendarUpdateForm(props) {
               day,
               workerTimeMinutes,
               equipmentTimeMinutes: value,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.equipmentTimeMinutes ?? value;
@@ -226,6 +236,33 @@ export default function CalendarUpdateForm(props) {
         errorMessage={errors.equipmentTimeMinutes?.errorMessage}
         hasError={errors.equipmentTimeMinutes?.hasError}
         {...getOverrideProps(overrides, "equipmentTimeMinutes")}
+      ></TextField>
+      <TextField
+        label="Description"
+        isRequired={false}
+        isReadOnly={false}
+        value={description}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              day,
+              workerTimeMinutes,
+              equipmentTimeMinutes,
+              description: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.description ?? value;
+          }
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
+          }
+          setDescription(value);
+        }}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <Flex
         justifyContent="space-between"

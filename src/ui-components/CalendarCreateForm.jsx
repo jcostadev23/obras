@@ -33,6 +33,7 @@ export default function CalendarCreateForm(props) {
     asda: undefined,
     workerTimeMinutes: "",
     equipmentTimeMinutes: "",
+    description: "",
   };
   const [day, setDay] = React.useState(initialValues.day);
   const [asda, setAsda] = React.useState(initialValues.asda);
@@ -42,12 +43,16 @@ export default function CalendarCreateForm(props) {
   const [equipmentTimeMinutes, setEquipmentTimeMinutes] = React.useState(
     initialValues.equipmentTimeMinutes
   );
+  const [description, setDescription] = React.useState(
+    initialValues.description
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDay(initialValues.day);
     setAsda(initialValues.asda);
     setWorkerTimeMinutes(initialValues.workerTimeMinutes);
     setEquipmentTimeMinutes(initialValues.equipmentTimeMinutes);
+    setDescription(initialValues.description);
     setErrors({});
   };
   const validations = {
@@ -55,6 +60,7 @@ export default function CalendarCreateForm(props) {
     asda: [],
     workerTimeMinutes: [],
     equipmentTimeMinutes: [],
+    description: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -86,6 +92,7 @@ export default function CalendarCreateForm(props) {
           asda,
           workerTimeMinutes,
           equipmentTimeMinutes,
+          description,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -119,6 +126,7 @@ export default function CalendarCreateForm(props) {
             day: modelFields.day,
             workerTimeMinutes: modelFields.workerTimeMinutes,
             equipmentTimeMinutes: modelFields.equipmentTimeMinutes,
+            description: modelFields.description,
           };
           await DataStore.save(new Calendar(modelFieldsToSave));
           if (onSuccess) {
@@ -150,6 +158,7 @@ export default function CalendarCreateForm(props) {
               asda,
               workerTimeMinutes,
               equipmentTimeMinutes,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.day ?? value;
@@ -176,6 +185,7 @@ export default function CalendarCreateForm(props) {
               asda: value,
               workerTimeMinutes,
               equipmentTimeMinutes,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.asda ?? value;
@@ -207,6 +217,7 @@ export default function CalendarCreateForm(props) {
               asda,
               workerTimeMinutes: value,
               equipmentTimeMinutes,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.workerTimeMinutes ?? value;
@@ -240,6 +251,7 @@ export default function CalendarCreateForm(props) {
               asda,
               workerTimeMinutes,
               equipmentTimeMinutes: value,
+              description,
             };
             const result = onChange(modelFields);
             value = result?.equipmentTimeMinutes ?? value;
@@ -255,6 +267,34 @@ export default function CalendarCreateForm(props) {
         errorMessage={errors.equipmentTimeMinutes?.errorMessage}
         hasError={errors.equipmentTimeMinutes?.hasError}
         {...getOverrideProps(overrides, "equipmentTimeMinutes")}
+      ></TextField>
+      <TextField
+        label="Description"
+        isRequired={false}
+        isReadOnly={false}
+        value={description}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              day,
+              asda,
+              workerTimeMinutes,
+              equipmentTimeMinutes,
+              description: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.description ?? value;
+          }
+          if (errors.description?.hasError) {
+            runValidationTasks("description", value);
+          }
+          setDescription(value);
+        }}
+        onBlur={() => runValidationTasks("description", description)}
+        errorMessage={errors.description?.errorMessage}
+        hasError={errors.description?.hasError}
+        {...getOverrideProps(overrides, "description")}
       ></TextField>
       <Flex
         justifyContent="space-between"

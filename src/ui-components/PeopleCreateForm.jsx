@@ -72,7 +72,7 @@ export default function PeopleCreateForm(props) {
         let modelFields = {
           name,
           phonenumber,
-          role
+          role,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {

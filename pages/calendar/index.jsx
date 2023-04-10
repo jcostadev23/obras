@@ -37,7 +37,7 @@ export default function CallCalendar() {
         GetDays()
     }, [])
 
-
+    console.log('testecalendar', mycalendar)
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />

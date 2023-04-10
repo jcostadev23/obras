@@ -17,11 +17,13 @@ export declare type CalendarUpdateFormInputValues = {
     day?: string;
     workerTimeMinutes?: number;
     equipmentTimeMinutes?: number;
+    description?: string;
 };
 export declare type CalendarUpdateFormValidationValues = {
     day?: ValidationFunction<string>;
     workerTimeMinutes?: ValidationFunction<number>;
     equipmentTimeMinutes?: ValidationFunction<number>;
+    description?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type CalendarUpdateFormOverridesProps = {
@@ -29,6 +31,7 @@ export declare type CalendarUpdateFormOverridesProps = {
     day?: PrimitiveOverrideProps<TextFieldProps>;
     workerTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
     equipmentTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type CalendarUpdateFormProps = React.PropsWithChildren<{
     overrides?: CalendarUpdateFormOverridesProps | undefined | null;

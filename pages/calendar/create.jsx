@@ -3,7 +3,7 @@ import { People, Job, Equipements, Calendar } from "@/src/models";
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { SelectField, Button, StepperField } from "@aws-amplify/ui-react";
+import { SelectField, Button, TextAreaField, StepperField } from "@aws-amplify/ui-react";
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -24,6 +24,10 @@ export default function Mainfunct() {
     const [equipement, setEquipement] = useState([])
     const [workerhours, setWorkerhours] = useState()
     const [equipementhours, setEquipementhours] = useState()
+    const [description, setDescription] = useState("")
+    const handleDescriptionChange = (e) => {
+        setDescription(e.currentTarget.value);
+    };
 
     let footer = <p>Please pick a day.</p>;
     if (selected) {
@@ -66,17 +70,17 @@ export default function Mainfunct() {
         }
         CallMachine()
     }, [])
-
     async function SaveCalender() {
+        console.log('insidesavedata', description)
         try {
             const savedate = format(selected, "yyyy-MM-dd")
-
 
             const saveResponse = await DataStore.save(
                 new Calendar({
                     day: savedate,
                     people: { id: personid },
                     workerTimeMinutes: (workerhours * 60),
+                    description: (description),
                     job: { id: jobid },
                     equipement: { id: equipementid },
                     equipmentTimeMinutes: (equipementhours * 60)
@@ -115,8 +119,36 @@ export default function Mainfunct() {
 
                 <StepperField
                     label="Worker time in hours"
-                    value={workerhours} onStepChange={(Hours) => setWorkerhours(Hours)}
+                    value={workerhours}
+                    onStepChange={(Hours) => setWorkerhours(Hours)}
                     defaultValue={0} min={0} max={16} step={0.5} />
+
+                <TextAreaField
+                    autoComplete="on"
+                    direction="column"
+                    hasError={false}
+                    isDisabled={false}
+                    isReadOnly={false}
+                    isRequired={false}
+                    label="Description"
+                    labelHidden={false}
+                    rows="3"
+                    size="small"
+                    wrap="nowrap"
+                    value={description}
+                    onChange={handleDescriptionChange}
+                    onInput={(e) => console.info('input fired:', e.currentTarget.value)}
+                    onCopy={(e) => console.info('onCopy fired:', e.currentTarget.value)}
+                    onPaste={(e) => console.info('onPaste fired:', e.currentTarget.value)}
+                    onSelect={(e) =>
+                        console.info(
+                            'onSelect fired:',
+                            e.currentTarget.value.substring(
+                                e.currentTarget.selectionStart,
+                                e.currentTarget.selectionEnd
+                            )
+                        )
+                    } />
 
                 <SelectField
                     label="Job"
