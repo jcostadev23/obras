@@ -7,7 +7,7 @@ export default function CalendarList({ props, children }) {
             {(details) => {
                 return <Grid className="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                     <Card variation="elevated" key={details.id}>
-                        <Heading className="text-center my-5 font-bold">{details.day}</Heading>
+                        <Heading className="text-middle my-5 font-bold">{details.day}</Heading>
                         <h1 className="text-x text-center justify-center font-bold mb-2"> People: {details.people.name}</h1>
                         <h2 className="text-black  text-center font-semibold text-base mb-2">{details.workerTimeMinutes && <div>Hours: {FormatTime(details.workerTimeMinutes)}</div>}</h2>
                         <h3 className="text-black  text-center font-semibold text-base mb-2">{details.job && <div>Job: {details.job.name}</div>}</h3>

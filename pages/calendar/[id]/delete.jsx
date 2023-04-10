@@ -34,6 +34,7 @@ export default function ItemDetails() {
     if (!day) {
         return <Loader />
     }
+    console.log('test', day)
 
     return (
         <Layout>
@@ -46,17 +47,16 @@ export default function ItemDetails() {
                     heading="Atenttion">
                     This will delete the Day
                 </Alert>
+                <div>Day: {day.day}</div>
+                <Button
+                    variation="destructive"
+                    loadingText=""
+                    onClick={DeleteDays}
+                    ariaLabel="">
+                    Delete
+                </Button> {"  "}
+                <CustomButton color={"green"} link={"/calendar/"} text={"Exit"} />
 
-                <CalendarList props={day} >
-                    <Button
-                        variation="destructive"
-                        loadingText=""
-                        onClick={DeleteDays}
-                        ariaLabel="">
-                        Delete
-                    </Button> {"  "}
-                    <CustomButton color={"green"} link={"/calendar/"} text={"Exit"} />
-                </CalendarList>
             </Grid>
         </Layout>
     )

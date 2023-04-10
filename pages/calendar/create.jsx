@@ -71,26 +71,30 @@ export default function Mainfunct() {
         CallMachine()
     }, [])
     async function SaveCalender() {
-        console.log('insidesavedata', description)
+
+        console.log('inside savedata', description)
+
         try {
             const savedate = format(selected, "yyyy-MM-dd")
 
-            const saveResponse = await DataStore.save(
+            const datasafe = await DataStore.save(
                 new Calendar({
                     day: savedate,
                     people: { id: personid },
                     workerTimeMinutes: (workerhours * 60),
-                    description: (description),
+                    description: description,
                     job: { id: jobid },
                     equipement: { id: equipementid },
                     equipmentTimeMinutes: (equipementhours * 60)
                 })
             );
+            console.log('1', datasafe)
         } catch (error) {
         }
-        router.reload()
+
     }
 
+    console.log('return', description)
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
@@ -124,12 +128,7 @@ export default function Mainfunct() {
                     defaultValue={0} min={0} max={16} step={0.5} />
 
                 <TextAreaField
-                    autoComplete="on"
-                    direction="column"
-                    hasError={false}
-                    isDisabled={false}
-                    isReadOnly={false}
-                    isRequired={false}
+
                     label="Description"
                     labelHidden={false}
                     rows="3"
@@ -137,18 +136,7 @@ export default function Mainfunct() {
                     wrap="nowrap"
                     value={description}
                     onChange={handleDescriptionChange}
-                    onInput={(e) => console.info('input fired:', e.currentTarget.value)}
-                    onCopy={(e) => console.info('onCopy fired:', e.currentTarget.value)}
-                    onPaste={(e) => console.info('onPaste fired:', e.currentTarget.value)}
-                    onSelect={(e) =>
-                        console.info(
-                            'onSelect fired:',
-                            e.currentTarget.value.substring(
-                                e.currentTarget.selectionStart,
-                                e.currentTarget.selectionEnd
-                            )
-                        )
-                    } />
+                />
 
                 <SelectField
                     label="Job"

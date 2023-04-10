@@ -6,13 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SelectField,
-  TextField,
-} from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Calendar } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -30,13 +24,11 @@ export default function CalendarCreateForm(props) {
   } = props;
   const initialValues = {
     day: "",
-    asda: undefined,
     workerTimeMinutes: "",
     equipmentTimeMinutes: "",
     description: "",
   };
   const [day, setDay] = React.useState(initialValues.day);
-  const [asda, setAsda] = React.useState(initialValues.asda);
   const [workerTimeMinutes, setWorkerTimeMinutes] = React.useState(
     initialValues.workerTimeMinutes
   );
@@ -49,7 +41,6 @@ export default function CalendarCreateForm(props) {
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDay(initialValues.day);
-    setAsda(initialValues.asda);
     setWorkerTimeMinutes(initialValues.workerTimeMinutes);
     setEquipmentTimeMinutes(initialValues.equipmentTimeMinutes);
     setDescription(initialValues.description);
@@ -57,7 +48,6 @@ export default function CalendarCreateForm(props) {
   };
   const validations = {
     day: [],
-    asda: [],
     workerTimeMinutes: [],
     equipmentTimeMinutes: [],
     description: [],
@@ -89,7 +79,6 @@ export default function CalendarCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           day,
-          asda,
           workerTimeMinutes,
           equipmentTimeMinutes,
           description,
@@ -122,13 +111,7 @@ export default function CalendarCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          const modelFieldsToSave = {
-            day: modelFields.day,
-            workerTimeMinutes: modelFields.workerTimeMinutes,
-            equipmentTimeMinutes: modelFields.equipmentTimeMinutes,
-            description: modelFields.description,
-          };
-          await DataStore.save(new Calendar(modelFieldsToSave));
+          await DataStore.save(new Calendar(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -155,7 +138,6 @@ export default function CalendarCreateForm(props) {
           if (onChange) {
             const modelFields = {
               day: value,
-              asda,
               workerTimeMinutes,
               equipmentTimeMinutes,
               description,
@@ -173,33 +155,6 @@ export default function CalendarCreateForm(props) {
         hasError={errors.day?.hasError}
         {...getOverrideProps(overrides, "day")}
       ></TextField>
-      <SelectField
-        label="Label"
-        placeholder="Please select an option"
-        value={asda}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              day,
-              asda: value,
-              workerTimeMinutes,
-              equipmentTimeMinutes,
-              description,
-            };
-            const result = onChange(modelFields);
-            value = result?.asda ?? value;
-          }
-          if (errors.asda?.hasError) {
-            runValidationTasks("asda", value);
-          }
-          setAsda(value);
-        }}
-        onBlur={() => runValidationTasks("asda", asda)}
-        errorMessage={errors.asda?.errorMessage}
-        hasError={errors.asda?.hasError}
-        {...getOverrideProps(overrides, "asda")}
-      ></SelectField>
       <TextField
         label="Worker time minutes"
         isRequired={false}
@@ -214,7 +169,6 @@ export default function CalendarCreateForm(props) {
           if (onChange) {
             const modelFields = {
               day,
-              asda,
               workerTimeMinutes: value,
               equipmentTimeMinutes,
               description,
@@ -248,7 +202,6 @@ export default function CalendarCreateForm(props) {
           if (onChange) {
             const modelFields = {
               day,
-              asda,
               workerTimeMinutes,
               equipmentTimeMinutes: value,
               description,
@@ -278,7 +231,6 @@ export default function CalendarCreateForm(props) {
           if (onChange) {
             const modelFields = {
               day,
-              asda,
               workerTimeMinutes,
               equipmentTimeMinutes,
               description: value,

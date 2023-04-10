@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -14,14 +14,12 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type CalendarCreateFormInputValues = {
     day?: string;
-    asda?: string;
     workerTimeMinutes?: number;
     equipmentTimeMinutes?: number;
     description?: string;
 };
 export declare type CalendarCreateFormValidationValues = {
     day?: ValidationFunction<string>;
-    asda?: ValidationFunction<string>;
     workerTimeMinutes?: ValidationFunction<number>;
     equipmentTimeMinutes?: ValidationFunction<number>;
     description?: ValidationFunction<string>;
@@ -30,7 +28,6 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type CalendarCreateFormOverridesProps = {
     CalendarCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     day?: PrimitiveOverrideProps<TextFieldProps>;
-    asda?: PrimitiveOverrideProps<SelectFieldProps>;
     workerTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
     equipmentTimeMinutes?: PrimitiveOverrideProps<TextFieldProps>;
     description?: PrimitiveOverrideProps<TextFieldProps>;
