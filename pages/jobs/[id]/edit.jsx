@@ -38,7 +38,7 @@ export default function EditJobs() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <JobCard props={job}>
+                <JobCard job={job}>
                     <JobUpdateForm id={jobid}
                         onSuccess={() => router.reload()} />
                 </JobCard>

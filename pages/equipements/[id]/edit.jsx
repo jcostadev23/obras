@@ -41,7 +41,7 @@ export default function EquipementDetails() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <EquipementCard props={equipement}>
+                <EquipementCard equip={equipement}>
                     <EquipementsUpdateForm id={equipementid}
                         onSuccess={() => router.reload()} />
                 </EquipementCard>

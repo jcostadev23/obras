@@ -1,5 +1,5 @@
 import Layout from "@/components/layout"
-import CustomButton from "@/components/helpers/button"
+import CustomButton from "@/components/button"
 import PersonCard from "@/components/personcard"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
@@ -56,7 +56,7 @@ function ItemDetails() {
                 >
                     This will delete the user
                 </Alert>
-                <PersonCard props={person}>
+                <PersonCard person={person}>
                     <Button className="my-5"
                         variation="destructive"
                         loadingText=""

@@ -1,5 +1,5 @@
 import Layout from "@/components/layout"
-import CustomButton from "@/components/helpers/button"
+import CustomButton from "@/components/button"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Equipements } from "@/src/models";
@@ -53,7 +53,7 @@ export default function ItemDetails() {
                     heading="Atenttion">
                     This will delete the Job
                 </Alert>
-                <EquipementCard props={equip}>
+                <EquipementCard equip={equip}>
                     <Button
                         variation="destructive"
                         loadingText=""

@@ -40,7 +40,7 @@ export default function PeopleDetails() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <PersonCard props={person}>
+                <PersonCard person={person}>
                     <PeopleUpdateForm id={personid}
                         onSuccess={() => router.reload()} />
                 </PersonCard>

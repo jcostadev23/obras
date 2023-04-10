@@ -1,5 +1,5 @@
 import Layout from "@/components/layout"
-import CustomButton from "@/components/helpers/button"
+import CustomButton from "@/components/button"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Job } from "@/src/models";
@@ -54,7 +54,7 @@ function JobDetails() {
                     heading="Atenttion">
                     This will delete the Job
                 </Alert>
-                <JobCard props={name}>
+                <JobCard job={name}>
                     <Button
                         variation="destructive"
                         loadingText=""
