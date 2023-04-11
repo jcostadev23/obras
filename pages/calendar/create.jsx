@@ -78,16 +78,18 @@ export default function Mainfunct() {
             const savedate = format(selected, "yyyy-MM-dd")
 
             const datasafe = await DataStore.save(
-                new Calendar({
-                    day: savedate,
-                    people: { id: personid },
-                    workerTimeMinutes: (workerhours * 60),
-                    description: description,
-                    job: { id: jobid },
-                    equipement: { id: equipementid },
-                    equipmentTimeMinutes: (equipementhours * 60)
-                })
-            );
+                await DataStore.save(
+                    new Calendar({
+                        "day": savedate,
+                        "equipement": { id: equipementid },
+                        "job": { id: jobid },
+                        "people": { id: personid },
+                        "workerTimeMinutes": (workerhours * 60),
+                        "equipmentTimeMinutes": (equipementhours * 60),
+                        "description": description,
+                    })
+                ))
+
             console.log('1', datasafe)
         } catch (error) {
         }
@@ -170,7 +172,7 @@ export default function Mainfunct() {
                     value={equipementhours}
                     onStepChange={(Hours) => setEquipementhours(Hours)}
                     defaultValue={0} min={0} max={16} step={0.5} />
-                <Button type="submit">Save
+                <Button type="submit" >Save
                 </Button></form>
         </Layout>
     )
