@@ -10,8 +10,8 @@ export default function Create() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Card class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 " variation="elevated">
-                <Heading level={4}>{"ADD Equipement"}</Heading>
+            <Card className="middle-block px-6 py-6 mt-5 align-middle transition-all  rounded-lg  bg-gradient-to-tl from-gray-300 to-gray-400">
+                <Heading className="text-xl text-center my-5 font-bold">Add Equipement</Heading>
                 <EquipementsCreateForm
                     onSuccess={() => push("/equipements")} />  </Card>
         </Layout>

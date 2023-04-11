@@ -1,17 +1,17 @@
-import FormatTime from "./helpers/formattime";
+import FormatTime from "../helpers/formattime";
 import { Collection, Grid, Link, Card, Heading, TextAreaField } from "@aws-amplify/ui-react";
 
 export default function CalendarList({ props, children }) {
     return (
         <Collection items={props} isPaginated itemsPerPage={10} isSearchable>
             {(details) => {
-                return <Grid className="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
+                return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                     <Card variation="elevated" key={details.id} class="middle-block px-6 py-6 mt-5 align-middle transition-all  rounded-lg  bg-gradient-to-tl from-gray-300 to-gray-400">
                         <Heading class="text-xl text-center my-5 font-bold">{details.day}</Heading>
-                        <h1 className="text-x text-center justify-center font-bold mb-2"> People: {details.people.name}</h1>
-                        <h2 className="text-black  text-center font-semibold text-base mb-2">{details.workerTimeMinutes && <div>Hours: {FormatTime(details.workerTimeMinutes)}</div>}</h2>
-                        <h3 className="text-black  text-center font-semibold text-base mb-2">{details.job && <div>Job: {details.job.name}</div>}</h3>
-                        <h4 className="text-black  text-center font-semibold text-base mb-2"> {details.equipement && <div>Equipement: {details.equipement.name}</div>} </h4>
+                        <h1 class="text-x text-center justify-center font-bold mb-2"> People: {details.people.name}</h1>
+                        <h2 class="text-black  text-center font-semibold text-base mb-2">{details.workerTimeMinutes && <div>Hours: {FormatTime(details.workerTimeMinutes)}</div>}</h2>
+                        <h3 class="text-black  text-center font-semibold text-base mb-2">{details.job && <div>Job: {details.job.name}</div>}</h3>
+                        <h4 class="text-black  text-center font-semibold text-base mb-2"> {details.equipement && <div>Equipement: {details.equipement.name}</div>} </h4>
                         {/* need to do something to resole when is not hours selected */}
                         <h5 className="text-black  text-center font-semibold text-base mb-2"> {details.equipmentTimeMinutes && <div>Equipement Hours: {FormatTime(details.equipmentTimeMinutes)}</div>} </h5>
                         <TextAreaField

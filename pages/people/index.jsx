@@ -1,30 +1,30 @@
 import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
+import getPeople from "/helpers/get-people"
 import Breadcrumb from "@/components/breadcrumb"
 import { Link, Collection, Grid, } from "@aws-amplify/ui-react";
-import { People } from "@/src/models";
-import { DataStore } from "aws-amplify";
 import { useEffect, useState, } from "react";
 import * as React from 'react';
+import { useRouter } from "next/router"
 import PersonCard from "@/components/personcard"
 const breadcrumbItems = [{ label: "People" },
 ];
 
 export default function Getpeople() {
+    const router = useRouter()
     const [people, setPeople] = useState([])
 
+
     useEffect(() => {
-        async function GetPerson() {
-            try {
-                const peopledainternet = await DataStore.query(People,);
-                setPeople(peopledainternet)
-                console.log("People retrieved successfully!");
-            } catch (error) {
-                console.log("Error retrieving People", error);
-            }
-        }
-        GetPerson()
+
+        getPeople()
+            .then(personFromDB => {
+                setPeople(personFromDB);
+            });
+
     }, [])
+
+    console.log("test2", people)
 
     return <Layout>
         <Breadcrumb items={breadcrumbItems} />
