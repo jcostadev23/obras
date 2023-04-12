@@ -71,12 +71,8 @@ export default function Mainfunct() {
         CallMachine()
     }, [])
     async function SaveCalender() {
-
-        console.log('inside savedata', description)
-
         try {
             const savedate = format(selected, "yyyy-MM-dd")
-
             const datasafe = await DataStore.save(
                 await DataStore.save(
                     new Calendar({
@@ -89,14 +85,10 @@ export default function Mainfunct() {
                         "description": description,
                     })
                 ))
-
-            console.log('1', datasafe)
         } catch (error) {
         }
-
     }
 
-    console.log('return', description)
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />

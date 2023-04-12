@@ -23,6 +23,7 @@ export default function CallCalendar() {
                         id: daysofCalendar.id,
                         people: await daysofCalendar.people,
                         workerTimeMinutes: daysofCalendar.workerTimeMinutes,
+                        description: daysofCalendar.description,
                         job: await daysofCalendar.job,
                         equipement: await daysofCalendar.equipement,
                         equipmentTimeMinutes: daysofCalendar.equipmentTimeMinutes
@@ -37,7 +38,6 @@ export default function CallCalendar() {
         GetDays()
     }, [])
 
-    console.log('testecalendar', mycalendar)
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />

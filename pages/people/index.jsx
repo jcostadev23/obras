@@ -10,21 +10,16 @@ import PersonCard from "@/components/personcard"
 const breadcrumbItems = [{ label: "People" },
 ];
 
-export default function Getpeople() {
+export default function AllPeople() {
     const router = useRouter()
     const [people, setPeople] = useState([])
 
-
     useEffect(() => {
-
         getPeople()
             .then(personFromDB => {
                 setPeople(personFromDB);
             });
-
     }, [])
-
-    console.log("test2", people)
 
     return <Layout>
         <Breadcrumb items={breadcrumbItems} />

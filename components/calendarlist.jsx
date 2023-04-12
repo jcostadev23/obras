@@ -1,5 +1,5 @@
 import FormatTime from "../helpers/formattime";
-import { Collection, Grid, Link, Card, Heading, TextAreaField } from "@aws-amplify/ui-react";
+import { Collection, Grid, Link, Card, Heading } from "@aws-amplify/ui-react";
 
 export default function CalendarList({ props, children }) {
     return (
@@ -14,15 +14,6 @@ export default function CalendarList({ props, children }) {
                         <h4 class="text-black  text-center font-semibold text-base mb-2"> {details.equipement && <div>Equipement: {details.equipement.name}</div>} </h4>
                         {/* need to do something to resole when is not hours selected */}
                         <h5 className="text-black  text-center font-semibold text-base mb-2"> {details.equipmentTimeMinutes && <div>Equipement Hours: {FormatTime(details.equipmentTimeMinutes)}</div>} </h5>
-                        <TextAreaField
-
-                            label="Description"
-                            labelHidden={false}
-                            rows="3"
-                            size="small"
-                            wrap="nowrap"
-                            value={details.Prototype}
-                        />
                         <h6 className="text-black  text-center font-semibold text-base mb-2"> {details.description && <div>Description: {details.description}</div>} </h6>
                         {children}
                         <Link style={{ display: "flex", justifyContent: "center" }} label="Delete" class="inline-block my-5 px-6 py-3 mt-4 font-bold text-center uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-red-400 to-red-700 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"

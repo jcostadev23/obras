@@ -2,13 +2,10 @@ import { People } from "@/src/models";
 import { DataStore } from "aws-amplify";
 
 async function getPeople(id) {
-    console.log("getpeople", id)
-    try {
-        const personFromDB = await DataStore.query(People, c => c.name.contains(id))
-
-        return personFromDB
+    if (!id) {
+        return (await DataStore.query(People))
     }
-    catch (error) { console.log("Error don't get any People") }
+    return (await DataStore.query(People, id))
 
 }
 

@@ -4,6 +4,7 @@ import PersonCard from "@/components/personcard"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
+import getPeople from "/helpers/get-people"
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
@@ -12,35 +13,25 @@ const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Delete" 
 
 function ItemDetails() {
     const { query, push } = useRouter()
-    const itemid = query.id
-    const [person, setPerson] = useState()
+    const personid = query.id
+    const [people, setPeople] = useState()
 
     async function DeleteItem() {
-
-        const postToDelete = await DataStore.query(People, itemid);
+        const postToDelete = await DataStore.query(People, personid);
         await DataStore.delete(postToDelete);
         push("/people")
     }
-
     useEffect(() => {
-        async function ItemName() {
-            try {
-                const itemFromDatastore = await DataStore.query(People, itemid);
-                setPerson(itemFromDatastore)
-
-                console.log("Person retrieved successfully!", JSON.stringify(itemFromDatastore, null, 2));
-            } catch (error) {
-                console.log("Error retrieving Person", error);
-            }
-        }
-
-        if (!itemid) {
+        if (!personid) {
             return
         }
-        ItemName()
-    }, [itemid])
+        getPeople(personid)
+            .then(personFromDB => {
+                setPeople(personFromDB)
+            })
+    }, [personid])
 
-    if (!person) {
+    if (!people) {
         return <Loader />
     }
 
@@ -56,7 +47,7 @@ function ItemDetails() {
                 >
                     This will delete the user
                 </Alert>
-                <PersonCard person={person}>
+                <PersonCard person={people}>
                     <Button className="my-5"
                         variation="destructive"
                         loadingText=""
