@@ -43,6 +43,7 @@ export default function PersonInfo() {
     if (!person) {
         return <div>Loading...</div>
     }
+    console.log(person)
 
     return (
         <Layout>
