@@ -25,7 +25,7 @@ describe('template spec', () => {
     // Click the submit button
     cy.get('[type="submit"]').click();
 
-    // Verify that the new person was created successfully
+    // Verify that the new Job was created successfully
     cy.url().should('contain', '/jobs')
     cy.contains(randomJob).should('exist')
 

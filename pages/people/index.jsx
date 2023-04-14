@@ -40,7 +40,6 @@ export default function AllPeople() {
                 </Grid>
             }}
         </Collection>
-
-        <CustomButton color={"green"} link={"/people/create/"} text={"Create people"} />
+        <CustomButton link={"/people/create/"} color={"green"} text={"Create people"} />
     </Layout>
 }

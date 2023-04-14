@@ -14,6 +14,7 @@ export default function SiteMenu() {
         <MenuItem onClick={() => router.push("/equipements")}>Equipements</MenuItem>
         <MenuItem onClick={() => router.push("/about")}>About</MenuItem>
         <MenuItem onClick={() => router.push("/treino")}>Treino </MenuItem>
+
         <MenuItem>
             Exit Menu
         </MenuItem>
