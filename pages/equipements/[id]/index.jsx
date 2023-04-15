@@ -8,37 +8,38 @@ import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
 import CalendarList from "../../../components/calendarlist";
 import formatDays from "../../../helpers/daysformat";
+import { Loader } from "@aws-amplify/ui-react";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "EquipementsId" }
 ];
 
 export default function EquipInfo() {
-    const [equip, setEquip] = useState()
+    const [equipement, setEquipement] = useState()
     const router = useRouter()
     const equipId = router.query.id
 
     useEffect(() => {
-        async function GetDetails() {
+        async function EquipementDetails() {
             try {
-                const details = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipId));
-                const promisedetals = await Promise.all(details.map((day) => formatDays(day)));
-                setEquip(promisedetals)
+                const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipId));
+                const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
+                setEquipement(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
             }
         }
         if (equipId) {
-            GetDetails()
+            EquipementDetails()
         }
     }, [equipId])
 
-    if (!equip) {
-        return <div>Loading...</div>
+    if (!equipement) {
+        return <Loader />
     }
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={equip} />
+            <CalendarList props={equipement} />
             <CustomButton color={"green"} link={"/equipements/"} text={"Return"} />
         </Layout>
     )

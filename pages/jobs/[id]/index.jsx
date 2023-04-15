@@ -8,6 +8,7 @@ import CustomButton from "@/components/button"
 import CalendarList from "../../../components/calendarlist";
 import { useRouter } from "next/router"
 import formatDays from "../../../helpers/daysformat";
+import { Loader } from "@aws-amplify/ui-react";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Job Info" }
 ];
@@ -20,9 +21,9 @@ export default function JobInfo() {
     useEffect(() => {
         async function JobDetails() {
             try {
-                const details = await DataStore.query(Calendar, (c) => c.calendarJobId.eq(jobId));
-                const promisedetals = await Promise.all(details.map((day) => formatDays(day)));
-                setJob(promisedetals)
+                const days = await DataStore.query(Calendar, (c) => c.calendarJobId.eq(jobId));
+                const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
+                setJob(daysInfo)
             } catch (error) {
                 console.log("Error don't get the JobDetails", error);
             }
@@ -33,7 +34,7 @@ export default function JobInfo() {
     }, [jobId])
 
     if (!job) {
-        return <div>Loading...</div>
+        return <Loader />
     }
 
     return (

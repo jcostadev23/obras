@@ -1,6 +1,6 @@
 import { Calendar, } from "@/src/models";
 import { DataStore } from "aws-amplify";
-import { Button } from "@aws-amplify/ui-react";
+import { Button, Loader } from "@aws-amplify/ui-react";
 import { useEffect, useState, } from "react";
 import React from "react";
 import Layout from "@/components/layout"
@@ -28,22 +28,22 @@ export default function PersonInfo() {
     };
 
     useEffect(() => {
-        async function GetDetails() {
+        async function PersonDetails() {
             try {
-                const details = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
-                const promisedetals = await Promise.all(details.map((day) => formatDays(day)));
-                setPerson(promisedetals)
+                const days = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
+                const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
+                setPerson(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
             }
         }
         if (personId) {
-            GetDetails()
+            PersonDetails()
         }
     }, [personId])
 
     if (!person) {
-        return <div>Loading...</div>
+        return <Loader />
     }
 
     const handleSubmit = (e) => {

@@ -1,37 +1,30 @@
 
 import { useEffect, useState } from "react";
-import { Card, Heading, Grid, Link, Collection } from "@aws-amplify/ui-react";
-import { Job } from "@/src/models";
-import { DataStore } from "aws-amplify";
+import { Grid, Link, Collection } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 import JobCard from "../../components/jobcard";
+import getJob from "../../helpers/get-jobs";
 
 const breadcrumbItems = [{ label: "Jobs" },
 ];
 
-export default function NewJob() {
-    const [jobname, setJobname] = useState([])
+export default function AllJobs() {
+    const [job, setJob] = useState([])
 
     useEffect(() => {
-        async function Findjob() {
-            try {
-                const serchjob = await DataStore.query(Job,);
-                setJobname(serchjob)
-                console.log("Jobs retrieved successfully!");
-            } catch (error) {
-                console.log("Error retrieving Jobs", error);
-            }
-        }
-        Findjob()
+        getJob()
+            .then(jobFromDB => {
+                setJob(jobFromDB);
+            });
     }, [])
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Collection items={jobname} isPaginated itemsPerPage={10} isSearchable>
+            <Collection items={job} isPaginated itemsPerPage={10} isSearchable>
                 {(job) => {
                     return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                         <JobCard job={job}>

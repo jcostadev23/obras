@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Create" }
 ];
-export default function Create() {
+export default function CreateEquipement() {
     const { push } = useRouter()
     return (
         <Layout>

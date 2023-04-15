@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Create" }
 ];
 
-export default function Create() {
+export default function CreateJob() {
     const { push } = useRouter()
     return (
         <Layout>

@@ -7,37 +7,32 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../../components/equipementcard";
+import getEquipement from "../../../helpers/get-equipements";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Delete" }
 ];
 
 export default function ItemDetails() {
     const { query, push } = useRouter()
     const equipId = query.id
-    const [equip, setEquip] = useState([])
+    const [equipement, setEquipement] = useState([])
 
-    async function DeleteItem() {
-        const postToDelete = await DataStore.query(Equipements, equipId);
-        await DataStore.delete(postToDelete);
+    async function DeleteEquipement() {
+        const equipementToDelete = await DataStore.query(Equipements, equipId);
+        await DataStore.delete(equipementToDelete);
         push("/equipements")
     }
 
     useEffect(() => {
-        async function ItemName() {
-            try {
-                const itemFromDatastore = await DataStore.query(Equipements, equipId);
-                setEquip(itemFromDatastore)
-                console.log("Equipements retrieved successfully!");
-            } catch (error) {
-                console.log("Error retrieving posts", error);
-            }
-        }
         if (!equipId) {
             return
         }
-        ItemName()
+        getEquipement(equipId)
+            .then(equipementFromDB => {
+                setEquipement(equipementFromDB);
+            });
     }, [equipId])
 
-    if (!equip) {
+    if (!equipement) {
         return <Loader />
     }
 
@@ -51,13 +46,13 @@ export default function ItemDetails() {
                     isDismissible={false}
                     hasIcon={true}
                     heading="Atenttion">
-                    This will delete the Job
+                    This will delete the Equipement
                 </Alert>
-                <EquipementCard equip={equip}>
+                <EquipementCard equip={equipement}>
                     <Button
                         variation="destructive"
                         loadingText=""
-                        onClick={DeleteItem}
+                        onClick={DeleteEquipement}
                         ariaLabel="">
                         Delete
                     </Button> {"  "}

@@ -7,38 +7,35 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import JobCard from "../../../components/jobcard";
+import getJob from "/helpers/get-jobs";
+
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];
 
 function JobDetails() {
+    // the useRouter some times dosen't work
     const { query, push } = useRouter()
-    const jobid = query.id
-    const [name, setName] = useState()
+    const jobId = query.id
+    const [job, setJob] = useState()
 
     async function DeleteJob() {
-        const jobToDelete = await DataStore.query(Job, jobid);
+        const jobToDelete = await DataStore.query(Job, jobId);
         await DataStore.delete(jobToDelete);
         push("/jobs")
     }
 
     useEffect(() => {
-        async function JobName() {
-            try {
-                const JobFromDatastore = await DataStore.query(Job, jobid);
-                setName(JobFromDatastore)
-                console.log("Posts retrieved successfully!");
-            } catch (error) {
-                console.log("Error retrieving posts", error);
-            }
-        }
-
-        if (!jobid) {
+        if (!jobId) {
             return
         }
-        JobName()
-    }, [jobid])
+        getJob(jobId)
+            .then(jobFromDB => {
+                setJob(jobFromDB);
+            });
 
-    if (!name) {
+    }, [jobId])
+
+    if (!job) {
         return <Loader />
     }
 
@@ -54,7 +51,7 @@ function JobDetails() {
                     heading="Atenttion">
                     This will delete the Job
                 </Alert>
-                <JobCard job={name}>
+                <JobCard job={job}>
                     <Button
                         variation="destructive"
                         loadingText=""
@@ -68,4 +65,4 @@ function JobDetails() {
         </Layout>
     )
 }
-export default JobDetails
+export default JobDetails()

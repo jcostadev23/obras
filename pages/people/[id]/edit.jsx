@@ -10,35 +10,31 @@ import PersonCard from "@/components/personcard"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Edit" }
 ];
 
-export default function PeopleDetails() {
+export default function EditPersonDetails() {
     const router = useRouter()
     const personid = router.query.id
-    const [people, setPeople] = useState()
+    const [person, setPerson] = useState()
 
     useEffect(() => {
-        if (!personid) {
-            return
-        }
+        if (!personid) { return }
+
         getPeople(personid)
             .then(personFromDB => {
-                setPeople(personFromDB);
+                setPerson(personFromDB);
             });
     }, [personid])
 
-    if (!people) {
-        return <Loader />
-    }
+    if (!person) { return <Loader /> }
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <PersonCard person={people}>
+                <PersonCard person={person}>
                     <PeopleUpdateForm id={personid}
                         onSuccess={() => router.reload()} />
                 </PersonCard>
             </Grid>
-
         </Layout>
     )
 }

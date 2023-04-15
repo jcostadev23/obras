@@ -1,12 +1,12 @@
 import Layout from "@/components/layout"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Job } from "@/src/models";
-import { DataStore } from "aws-amplify";
 import { Grid, Loader } from "@aws-amplify/ui-react";
 import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
 import Breadcrumb from "@/components/breadcrumb"
 import JobCard from "@/components/jobcard";
+import getJob from "/helpers/get-jobs";
+
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Edit" }
 ];
 
@@ -16,20 +16,16 @@ export default function EditJobs() {
     const [job, setJob] = useState()
 
     useEffect(() => {
-        async function JobName() {
-            try {
-                const joblist = await DataStore.query(Job, jobid);
-                setJob(joblist)
-                console.log("Job retrieved successfully!");
-            } catch (error) {
-                console.log("Error retrieving Job", error);
-            }
-        }
         if (!jobid) {
             return
         }
-        JobName()
+        getJob(jobid)
+            .then(jobFromDB => {
+                setJob(jobFromDB);
+            });
+
     }, [jobid])
+
     if (!job) {
         return <Loader />
     }

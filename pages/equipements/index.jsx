@@ -1,36 +1,29 @@
 
 import { useEffect, useState } from "react";
 import { Grid, Link, Collection } from "@aws-amplify/ui-react";
-import { Equipements } from "@/src/models";
-import { DataStore } from "aws-amplify";
 import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../components/equipementcard";
+import getEquipement from "../../helpers/get-equipements";
 const breadcrumbItems = [{ label: "Equipements", },
 ];
 
-export default function CheckMachine() {
-    const [machine, setMachine] = useState([])
+export default function AllEquipements() {
+    const [equipement, setEquipement] = useState([])
 
     useEffect(() => {
-        async function CallMachine() {
-            try {
-                const serchmachine = await DataStore.query(Equipements,);
-                setMachine(serchmachine)
-                console.log("Equipements retrieved successfully!");
-            } catch (error) {
-                console.log("Error retrieving Equipements", error);
-            }
-        }
-        CallMachine()
+        getEquipement()
+            .then(equipementFromDB => {
+                setEquipement(equipementFromDB);
+            });
     }, [])
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <Collection items={machine} isPaginated itemsPerPage={10} isSearchable>
+            <Collection items={equipement} isPaginated itemsPerPage={10} isSearchable>
                 {(equip) => {
                     return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                         <EquipementCard equip={equip}>

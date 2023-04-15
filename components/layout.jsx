@@ -1,5 +1,5 @@
 import SiteMenu from "@/components/menu";
-import logo from "../public/logo.jpg";
+import logo from "../public/logo.png";
 import Image from "next/image";
 export default function Layout({ children }) {
     return (
@@ -9,8 +9,8 @@ export default function Layout({ children }) {
                     <Image
                         onClick={() => (window.location.href = "/")}
                         src={logo}
-                        height="200"
-                        width="200"
+                        height="auto"
+                        width="auto"
                         placeholder="blur"
                         alt="/"
                     />

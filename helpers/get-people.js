@@ -6,8 +6,6 @@ async function getPeople(id) {
         return (await DataStore.query(People))
     }
     return (await DataStore.query(People, id))
-
 }
-
 export default getPeople
 

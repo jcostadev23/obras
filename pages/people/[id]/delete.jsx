@@ -11,14 +11,14 @@ import Breadcrumb from "@/components/breadcrumb"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Delete" }
 ];
 
-function ItemDetails() {
+function PersonDetails() {
     const { query, push } = useRouter()
     const personid = query.id
-    const [people, setPeople] = useState()
+    const [person, setPerson] = useState()
 
-    async function DeleteItem() {
-        const postToDelete = await DataStore.query(People, personid);
-        await DataStore.delete(postToDelete);
+    async function DeletePerson() {
+        const personToDelete = await DataStore.query(People, personid);
+        await DataStore.delete(personToDelete);
         push("/people")
     }
     useEffect(() => {
@@ -27,11 +27,11 @@ function ItemDetails() {
         }
         getPeople(personid)
             .then(personFromDB => {
-                setPeople(personFromDB)
+                setPerson(personFromDB)
             })
     }, [personid])
 
-    if (!people) {
+    if (!person) {
         return <Loader />
     }
 
@@ -47,11 +47,11 @@ function ItemDetails() {
                 >
                     This will delete the user
                 </Alert>
-                <PersonCard person={people}>
+                <PersonCard person={person}>
                     <Button className="my-5"
                         variation="destructive"
                         loadingText=""
-                        onClick={DeleteItem}
+                        onClick={DeletePerson}
                         ariaLabel=""
                     >
                         Delete
@@ -62,5 +62,5 @@ function ItemDetails() {
         </Layout>
     )
 }
-export default ItemDetails
+export default PersonDetails
 
