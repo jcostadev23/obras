@@ -8,6 +8,8 @@ import Breadcrumb from "@/components/breadcrumb"
 import CalendarList from "../../../components/calendarlist";
 import CalculateHours from "../../../components/calculatehours";
 import { useRouter } from "next/router"
+import formatDays from "../../../helpers/daysformat";
+
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person Info" }
 ];
 
@@ -25,22 +27,11 @@ export default function PersonInfo() {
         setEnddate(e.target.value);
     };
 
-
     useEffect(() => {
         async function GetDetails() {
             try {
                 const details = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
-                const promisedetals = await Promise.all(details.map(async (PersonInformation) => {
-                    return {
-                        day: PersonInformation.day,
-                        id: PersonInformation.id,
-                        people: await PersonInformation.people,
-                        workerTimeMinutes: PersonInformation.workerTimeMinutes,
-                        job: await PersonInformation.job,
-                        equipement: await PersonInformation.equipement,
-                        equipmentTimeMinutes: PersonInformation.equipmentTimeMinutes
-                    };
-                }))
+                const promisedetals = await Promise.all(details.map((day) => formatDays(day)));
                 setPerson(promisedetals)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
