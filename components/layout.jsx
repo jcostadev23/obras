@@ -1,13 +1,11 @@
 import SiteMenu from "@/components/menu";
 import Image from "next/image";
 import logo from "../public/logo.png"
-import { hoursToMilliseconds, hoursToMinutes, hoursToSeconds } from "date-fns";
-import minutesToHours from "date-fns/minutesToHours";
-import setHours from "date-fns/setHours/index.js";
+
 export default function Layout({ children }) {
     return (
-        <div className="flex flex-col min-h-screen">
-            <div className="flex justify-between items-center p-4 border-b-2">
+        <div className="flex flex-col min-h-screen shadow-lg">
+            <div className="flex justify-between items-center p-4 border-b-2 shadow-lg">
                 <div className="flex-shrink-0">
                     <Image
                         onClick={() => (window.location.href = "/")}
