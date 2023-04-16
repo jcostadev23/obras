@@ -42,7 +42,7 @@ export default function EquipInfo() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <CalendarList props={equipement} />
-            {/* <CalculateHours numberofHours={equipement} /> */}
+            <CalculateHours numberofHours={equipement} />
             <CustomButton color={"green"} link={"/equipements/"} text={"Return"} />
         </Layout>
     )

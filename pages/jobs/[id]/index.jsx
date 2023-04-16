@@ -42,8 +42,7 @@ export default function JobInfo() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <CalendarList props={job} />
-            {/* the Job dosen't have any worker hours field itself */}
-            {/* <CalculateHours numberofHours={job} /> */}
+            <CalculateHours numberofHours={job} />
             <CustomButton color={"green"} link={"/jobs/"} text={"Return"} />
         </Layout>
     )
