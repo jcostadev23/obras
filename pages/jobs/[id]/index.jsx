@@ -37,12 +37,13 @@ export default function JobInfo() {
     if (!job) {
         return <Loader />
     }
-
+    console.log("test", job)
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <CalendarList props={job} />
-            <CalculateHours numberofHours={job} />
+            {/* the Job dosen't have any worker hours field itself */}
+            {/* <CalculateHours numberofHours={job} /> */}
             <CustomButton color={"green"} link={"/jobs/"} text={"Return"} />
         </Layout>
     )

@@ -9,7 +9,9 @@ import CustomButton from "@/components/button"
 import CalendarList from "../../../components/calendarlist";
 import formatDays from "../../../helpers/daysformat";
 import { Loader } from "@aws-amplify/ui-react";
-const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "EquipementsId" }
+import CalculateHours from "../../../components/calculatehours";
+
+const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Equipements Info" }
 ];
 
 export default function EquipInfo() {
@@ -40,6 +42,7 @@ export default function EquipInfo() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <CalendarList props={equipement} />
+            {/* <CalculateHours numberofHours={equipement} /> */}
             <CustomButton color={"green"} link={"/equipements/"} text={"Return"} />
         </Layout>
     )
