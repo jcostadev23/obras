@@ -1,6 +1,5 @@
 import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
-import PersonCard from "@/components/personcard"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
@@ -8,6 +7,7 @@ import getPeople from "/helpers/get-people"
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
+import PersonCard from "@/components/personcard"
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Delete" }
 ];
 

@@ -1,39 +1,38 @@
-import Layout from "@/components/layout"
-import CustomButton from "@/components/button"
-import { useRouter } from "next/router"
+import Layout from "@/components/layout";
+import CustomButton from "@/components/button";
+import { useRouter } from "next/router";
 import { useEffect, useState, } from "react";
 import { Job } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
-import Breadcrumb from "@/components/breadcrumb"
+import Breadcrumb from "@/components/breadcrumb";
 import JobCard from "../../../components/jobcard";
 import getJob from "/helpers/get-jobs";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];
 
-function JobDetails() {
-    // the useRouter some times dosen't work
-    const { query, push } = useRouter()
-    const jobId = query.id
+export default function JobDetails() {
+    const router = useRouter()
+    const jobid = router.query.id
     const [job, setJob] = useState()
 
     async function DeleteJob() {
-        const jobToDelete = await DataStore.query(Job, jobId);
+        const jobToDelete = await DataStore.query(Job, jobid);
         await DataStore.delete(jobToDelete);
-        push("/jobs")
+        router.push("/jobs")
     }
 
     useEffect(() => {
-        if (!jobId) {
+        if (!jobid) {
             return
         }
-        getJob(jobId)
+        getJob(jobid)
             .then(jobFromDB => {
                 setJob(jobFromDB);
             });
 
-    }, [jobId])
+    }, [jobid])
 
     if (!job) {
         return <Loader />
@@ -65,4 +64,3 @@ function JobDetails() {
         </Layout>
     )
 }
-export default JobDetails()

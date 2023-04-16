@@ -28,7 +28,7 @@ export default function PersonInfo() {
     };
 
     useEffect(() => {
-        async function PersonDetails() {
+        async function personDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
@@ -38,7 +38,7 @@ export default function PersonInfo() {
             }
         }
         if (personId) {
-            PersonDetails()
+            personDetails()
         }
     }, [personId])
 
@@ -76,7 +76,7 @@ export default function PersonInfo() {
                         />
                     </label>
                 </div>
-                <CalculateHours personHours={person} startDate={startdate} endDate={enddate} />
+                <CalculateHours numberofHours={person} startDate={startdate} endDate={enddate} />
             </form>
             <Button style={{ display: "flex", justifyContent: "center" }} label="Delete" class="inline-block my-5 px-6 py-3 mt-4 font-bold text-center uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-green-300 to-green-400 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
                 onClick={() => window.location.href = "/people/"}>Return</Button>

@@ -18,7 +18,7 @@ export default function EquipInfo() {
     const equipId = router.query.id
 
     useEffect(() => {
-        async function EquipementDetails() {
+        async function equipementDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
@@ -28,7 +28,7 @@ export default function EquipInfo() {
             }
         }
         if (equipId) {
-            EquipementDetails()
+            equipementDetails()
         }
     }, [equipId])
 

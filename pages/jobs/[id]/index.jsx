@@ -9,6 +9,7 @@ import CalendarList from "../../../components/calendarlist";
 import { useRouter } from "next/router"
 import formatDays from "../../../helpers/daysformat";
 import { Loader } from "@aws-amplify/ui-react";
+import CalculateHours from "../../../components/calculatehours";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Job Info" }
 ];
@@ -19,7 +20,7 @@ export default function JobInfo() {
     const jobId = router.query.id
 
     useEffect(() => {
-        async function JobDetails() {
+        async function jobDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarJobId.eq(jobId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
@@ -29,7 +30,7 @@ export default function JobInfo() {
             }
         }
         if (jobId) {
-            JobDetails()
+            jobDetails()
         }
     }, [jobId])
 
@@ -41,6 +42,7 @@ export default function JobInfo() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <CalendarList props={job} />
+            <CalculateHours numberofHours={job} />
             <CustomButton color={"green"} link={"/jobs/"} text={"Return"} />
         </Layout>
     )
