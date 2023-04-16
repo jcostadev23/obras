@@ -1,6 +1,6 @@
 import SiteMenu from "@/components/menu";
-import logo from "../public/logo.png";
 import Image from "next/image";
+import logo from "../src/live-watch/public/logo.png"
 export default function Layout({ children }) {
     return (
         <div className="flex flex-col min-h-screen">
