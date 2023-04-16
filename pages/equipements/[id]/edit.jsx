@@ -2,8 +2,6 @@ import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import EquipementsUpdateForm from "@/src/ui-components/EquipementsUpdateForm";
-import { Equipements } from "@/src/models";
-import { DataStore } from "aws-amplify";
 import { Grid, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../../components/equipementcard";
@@ -14,7 +12,7 @@ const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label:
 export default function EquipementDetails() {
     const router = useRouter()
     const equipementid = router.query.id
-    const [equipement, setEquipement] = useState()
+    const [equipements, setEquipements] = useState()
 
     useEffect(() => {
         if (!equipementid) {
@@ -27,7 +25,7 @@ export default function EquipementDetails() {
 
     }, [equipementid])
 
-    if (!equipement) {
+    if (!equipements) {
         return <Loader />
     }
 
@@ -35,7 +33,7 @@ export default function EquipementDetails() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <EquipementCard equip={equipement}>
+                <EquipementCard equip={equipements}>
                     <EquipementsUpdateForm id={equipementid}
                         onSuccess={() => router.reload()} />
                 </EquipementCard>

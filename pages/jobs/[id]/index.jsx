@@ -15,7 +15,7 @@ const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Job Info" }
 ];
 
 export default function JobInfo() {
-    const [job, setJob] = useState()
+    const [jobcalendar, setJobcalendar] = useState()
     const router = useRouter()
     const jobId = router.query.id
 
@@ -24,7 +24,7 @@ export default function JobInfo() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarJobId.eq(jobId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
-                setJob(daysInfo)
+                setJobcalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the JobDetails", error);
             }
@@ -34,15 +34,15 @@ export default function JobInfo() {
         }
     }, [jobId])
 
-    if (!job) {
+    if (!jobcalendar) {
         return <Loader />
     }
-    console.log("test", job)
+
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={job} />
-            <CalculateHours numberofHours={job} />
+            <CalendarList calendarlist={jobcalendar} />
+            <CalculateHours arrayofdays={jobcalendar} />
             <CustomButton color={"green"} link={"/jobs/"} text={"Return"} />
         </Layout>
     )

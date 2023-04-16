@@ -1,9 +1,9 @@
 import FormatTime from "../helpers/formattime";
 import { Collection, Grid, Link, Card, Heading } from "@aws-amplify/ui-react";
 
-export default function CalendarList({ props, children }) {
+export default function CalendarList({ calendarlist, children }) {
     return (
-        <Collection items={props} isPaginated itemsPerPage={10} isSearchable>
+        <Collection items={calendarlist} isPaginated itemsPerPage={10} isSearchable>
             {(details) => {
                 return <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
                     <Card variation="elevated" key={details.id} class="middle-block px-6 py-6 mt-5 align-middle transition-all  rounded-lg  bg-gradient-to-tl from-gray-300 to-gray-400">

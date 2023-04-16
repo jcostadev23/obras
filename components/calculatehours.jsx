@@ -1,12 +1,12 @@
 import FormatTime from "../helpers/formattime";
 
-export default function CalculateHours({ numberofHours, startDate, endDate }) {
-  let filteredData = numberofHours
+export default function CalculateHours({ arrayofdays, startDate, endDate }) {
+  let filteredData = arrayofdays
   if (startDate) {
-    filteredData = numberofHours.filter((hours) => hours.day >= startDate && hours.day <= endDate);
+    filteredData = arrayofdays.filter((items) => items.day >= startDate && items.day <= endDate);
   }
-  filteredData = filteredData.filter((days) => days.workerTimeMinutes >= 0);
-  const hours = filteredData.reduce((acc, item) => acc + Math.floor(item.workerTimeMinutes), 0);
+  filteredData = filteredData.filter((items) => items.workerTimeMinutes >= 0);
+  const hours = filteredData.reduce((acc, items) => acc + Math.floor(items.workerTimeMinutes), 0);
 
   return (
     <div>

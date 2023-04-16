@@ -6,7 +6,6 @@ import 'react-day-picker/dist/style.css';
 import { SelectField, Button, TextAreaField, StepperField } from "@aws-amplify/ui-react";
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
-import { useRouter } from "next/router";
 import Breadcrumb from "@/components/breadcrumb"
 
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Create" }
@@ -14,14 +13,13 @@ const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Crea
 
 export default function Mainfunct() {
     const today = new Date();
-    const router = useRouter()
     const [personid, setPersonid] = useState("")
     const [selected, setSelected] = useState(today);
     const [people, setPeople] = useState([])
     const [jobid, setJobid] = useState("")
-    const [jobname, setJobname] = useState([])
+    const [job, setJob] = useState([])
     const [equipementid, setEquipementid] = useState("")
-    const [equipement, setEquipement] = useState([])
+    const [equipements, setEquipements] = useState([])
     const [workerhours, setWorkerhours] = useState()
     const [equipementhours, setEquipementhours] = useState()
     const [description, setDescription] = useState("")
@@ -50,7 +48,7 @@ export default function Mainfunct() {
         async function Findjob() {
             try {
                 const serchjob = await DataStore.query(Job);
-                setJobname(serchjob)
+                setJob(serchjob)
             } catch (error) {
                 console.log("Error retrieving Jobs", error);
             }
@@ -63,7 +61,7 @@ export default function Mainfunct() {
         async function CallMachine() {
             try {
                 const serchmachine = await DataStore.query(Equipements);
-                setEquipement(serchmachine)
+                setEquipements(serchmachine)
             } catch (error) {
                 console.log("Error retrieving Equipements", error);
             }
@@ -77,7 +75,7 @@ export default function Mainfunct() {
                 await DataStore.save(
                     new Calendar({
                         "day": savedate,
-                        "equipement": { id: equipementid },
+                        "equipements": { id: equipementid },
                         "job": { id: jobid },
                         "people": { id: personid },
                         "workerTimeMinutes": (workerhours * 60),
@@ -139,7 +137,7 @@ export default function Mainfunct() {
                     value={jobid}
                     onChange={(e) => setJobid(e.target.value)}>
                     <option></option>
-                    {jobname.map((user) => {
+                    {job.map((user) => {
                         return <option value={user.id}
                             key={user.id}>
                             {user.name}
@@ -153,7 +151,7 @@ export default function Mainfunct() {
                     value={equipementid}
                     onChange={(e) => setEquipementid(e.target.value)}>
                     <option></option>
-                    {equipement.map((user) => {
+                    {equipements.map((user) => {
                         return <option value={user.id}
                             key={user.id}>
                             {user.name}

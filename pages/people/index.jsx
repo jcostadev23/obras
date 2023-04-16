@@ -11,13 +11,12 @@ const breadcrumbItems = [{ label: "People" },
 ];
 
 export default function AllPeople() {
-    process.env.AWS_SDK_LOAD_CONFIG = 1;
     const [people, setPeople] = useState([])
 
     useEffect(() => {
         getPeople()
-            .then(personFromDB => {
-                setPeople(personFromDB);
+            .then(peopleFromDB => {
+                setPeople(peopleFromDB);
             });
     }, [])
 

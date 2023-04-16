@@ -14,7 +14,7 @@ const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person I
 ];
 
 export default function PersonInfo() {
-    const [person, setPerson] = useState()
+    const [personcalendar, setPersoncalendar] = useState()
     const router = useRouter()
     const personId = router.query.id
     const [startdate, setStartdate] = useState()
@@ -32,7 +32,7 @@ export default function PersonInfo() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
-                setPerson(daysInfo)
+                setPersoncalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
             }
@@ -42,7 +42,7 @@ export default function PersonInfo() {
         }
     }, [personId])
 
-    if (!person) {
+    if (!personcalendar) {
         return <Loader />
     }
 
@@ -53,7 +53,7 @@ export default function PersonInfo() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={person} />
+            <CalendarList calendarlist={personcalendar} />
             <form onSubmit={handleSubmit} className="bg-gray-200 p-4 rounded-lg">
                 <h2 className="text-lg font-semibold mb-2">Calculate the Hours</h2>
                 <div className="flex space-x-4">
@@ -76,7 +76,7 @@ export default function PersonInfo() {
                         />
                     </label>
                 </div>
-                <CalculateHours numberofHours={person} startDate={startdate} endDate={enddate} />
+                <CalculateHours arrayofdays={personcalendar} startDate={startdate} endDate={enddate} />
             </form>
             <Button style={{ display: "flex", justifyContent: "center" }} label="Delete" class="inline-block my-5 px-6 py-3 mt-4 font-bold text-center uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-green-300 to-green-400 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
                 onClick={() => window.location.href = "/people/"}>Return</Button>

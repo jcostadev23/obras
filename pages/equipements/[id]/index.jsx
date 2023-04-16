@@ -15,7 +15,7 @@ const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label:
 ];
 
 export default function EquipInfo() {
-    const [equipement, setEquipement] = useState()
+    const [equipementecalendar, setEquipementcalendar] = useState()
     const router = useRouter()
     const equipId = router.query.id
 
@@ -24,7 +24,7 @@ export default function EquipInfo() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
-                setEquipement(daysInfo)
+                setEquipementcalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
             }
@@ -34,15 +34,15 @@ export default function EquipInfo() {
         }
     }, [equipId])
 
-    if (!equipement) {
+    if (!equipementecalendar) {
         return <Loader />
     }
 
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={equipement} />
-            <CalculateHours numberofHours={equipement} />
+            <CalendarList calendarlist={equipementecalendar} />
+            <CalculateHours arrayofdays={equipementecalendar} />
             <CustomButton color={"green"} link={"/equipements/"} text={"Return"} />
         </Layout>
     )

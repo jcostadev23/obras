@@ -30,7 +30,7 @@ export default function CallCalendar() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList props={mycalendar} />
+            <CalendarList calendarlist={mycalendar} />
             <CustomButton color={"green"} link={"/calendar/create/"} text={"Add New Day"} />
         </Layout>)
 }
