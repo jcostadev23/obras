@@ -1,6 +1,6 @@
 import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
-import getPeople from "/helpers/get-people"
+import getPeople from "/helpers/GetPeople"
 import Breadcrumb from "@/components/breadcrumb"
 import { Link, Collection, Grid, } from "@aws-amplify/ui-react";
 import { useEffect, useState, } from "react";
@@ -36,6 +36,6 @@ export default function AllPeople() {
                 </Grid>
             }}
         </Collection>
-        <CustomButton link={"/people/create/"} color={"green"} text={"Create people"} />
+        <CustomButton link={"/people/create/"} color={"green"} text={"Add Person"} />
     </Layout>
 }

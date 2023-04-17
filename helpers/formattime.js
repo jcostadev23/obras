@@ -1,7 +1,7 @@
-export default function FormatTime(minutes) {
-    const h = Math.floor(minutes / 60);
+export default function formatTime(minutes) {
+    const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-    let formatTime = `${h}h`;
+    let formatTime = `${hours}h`;
     if (remainingMinutes !== 0) return (
         formatTime += `:${remainingMinutes}m`)
 

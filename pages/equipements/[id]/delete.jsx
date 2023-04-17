@@ -7,7 +7,7 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../../components/equipementcard";
-import getEquipement from "../../../helpers/get-equipements";
+import getEquipements from "../../../helpers/GetEquipements";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Delete" }
 ];
 
@@ -26,7 +26,7 @@ export default function ItemDetails() {
         if (!equipementId) {
             return
         }
-        getEquipement(equipementId)
+        getEquipements(equipementId)
             .then(equipementFromDB => {
                 setEquipement(equipementFromDB);
             });

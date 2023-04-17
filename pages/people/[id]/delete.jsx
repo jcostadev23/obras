@@ -3,7 +3,7 @@ import CustomButton from "@/components/button"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
-import getPeople from "/helpers/get-people"
+import getPeople from "/helpers/GetPeople"
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"

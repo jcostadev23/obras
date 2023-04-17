@@ -5,7 +5,7 @@ import EquipementsUpdateForm from "@/src/ui-components/EquipementsUpdateForm";
 import { Grid, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../../components/equipementcard";
-import getEquipement from "../../../helpers/get-equipements";
+import getEquipements from "../../../helpers/GetEquipements";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Edit" }
 ];
 
@@ -18,7 +18,7 @@ export default function EquipementDetails() {
         if (!equipementid) {
             return
         }
-        getEquipement(equipementid)
+        getEquipements(equipementid)
             .then(equipementFromDB => {
                 setEquipement(equipementFromDB);
             });

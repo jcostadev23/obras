@@ -6,7 +6,7 @@ import CustomButton from "@/components/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 import JobCard from "../../components/jobcard";
-import getJob from "../../helpers/get-jobs";
+import getJobs from "../../helpers/GetJobs";
 
 const breadcrumbItems = [{ label: "Jobs" },
 ];
@@ -15,7 +15,7 @@ export default function AllJobs() {
     const [jobs, setJobs] = useState([])
 
     useEffect(() => {
-        getJob()
+        getJobs()
             .then(jobsFromDB => {
                 setJobs(jobsFromDB);
             });

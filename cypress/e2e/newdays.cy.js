@@ -15,21 +15,23 @@ describe('template spec', () => {
         //Select data
         cy.get(':nth-child(5) > :nth-child(3) > .rdp-button_reset').click()
         // Can't find the key to select the person field
+        cy.get('[data-cy="Select a People"]').click()
+        cy.select()
         // cy.get(':nth-child(2) > #amplify-id-\:rm\:')
 
         // select hours
-        cy.get(':nth-child(3) > .amplify-flex > .amplify-field-group__outer-end > .amplify-button').then(($el) => {
-            for (let i = 0; i < 5; i++) {
-                cy.wrap($el).click()
-            }
-        })
+        // cy.get(':nth-child(3) > .amplify-flex > .amplify-field-group__outer-end > .amplify-button').then(($el) => {
+        // for (let i = 0; i < 5; i++) {
+        // cy.wrap($el).click()
+        // }
+        // })
 
 
-        cy.get(':nth-child(6) > .amplify-flex > .amplify-field-group__outer-end > .amplify-button').then(($el) => {
-            for (let i = 0; i < 7; i++) {
-                cy.wrap($el).click()
-            }
-        })
+        // cy.get(':nth-child(6) > .amplify-flex > .amplify-field-group__outer-end > .amplify-button').then(($el) => {
+        // for (let i = 0; i < 7; i++) {
+        // cy.wrap($el).click()
+        // }
+        // })
 
     })
 })

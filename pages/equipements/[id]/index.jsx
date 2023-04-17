@@ -7,7 +7,7 @@ import React from "react";
 import Layout from "@/components/layout"
 import CustomButton from "@/components/button"
 import CalendarList from "../../../components/calendarlist";
-import formatDays from "../../../helpers/daysformat";
+import getDayDetails from "../../../helpers/FormatDays";
 import { Loader } from "@aws-amplify/ui-react";
 import CalculateHours from "../../../components/calculatehours";
 
@@ -23,7 +23,7 @@ export default function EquipInfo() {
         async function equipementDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipementId));
-                const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
+                const daysInfo = await Promise.all(days.map((day) => getDayDetails(day)));
                 setEquipementcalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
@@ -41,7 +41,7 @@ export default function EquipInfo() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList calendarlist={equipementecalendar} />
+            <CalendarList days={equipementecalendar} />
             <CalculateHours arrayofdays={equipementecalendar} />
             <CustomButton color={"green"} link={"/equipements/"} text={"Return"} />
         </Layout>

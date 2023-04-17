@@ -7,7 +7,7 @@ import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/button"
 import CalendarList from "../../../components/calendarlist";
 import { useRouter } from "next/router"
-import formatDays from "../../../helpers/daysformat";
+import getDayDetails from "/../../helpers/FormatDays";
 import { Loader } from "@aws-amplify/ui-react";
 import CalculateHours from "../../../components/calculatehours";
 
@@ -23,7 +23,7 @@ export default function JobInfo() {
         async function jobDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarJobId.eq(jobId));
-                const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
+                const daysInfo = await Promise.all(days.map((day) => getDayDetails(day)));
                 setJobcalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the JobDetails", error);
@@ -41,7 +41,7 @@ export default function JobInfo() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList calendarlist={jobcalendar} />
+            <CalendarList days={jobcalendar} />
             <CalculateHours arrayofdays={jobcalendar} />
             <CustomButton color={"green"} link={"/jobs/"} text={"Return"} />
         </Layout>

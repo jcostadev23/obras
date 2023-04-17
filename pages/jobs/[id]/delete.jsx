@@ -7,7 +7,7 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb";
 import JobCard from "../../../components/jobcard";
-import getJob from "/helpers/get-jobs";
+import getJobs from "/helpers/GetJobs";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];
@@ -27,7 +27,7 @@ export default function JobDetails() {
         if (!jobid) {
             return
         }
-        getJob(jobid)
+        getJobs(jobid)
             .then(jobFromDB => {
                 setJob(jobFromDB);
             });

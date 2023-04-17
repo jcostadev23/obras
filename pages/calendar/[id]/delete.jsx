@@ -34,7 +34,6 @@ export default function ItemDetails() {
     if (!day) {
         return <Loader />
     }
-    console.log('test', day)
 
     return (
         <Layout>

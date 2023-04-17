@@ -6,7 +6,7 @@ import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/button"
 import CalendarList from "../../components/calendarlist";
-import formatDays from "../../helpers/daysformat";
+import getDayDetails from "../../helpers/FormatDays";
 
 const breadcrumbItems = [{ label: "Calendar" },
 ];
@@ -18,7 +18,7 @@ export default function CallCalendar() {
         async function GetDays() {
             try {
                 const days = await DataStore.query(Calendar);
-                const promisedetals = await Promise.all(days.map((day) => formatDays(day)));
+                const promisedetals = await Promise.all(days.map((day) => getDayDetails(day)));
                 setMycalendar(promisedetals)
             } catch (error) {
                 console.log("Error don't get the CallCalendar", error);
@@ -30,7 +30,7 @@ export default function CallCalendar() {
     return (
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
-            <CalendarList calendarlist={mycalendar} />
+            <CalendarList days={mycalendar} />
             <CustomButton color={"green"} link={"/calendar/create/"} text={"Add New Day"} />
         </Layout>)
 }

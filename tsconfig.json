@@ -25,25 +25,12 @@
       ]
     }
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "pages/Workers.jsx",
-    "components/menu.jsx",
-    "pages/treino.jsx",
-    "pages/about.jsx",
-    "pages/index.jsx",
-    "cypress/e2e/create/equip.cy.js",
-    "cypress/e2e/create/newdays.cy.js",
-    "cypress/e2e/create/pep.cy.js",
-    "cypress/e2e/spec.cy.js",
-    "cypress/e2e/spec-copy-3.cy.js",
-    "cypress/e2e/spec-copy-2.cy.js",
-    "cypress/e2e/spec-copy-1.cy.jsx",
-    "cypress/e2e/jo.cy.jsx"
-  ],
-  "exclude": [
-    "node_modules"
+    "**/*.tsx"
   ]
 }

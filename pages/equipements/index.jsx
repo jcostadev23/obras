@@ -6,7 +6,7 @@ import CustomButton from "@/components/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../components/equipementcard";
-import getEquipement from "../../helpers/get-equipements";
+import getEquipements from "../../helpers/GetEquipements";
 const breadcrumbItems = [{ label: "Equipements", },
 ];
 
@@ -14,7 +14,7 @@ export default function AllEquipements() {
     const [equipements, setEquipements] = useState([])
 
     useEffect(() => {
-        getEquipement()
+        getEquipements()
             .then(equipementFromDB => {
                 setEquipements(equipementFromDB);
             });

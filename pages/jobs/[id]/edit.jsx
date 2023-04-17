@@ -5,7 +5,7 @@ import { Grid, Loader } from "@aws-amplify/ui-react";
 import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
 import Breadcrumb from "@/components/breadcrumb"
 import JobCard from "@/components/jobcard";
-import getJob from "/helpers/get-jobs";
+import getJobs from "/helpers/GetJobs";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Edit" }
 ];
@@ -19,7 +19,7 @@ export default function EditJobs() {
         if (!jobid) {
             return
         }
-        getJob(jobid)
+        getJobs(jobid)
             .then(jobFromDB => {
                 setJob(jobFromDB);
             });
