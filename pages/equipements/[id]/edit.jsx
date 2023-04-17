@@ -12,7 +12,7 @@ const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label:
 export default function EquipementDetails() {
     const router = useRouter()
     const equipementid = router.query.id
-    const [equipements, setEquipements] = useState()
+    const [equipement, setEquipement] = useState()
 
     useEffect(() => {
         if (!equipementid) {
@@ -25,7 +25,7 @@ export default function EquipementDetails() {
 
     }, [equipementid])
 
-    if (!equipements) {
+    if (!equipement) {
         return <Loader />
     }
 
@@ -33,7 +33,7 @@ export default function EquipementDetails() {
         <Layout>
             <Breadcrumb items={breadcrumbItems} />
             <Grid class="middle-block px-6 py-6 mt-5 align-middle transition-all border-2 rounded-lg  bg-gradient-to-tl from-gray-400 to-gray-500 ">
-                <EquipementCard equip={equipements}>
+                <EquipementCard equipement={equipement}>
                     <EquipementsUpdateForm id={equipementid}
                         onSuccess={() => router.reload()} />
                 </EquipementCard>

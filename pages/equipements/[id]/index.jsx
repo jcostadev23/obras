@@ -17,22 +17,22 @@ const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label:
 export default function EquipInfo() {
     const [equipementecalendar, setEquipementcalendar] = useState()
     const router = useRouter()
-    const equipId = router.query.id
+    const equipementId = router.query.id
 
     useEffect(() => {
         async function equipementDetails() {
             try {
-                const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipId));
+                const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipementId));
                 const daysInfo = await Promise.all(days.map((day) => formatDays(day)));
                 setEquipementcalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);
             }
         }
-        if (equipId) {
+        if (equipementId) {
             equipementDetails()
         }
-    }, [equipId])
+    }, [equipementId])
 
     if (!equipementecalendar) {
         return <Loader />

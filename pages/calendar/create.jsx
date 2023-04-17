@@ -1,5 +1,5 @@
 import Layout from "@/components/layout"
-import { People, Job, Equipements, Calendar } from "@/src/models";
+import { Calendar } from "@/src/models";
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
@@ -7,6 +7,9 @@ import { SelectField, Button, TextAreaField, StepperField } from "@aws-amplify/u
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import Breadcrumb from "@/components/breadcrumb"
+import getPeople from "/helpers/get-people"
+import getJob from "../../helpers/get-jobs";
+import getEquipement from "../../helpers/get-equipements";
 
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Create" }
 ];
@@ -17,12 +20,13 @@ export default function Mainfunct() {
     const [selected, setSelected] = useState(today);
     const [people, setPeople] = useState([])
     const [jobid, setJobid] = useState("")
-    const [job, setJob] = useState([])
+    const [jobs, setJobs] = useState([])
     const [equipementid, setEquipementid] = useState("")
     const [equipements, setEquipements] = useState([])
     const [workerhours, setWorkerhours] = useState()
     const [equipementhours, setEquipementhours] = useState()
     const [description, setDescription] = useState("")
+
     const handleDescriptionChange = (e) => {
         setDescription(e.currentTarget.value);
     };
@@ -33,41 +37,26 @@ export default function Mainfunct() {
     }
 
     useEffect(() => {
-        async function GetPerson() {
-            try {
-                const peopledainternet = await DataStore.query(People);
-                setPeople(peopledainternet)
-            } catch (error) {
-                console.log("Error retrieving People", error);
-            }
-        }
-        GetPerson()
+        getPeople()
+            .then(peopleFromDB => {
+                setPeople(peopleFromDB);
+            });
     }, [])
 
     useEffect(() => {
-        async function Findjob() {
-            try {
-                const serchjob = await DataStore.query(Job);
-                setJob(serchjob)
-            } catch (error) {
-                console.log("Error retrieving Jobs", error);
-            }
-        }
-        Findjob()
-
+        getJob()
+            .then(jobsFromDB => {
+                setJobs(jobsFromDB);
+            });
     }, [])
 
     useEffect(() => {
-        async function CallMachine() {
-            try {
-                const serchmachine = await DataStore.query(Equipements);
-                setEquipements(serchmachine)
-            } catch (error) {
-                console.log("Error retrieving Equipements", error);
-            }
-        }
-        CallMachine()
+        getEquipement()
+            .then(equipementFromDB => {
+                setEquipements(equipementFromDB);
+            });
     }, [])
+
     async function SaveCalender() {
         try {
             const savedate = format(selected, "yyyy-MM-dd")
@@ -105,10 +94,10 @@ export default function Mainfunct() {
                     value={personid}
                     onChange={(e) => setPersonid(e.target.value)} >
                     <option></option>
-                    {people.map((user) => {
-                        return <option value={user.id}
-                            key={user.id}>
-                            {user.name}
+                    {people.map((person) => {
+                        return <option value={person.id}
+                            key={person.id}>
+                            {person.name}
                         </option>
                     })}
                 </SelectField>
@@ -137,10 +126,10 @@ export default function Mainfunct() {
                     value={jobid}
                     onChange={(e) => setJobid(e.target.value)}>
                     <option></option>
-                    {job.map((user) => {
-                        return <option value={user.id}
-                            key={user.id}>
-                            {user.name}
+                    {jobs.map((job) => {
+                        return <option value={job.id}
+                            key={job.id}>
+                            {job.name}
                         </option>
                     })}
                 </SelectField>
@@ -151,10 +140,10 @@ export default function Mainfunct() {
                     value={equipementid}
                     onChange={(e) => setEquipementid(e.target.value)}>
                     <option></option>
-                    {equipements.map((user) => {
-                        return <option value={user.id}
-                            key={user.id}>
-                            {user.name}
+                    {equipements.map((equipement) => {
+                        return <option value={equipement.id}
+                            key={equipement.id}>
+                            {equipement.name}
                         </option>
                     })}
                 </SelectField>

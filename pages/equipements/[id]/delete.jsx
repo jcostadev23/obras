@@ -13,26 +13,26 @@ const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label:
 
 export default function ItemDetails() {
     const { query, push } = useRouter()
-    const equipId = query.id
-    const [equipements, setEquipements] = useState([])
+    const equipementId = query.id
+    const [equipement, setEquipement] = useState([])
 
     async function DeleteEquipement() {
-        const equipementToDelete = await DataStore.query(Equipements, equipId);
+        const equipementToDelete = await DataStore.query(Equipements, equipementId);
         await DataStore.delete(equipementToDelete);
         push("/equipements")
     }
 
     useEffect(() => {
-        if (!equipId) {
+        if (!equipementId) {
             return
         }
-        getEquipement(equipId)
-            .then(equipementsFromDB => {
-                setEquipements(equipementsFromDB);
+        getEquipement(equipementId)
+            .then(equipementFromDB => {
+                setEquipement(equipementFromDB);
             });
-    }, [equipId])
+    }, [equipementId])
 
-    if (!equipements) {
+    if (!equipement) {
         return <Loader />
     }
 
@@ -48,7 +48,7 @@ export default function ItemDetails() {
                     heading="Atenttion">
                     This will delete the Equipement
                 </Alert>
-                <EquipementCard equip={equipements}>
+                <EquipementCard equipement={equipement}>
                     <Button
                         variation="destructive"
                         loadingText=""
