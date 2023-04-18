@@ -7,9 +7,9 @@ import { SelectField, Button, TextAreaField, StepperField } from "@aws-amplify/u
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import Breadcrumb from "@/components/breadcrumb"
-import getPeople from "/helpers/GetPeople"
-import getJobs from "/helpers/GetJobs";
-import getEquipements from "/helpers/GetEquipements";
+import getPeople from "/helpers/getPeople"
+import getJobs from "/helpers/getJobs";
+import getEquipements from "/helpers/getEquipements";
 
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Create" }
 ];
@@ -116,6 +116,7 @@ export default function Mainfunct() {
                     rows="3"
                     size="small"
                     wrap="nowrap"
+                    data-cy="TextAreaField"
                     value={description}
                     onChange={handleDescriptionChange}
                 />
@@ -124,6 +125,7 @@ export default function Mainfunct() {
                     label="Job"
                     required
                     descriptiveText="Select a Job"
+                    data-cy="Select a Job"
                     value={jobid}
                     onChange={(e) => setJobid(e.target.value)}>
                     <option></option>
@@ -138,6 +140,7 @@ export default function Mainfunct() {
                 <SelectField
                     label="Equipement"
                     descriptiveText="Select a Equipement"
+                    data-cy="Select a Equipement"
                     value={equipementid}
                     onChange={(e) => setEquipementid(e.target.value)}>
                     <option></option>

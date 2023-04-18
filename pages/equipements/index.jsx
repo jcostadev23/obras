@@ -1,12 +1,11 @@
 
 import { useEffect, useState } from "react";
-import { Grid, Link, Collection } from "@aws-amplify/ui-react";
+import { Grid, Link, Button, Collection } from "@aws-amplify/ui-react";
 import Layout from "@/components/layout"
-import CustomButton from "@/components/button"
 import * as React from 'react';
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../components/equipementcard";
-import getEquipements from "../../helpers/GetEquipements";
+import getEquipements from "../../helpers/getEquipements";
 const breadcrumbItems = [{ label: "Equipements", },
 ];
 
@@ -39,7 +38,8 @@ export default function AllEquipements() {
                         </EquipementCard></Grid>
                 }}
             </Collection>
-            <CustomButton color={"green"} link={"/equipements/create/"} text={"Create Equipements"} />
+            <Button style={{ display: "flex", justifyContent: "center" }} label="Edit" class="inline-block my-5 px-6 py-3 mt-4 font-bold text-center uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-green-400 to-green-700 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25" onClick={() => (window.location.href = "/equipements/create/")}>
+                Add Equipement</Button>
         </Layout>
     )
 }

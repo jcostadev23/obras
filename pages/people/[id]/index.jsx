@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/breadcrumb"
 import CalendarList from "../../../components/calendarlist";
 import CalculateHours from "../../../components/calculatehours";
 import { useRouter } from "next/router"
-import getDayDetails from "/../../helpers/FormatDays";
+import getDayDetails from "/../../helpers/formatDays";
 
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person Info" }
 ];

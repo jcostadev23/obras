@@ -1,5 +1,4 @@
 import Layout from "@/components/layout"
-import CustomButton from "@/components/button"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { Equipements } from "@/src/models";
@@ -7,7 +6,7 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import EquipementCard from "../../../components/equipementcard";
-import getEquipements from "../../../helpers/GetEquipements";
+import getEquipements from "../../../helpers/getEquipements";
 const breadcrumbItems = [{ label: "Equipements", url: "/equipements" }, { label: "Delete" }
 ];
 
@@ -56,7 +55,8 @@ export default function ItemDetails() {
                         ariaLabel="">
                         Delete
                     </Button> {"  "}
-                    <CustomButton color={"green"} link={"/equipements"} text={"Exit"} />
+                    <Button style={{ display: "flex", justifyContent: "center" }} label="Edit" class="inline-block my-5 px-6 py-3 mt-4 font-bold text-center uppercase align-middle transition-all border-0 rounded-lg cursor-pointer lg:w-full hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-green-400 to-green-700 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25" onClick={() => (window.location.href = "/equipements")}>
+                        Exit</Button>
                 </EquipementCard>
             </Grid>
         </Layout>)

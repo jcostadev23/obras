@@ -5,8 +5,7 @@ import { Calendar } from "@/src/models";
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button, Heading } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
-import CustomButton from "@/components/button"
-import CalendarList from "../../../components/calendarlist";
+
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Delete" }
 ];
 

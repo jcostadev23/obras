@@ -7,7 +7,7 @@ import Breadcrumb from "@/components/breadcrumb"
 import CustomButton from "@/components/button"
 import CalendarList from "../../../components/calendarlist";
 import { useRouter } from "next/router"
-import getDayDetails from "/../../helpers/FormatDays";
+import getDayDetails from "/../../helpers/formatDays";
 import { Loader } from "@aws-amplify/ui-react";
 import CalculateHours from "../../../components/calculatehours";
 

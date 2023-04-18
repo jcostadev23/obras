@@ -5,7 +5,7 @@ import { Grid, Loader } from "@aws-amplify/ui-react";
 import JobUpdateForm from "@/src/ui-components/JobUpdateForm";
 import Breadcrumb from "@/components/breadcrumb"
 import JobCard from "@/components/jobcard";
-import getJobs from "/helpers/GetJobs";
+import getJobs from "/helpers/getJobs";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Edit" }
 ];
