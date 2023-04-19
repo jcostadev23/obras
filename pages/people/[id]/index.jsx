@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/breadcrumb"
 import CalendarList from "../../../components/calendarlist";
 import CalculateHours from "../../../components/calculatehours";
 import { useRouter } from "next/router"
-import getDayDetails from "/../../helpers/formatDays";
+import formatDay from "../../../helpers/formatDay";
 
 const breadcrumbItems = [{ label: "People", url: "/people" }, { label: "Person Info" }
 ];
@@ -31,7 +31,7 @@ export default function PersonInfo() {
         async function personDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarPeopleId.eq(personId));
-                const daysInfo = await Promise.all(days.map((day) => getDayDetails(day)));
+                const daysInfo = await Promise.all(days.map((day) => formatDay(day)));
                 setPersoncalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);

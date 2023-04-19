@@ -7,7 +7,7 @@ import React from "react";
 import Layout from "@/components/layout"
 import { Button } from "@aws-amplify/ui-react";
 import CalendarList from "../../../components/calendarlist";
-import getDayDetails from "../../../helpers/formatDays";
+import formatDay from "../../../helpers/formatDay";
 import { Loader } from "@aws-amplify/ui-react";
 import CalculateHours from "../../../components/calculatehours";
 
@@ -23,7 +23,7 @@ export default function EquipInfo() {
         async function equipementDetails() {
             try {
                 const days = await DataStore.query(Calendar, (c) => c.calendarEquipementId.eq(equipementId));
-                const daysInfo = await Promise.all(days.map((day) => getDayDetails(day)));
+                const daysInfo = await Promise.all(days.map((day) => formatDay(day)));
                 setEquipementcalendar(daysInfo)
             } catch (error) {
                 console.log("Error don't get the GetDetails", error);

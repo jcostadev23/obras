@@ -2,7 +2,7 @@ import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import PeopleUpdateForm from "@/src/ui-components/PeopleUpdateForm";
-import getPeople from "/helpers/getPeople"
+import getPeople from "../helpers/getPeople"
 import { Grid, Loader } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"
 import PersonCard from "@/components/personcard"

@@ -2,7 +2,7 @@ import Layout from "@/components/layout"
 import { useRouter } from "next/router"
 import { useEffect, useState, } from "react";
 import { People } from "@/src/models";
-import getPeople from "/helpers/getPeople"
+import getPeople from "../../../helpers/getPeople"
 import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb"

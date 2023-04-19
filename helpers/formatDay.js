@@ -1,5 +1,5 @@
 
-async function getDayDetails(day) {
+async function formatDay(day) {
 
     return {
         day: day.day,
@@ -13,5 +13,5 @@ async function getDayDetails(day) {
     };
 }
 
-export default getDayDetails
+export default formatDay
 

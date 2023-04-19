@@ -5,7 +5,7 @@ import React from "react";
 import Layout from "@/components/layout"
 import Breadcrumb from "@/components/breadcrumb"
 import CalendarList from "../../components/calendarlist";
-import getDayDetails from "../../helpers/formatDays";
+import formatDay from "../../helpers/formatDay"
 import { Button } from "@aws-amplify/ui-react";
 
 const breadcrumbItems = [{ label: "Calendar" },
@@ -18,7 +18,7 @@ export default function CallCalendar() {
         async function GetDays() {
             try {
                 const days = await DataStore.query(Calendar);
-                const promisedetals = await Promise.all(days.map((day) => getDayDetails(day)));
+                const promisedetals = await Promise.all(days.map((day) => formatDay(day)));
                 setMycalendar(promisedetals)
             } catch (error) {
                 console.log("Error don't get the CallCalendar", error);

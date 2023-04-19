@@ -1,5 +1,5 @@
 import Layout from "@/components/layout"
-import getPeople from "/helpers/getPeople"
+import getPeople from "../../helpers/getPeople"
 import Breadcrumb from "@/components/breadcrumb"
 import { Link, Collection, Button, Grid, } from "@aws-amplify/ui-react";
 import { useEffect, useState, } from "react";

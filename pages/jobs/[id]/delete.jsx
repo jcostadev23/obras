@@ -6,7 +6,7 @@ import { DataStore } from "aws-amplify";
 import { Grid, Alert, Loader, Button } from "@aws-amplify/ui-react";
 import Breadcrumb from "@/components/breadcrumb";
 import JobCard from "../../../components/jobcard";
-import getJobs from "/helpers/getJobs";
+import getJobs from "../../../helpers/getJobs";
 
 const breadcrumbItems = [{ label: "Jobs", url: "/jobs" }, { label: "Delete" }
 ];

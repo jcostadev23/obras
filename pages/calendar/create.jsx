@@ -7,8 +7,8 @@ import { SelectField, Button, TextAreaField, StepperField } from "@aws-amplify/u
 import { useEffect, useState, React } from "react";
 import { DataStore } from "aws-amplify";
 import Breadcrumb from "@/components/breadcrumb"
-import getPeople from "/helpers/getPeople"
-import getJobs from "/helpers/getJobs";
+import getPeople from "../../helpers/getPeople"
+import getJobs from "../../helpers/getJobs"
 import getEquipements from "/helpers/getEquipements";
 
 const breadcrumbItems = [{ label: "Calendar", url: "/calendar" }, { label: "Create" }
