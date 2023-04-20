@@ -4,7 +4,7 @@ import logo from "../public/logo.png"
 
 export default function Layout({ children }) {
     return (
-        <div className="flex flex-col min-h-screen shadow-lg">
+        <div className="flex bg-red-500 flex-col min-h-screen shadow-lg">
             <div className="flex justify-between items-center p-4 border-b-2 shadow-lg">
                 <div className="flex-shrink-0">
                     <Image
