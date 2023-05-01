@@ -1,135 +1,159 @@
 import Layout from "@/components/layout"
-import { Button, Tabs, TabItem, PhoneNumberField, Menu, MenuItem, CheckboxField, Expander, ExpanderItem, Autocomplete, Card, Heading, Icon, Alert, Loader, TextField, PasswordField, Grid, Flex, } from '@aws-amplify/ui-react';
-import { useState } from 'react';
-import { DiJsBadge } from 'react-icons/di';
+import { Calendar } from "@/src/models";
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+import { SelectField, Button, TextAreaField, StepperField } from "@aws-amplify/ui-react";
+import { useEffect, useState, React } from "react";
+import { DataStore } from "aws-amplify";
 import Breadcrumb from "@/components/breadcrumb"
-const breadcrumbItems = [];
-export default function Home() {
-  const [mostrar, setMostrar] = useState(false)
-  return (
-    <Layout>
-      <Breadcrumb />
+import getPeople from "../helpers/getPeople"
+import getJobs from "../helpers/getJobs"
+import getEquipements from "/helpers/getEquipements";
 
+export default function Mainfunct() {
+    const today = new Date();
+    const [personid, setPersonid] = useState("")
+    const [selected, setSelected] = useState(today);
+    const [people, setPeople] = useState([])
+    const [jobid, setJobid] = useState("")
+    const [jobs, setJobs] = useState([])
+    const [equipementid, setEquipementid] = useState("")
+    const [equipements, setEquipements] = useState([])
+    const [workerhours, setWorkerhours] = useState()
+    const [equipementhours, setEquipementhours] = useState()
+    const [description, setDescription] = useState("")
 
-      <div className="bg-green-400 "> you can wright here</div>
-      <Button variation="primary">costa</Button>
-      <div>
-        <textarea></textarea>
-      </div>
-      <hr></hr>
-      <TextField
-        descriptiveText="Enter a valid last name"
-        placeholder="Baggins"
-        label="Last name"
-        errorMessage="There is an error"
-      />
-      <Tabs
-        justifyContent="flex-start">
-        <TabItem title="obra manuel">
-          <Alert>This Alert is not dismissible by default</Alert>
-          <Alert isDismissible={true}>Click the X to dismiss this Alert</Alert>
-          <Button variation="primary">mais um button</Button>
+    const handleDescriptionChange = (e) => {
+        setDescription(e.currentTarget.value);
+    };
 
-          Tab content #1
-        </TabItem>
-        <TabItem title="obra maria">
-          <PhoneNumberField
-            defaultDialCode="+1"
-            label="Numero Telf:"
-            descriptiveText="Please enter your phone number"
-            placeholder="234-567-8910"
-          />
-          Tab content #2
-        </TabItem>
-        <TabItem title="Disabled" isDisabled={true}>
-          Cannot click
-        </TabItem>
-      </Tabs>
-      <CheckboxField
-        label="Muros"
-        name="muros"
-        value="yes"
-      />
-      <CheckboxField
-        label="Janelas"
-        name="janelas"
-        value="yes"
-      />
-      <CheckboxField
-        label="Jardim"
-        name="jardim"
-        value="yes"
-      />
+    let footer = <p>Please pick a day.</p>;
+    if (selected) {
+        footer = <p>You picked {format(selected, 'PPPP')}.</p>;
+    }
 
+    useEffect(() => {
+        getPeople()
+            .then(peopleFromDB => {
+                setPeople(peopleFromDB);
+            });
+    }, [])
 
-      <div>
+    useEffect(() => {
+        getJobs()
+            .then(jobsFromDB => {
+                setJobs(jobsFromDB);
+            });
+    }, [])
 
-      </div>
-      <Loader
-      />
+    useEffect(() => {
+        getEquipements()
+            .then(equipementFromDB => {
+                setEquipements(equipementFromDB);
+            });
+    }, [])
 
-      <Grid
-        columnGap="0.5rem"
-        rowGap="0.5rem"
-        templateColumns="1fr 1fr 1fr"
-        templateRows="1fr 3fr 1fr"
-      >
-        <Card
-          columnStart="1"
-          columnEnd="-1"
-        >
+    async function SaveCalender() {
+        try {
+            const savedate = format(selected, "yyyy-MM-dd")
+            const datasafe = await DataStore.save(
+                await DataStore.save(
+                    new Calendar({
+                        "day": savedate,
+                        "equipements": { id: equipementid },
+                        "job": { id: jobid },
+                        "people": { id: personid },
+                        "workerTimeMinutes": (workerhours * 60),
+                        "equipmentTimeMinutes": (equipementhours * 60),
+                        "description": description,
+                    })
+                ))
+        } catch (error) {
+        }
+    }
 
+    return (
+        <Layout>
+            <Breadcrumb />
+            <form onSubmit={SaveCalender}>
+                <DayPicker
+                    mode="single"
+                    required
+                    selected={selected}
+                    onSelect={setSelected}
+                    footer={footer} />
 
-        </Card>
-        <Card
-          columnStart="1"
-          columnEnd="2"
-        >
-          <Autocomplete
-            label="Autocomplete"
-            options={[{ "id": "apple", "label": "apple" }, { "id": "banana", "label": "banana" }, { "id": "cherry", "label": "cherry" }, { "id": "grape", "label": "grape" }, { "id": "kiwis", "label": "kiwis" }, { "id": "lemon", "label": "lemon" }, { "id": "mango", "label": "mango" }, { "id": "orange", "label": "orange" }, { "id": "strawberry", "label": "strawberry" }]}
-            placeholder="Search here..."
-          />
+                <SelectField
+                    label="People"
+                    required
+                    descriptiveText="Select a People"
+                    data-cy="Select a People"
+                    value={personid}
+                    onChange={(e) => setPersonid(e.target.value)} >
+                    <option></option>
+                    {people.map((person) => {
+                        return <option value={person.id}
+                            key={person.id}>
+                            {person.name}
+                        </option>
+                    })}
+                </SelectField>
 
-          {mostrar && <Expander>
-            <ExpanderItem title="What is an ExpanderItem?" value="expander-item">
-              An ExpanderItem contains all the parts of a collapsible section.
-            </ExpanderItem>
-            <ExpanderItem title="This is the item's title" value="unique-value">
-              The `children` of the ExpanderItem are displayed here.
-            </ExpanderItem>
-          </Expander>}
-        </Card>
-        <Card
-          columnStart="2"
-          columnEnd="-1"
-        >
-          <div style={{ padding: "100px", background: "grey" }}>
-            <Card>
-              <Heading
+                <StepperField
+                    label="Worker time in hours"
+                    value={workerhours}
+                    onStepChange={(Hours) => setWorkerhours(Hours)}
+                    defaultValue={0} min={0} max={16} step={0.5} />
 
-                level={4}
-              >
-                Heading text
-              </Heading>
-              <div><Icon
-                ariaLabel="Thumbs up"
-                pathData="M9 21h9c.83 0 1.54-.5
-1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17
-1 7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2zM9 9l4.34-4.34L12 10h9v2l-3 7H9V9zM1 9h4v12H1z"
-              /> Gosto disto</div>
-              <div><Icon ariaLabel="Javascript" as={DiJsBadge} /> Eu gosto Javascrip</div>
-            </Card>
-          </div>
-        </Card>
-        <Card
-          columnStart="2"
-          columnEnd="-1"
-        >
-          Footer
-        </Card>
-      </Grid>
-    </Layout>
-  )
+                <TextAreaField
+
+                    label="Description"
+                    labelHidden={false}
+                    rows="3"
+                    size="small"
+                    wrap="nowrap"
+                    data-cy="TextAreaField"
+                    value={description}
+                    onChange={handleDescriptionChange}
+                />
+
+                <SelectField
+                    label="Job"
+                    required
+                    descriptiveText="Select a Job"
+                    data-cy="Select a Job"
+                    value={jobid}
+                    onChange={(e) => setJobid(e.target.value)}>
+                    <option></option>
+                    {jobs.map((job) => {
+                        return <option value={job.id}
+                            key={job.id}>
+                            {job.name}
+                        </option>
+                    })}
+                </SelectField>
+
+                <SelectField
+                    label="Equipement"
+                    descriptiveText="Select a Equipement"
+                    data-cy="Select a Equipement"
+                    value={equipementid}
+                    onChange={(e) => setEquipementid(e.target.value)}>
+                    <option></option>
+                    {equipements.map((equipement) => {
+                        return <option value={equipement.id}
+                            key={equipement.id}>
+                            {equipement.name}
+                        </option>
+                    })}
+                </SelectField>
+                <StepperField label={"Equipement time in hours"}
+                    value={equipementhours}
+                    onStepChange={(Hours) => setEquipementhours(Hours)}
+                    defaultValue={0} min={0} max={16} step={0.5} />
+                <Button type="submit" >Save
+                </Button></form>
+        </Layout>
+    )
 }
-
