@@ -10,8 +10,8 @@ export default function Layout({ children }) {
                     <Image
                         onClick={() => (window.location.href = "/")}
                         src={logo}
-                        height="50"
-                        width="50"
+                        height="auto"
+                        width="auto"
                         placeholder="blur"
                         alt="/"
                     />
